@@ -1,0 +1,86 @@
+
+.navbar-default {
+    border-color: transparent;
+    opacity: 0.8;
+
+}
+
+/*nav 'header' custom */
+.navbar-default .navbar-brand {
+    color: red;
+    font-weight: bold;
+    font-size: 40px;
+    margin: 10px;
+    font-family: Montserrat;
+}
+
+.navbar-default .navbar-collapse {
+    background-color: transparent; /*changes nav background color*/
+
+}
+
+/*for navbar-right stuff */
+.navbar-default .navbar-nav li a {
+    color: black;
+    font-weight: bold;
+    padding-top: 30px;
+    padding-right: 30px;
+    letter-spacing: 1px;
+    font-family: Ubuntu, sans-serif;
+}
+
+.navbar-default .nav li a:hover,
+.navbar-default .nav li a:focus {
+    outline: 0;
+    color: red;
+}
+
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+    outline: 0;
+    color: black;
+}
+
+p {
+    font-size: 20px;
+    font-weight: bold;
+    color: green;
+}
+
+img {
+    min-width: 100%;
+    /*should prob adjust height, this didn't work.*/
+    min-height: 100%;
+    width: auto;
+    height: auto;
+}
+
+.transbox {
+    margin: 30px;
+    background-color: #ffffff;
+    opacity: 0.6;
+}
+
+body {
+    background-color: whitesmoke;
+}
+
+
+footer {
+    letter-spacing: 1px;
+    width: auto;
+    font-family: Ubuntu, sans-serif;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

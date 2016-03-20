@@ -1,0 +1,54 @@
+.navbar-default {
+    border-color: transparent;
+}
+
+/*nav 'header' custom */
+.navbar-default .navbar-brand {
+    color: red;
+    font-weight: bold;
+    font-size: 40px;
+    margin: 10px;
+    font-family: Ubuntu, sans-serif;
+}
+
+.navbar-default .navbar-collapse {
+    background-color: transparent; /*changes nav background color*/
+}
+
+/*for navbar-right stuff */
+.navbar-default .navbar-nav li a {
+    color: black;
+    font-weight: bold;
+    padding-top: 30px;
+    padding-right: 30px;
+    letter-spacing: 1px;
+    font-family: Ubuntu, sans-serif;
+}
+
+.navbar-default .nav li a:hover,
+.navbar-default .nav li a:focus {
+    outline: 0;
+    color: red;
+}
+
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+    outline: 0;
+    color: black;
+}
+
+h1 {
+    padding-top: 100px;
+    font-family: Lobster;
+}
+
+p {
+    font-size: 15px;
+    font-family: Ubuntu, sans-serif;
+}
+
+footer {
+    letter-spacing: 1px;
+    width: auto;
+    font-family: Ubuntu, sans-serif;
+}
