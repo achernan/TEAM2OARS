@@ -11,7 +11,7 @@
     font-weight: bold;
     font-size: 40px;
     margin: 10px;
-    font-family: Montserrat;
+    font-family: Ubuntu, sans-serif;
 }
 
 .navbar-default .navbar-collapse {
@@ -42,9 +42,10 @@
 }
 
 p {
-    font-size: 20px;
-    font-weight: bold;
-    color: green;
+    font-size: 50px;
+    font-family: Lobster;
+
+    color: coral;
 }
 
 img {

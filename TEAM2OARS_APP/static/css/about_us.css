@@ -44,6 +44,10 @@ h1 {
     font-family: Lobster;
 }
 
+.text-style {
+    font-family: Ubuntu, sans-serif;
+}
+
 footer {
     letter-spacing: 1px;
     width: auto;
