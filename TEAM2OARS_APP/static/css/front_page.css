@@ -63,9 +63,9 @@ body {
 footer {
     letter-spacing: 1px;
     font-family: Ubuntu, sans-serif;
-    position:absolute;
+    /*position:absolute;
     width:100%;
-    bottom:0;
+    bottom:0;*/
 }
 
 

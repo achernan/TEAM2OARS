@@ -53,6 +53,10 @@ p {
     font-family: Ubuntu, sans-serif;
 }
 
+body {
+    background-color: floralwhite;
+}
+
 footer {
     letter-spacing: 1px;
     font-family: Ubuntu, sans-serif;
