@@ -37,9 +37,15 @@
     color: black;
 }
 
+label {
+    font-family: Ubuntu, sans-serif;
+}
+
 h1 {
     padding-top: 100px;
+    text-align: center;
     font-family: Lobster, sans-serif;
+    font-size: 50px;
 }
 
 p {
@@ -49,6 +55,8 @@ p {
 
 footer {
     letter-spacing: 1px;
-    width: auto;
     font-family: Ubuntu, sans-serif;
+    position:absolute;
+    width:100%;
+    bottom:0;
 }

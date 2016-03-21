@@ -47,29 +47,25 @@ p {
     color: coral;
 }
 
-img {
-    min-width: 100%;
-    /*should prob adjust height, this didn't work.*/
-    min-height: 100%;
-    width: auto;
-    height: auto;
+.carousel {
+    max-width: 100%;
 }
 
-.transbox {
-    margin: 30px;
-    background-color: #ffffff;
-    opacity: 0.6;
+.carousel-inner > .item > img {
+   width:100%;
+   height: 800px;
 }
 
 body {
-    background-color: whitesmoke;
+    background-color: floralwhite;
 }
-
 
 footer {
     letter-spacing: 1px;
-    width: auto;
     font-family: Ubuntu, sans-serif;
+    position:absolute;
+    width:100%;
+    bottom:0;
 }
 
 

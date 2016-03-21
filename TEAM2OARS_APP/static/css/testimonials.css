@@ -1,3 +1,4 @@
+
 .navbar-default {
     border-color: transparent;
 }
@@ -37,13 +38,86 @@
     color: black;
 }
 
+/*header styling*/
 h1 {
     padding-top: 100px;
-    font-family: Lobster;
+    text-align: center;
+    font-family: Lobster, sans-serif;
+    font-size: 50px;
+}
+
+h3 {
+    font-family: Ubuntu, sans-serif;
+}
+
+.text-style {
+    text-align: center;
+    font-family: Ubuntu, sans-serif;
+}
+
+p {
+    font-family: Ubuntu, sans-serif;
+    font-size: 20px;
 }
 
 footer {
     letter-spacing: 1px;
-    width: auto;
     font-family: Ubuntu, sans-serif;
+    position:absolute;
+    width:100%;
+    bottom:0;
+}
+
+
+/*search box wrapper*/
+.form-wrapper {
+    width: 800px;
+    padding: 15px;
+    background: darkgray;
+    border-radius: 10px;
+}
+
+/*search input box styling*/
+.form-wrapper input {
+    width: 660px;
+    height: 40px;
+    padding: 10px 5px;
+    font: bold 15px 'Ubuntu';
+    border: 1px;
+    background: whitesmoke;
+    border-radius: 3px 0 0 3px;
+}
+
+/*search button*/
+.form-wrapper button {
+    float: right;
+    border: 0;
+    padding: 0;
+    height: 40px;
+    width: 110px;
+    font: bold 15px/40px 'Ubuntu';
+    color: #fff;
+    background: #d83c3c;
+    border-radius: 0 3px 3px 0;
+    text-shadow: 0 -1px 0 rgba(0, 0 ,0, .3);
+}
+
+/*This is for search box, not sure what*/
+ .cf:before, .cf:after{
+    content:"";
+    display:table;
+ }
+
+.cf:after{
+    clear:both;
+}
+
+.cf{
+    zoom:1;
+}
+
+.star-rating {
+  line-height:32px;
+  font-size:1.25em;
+  cursor: pointer;
 }

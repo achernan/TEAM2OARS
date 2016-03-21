@@ -41,16 +41,26 @@
 
 h1 {
     padding-top: 100px;
-    font-family: Lobster;
+    text-align: center;
+    font-family: Lobster, sans-serif;
+    font-size: 50px;
+}
+
+.row {
+    margin: 0 auto;
+    float: none;
 }
 
 .text-style {
+    text-align: center;
     font-family: Ubuntu, sans-serif;
 }
 
 footer {
     letter-spacing: 1px;
-    width: auto;
     font-family: Ubuntu, sans-serif;
+    position:fixed;
+    width: 100%;
+    bottom:0;
 }
 

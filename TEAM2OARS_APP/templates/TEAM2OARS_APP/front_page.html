@@ -20,48 +20,13 @@
     <link rel="stylesheet" href="{% static 'css/front_page.css' %}">
 
 
-<!--Carousel-->
-    <div id="carousel" class="carousel slide" data-ride="carousel">
-        <!-- Menu -->
-        <ol class="carousel-indicators">
-            <li data-target="#carousel" data-slide-to="0" class="active"></li>
-            <li data-target="#carousel" data-slide-to="1"></li>
-            <li data-target="#carousel" data-slide-to="2"></li>
-            <li data-target="#carousel" data-slide-to="3"></li>
-        </ol>
 
-        <!-- Items -->
-        <div class="carousel-inner">
 
-            <div class="item active">
-                <img src="{% static 'images/pool.jpg' %}" alt="Slide 1" />
-            </div>
-            <div class="item">
-                <img src="{% static 'images/gym.jpg' %}" alt="Slide 2" />
-            </div>
-            <div class="item">
-                <img src="{% static 'images/kitchen.jpg' %}" alt="Slide 3" />
-            </div>
-            <div class="item">
-                <img src="{% static 'images/bedroom.jpg' %}" alt="Slide 3" />
-            </div>
-        </div>
-        <a href="#carousel" class="left carousel-control" data-slide="prev">
-            <span class="glyphicon glyphicon-chevron-left"></span>
-        </a>
-        <a href="#carousel" class="right carousel-control" data-slide="next">
-            <span class="glyphicon glyphicon-chevron-right"></span>
-        </a>
-    </div>
-
-    <!--For Carousel-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 
 </head>
 
 <body>
-    <div class="container">
+    <div class="container-fluid">
         <!-- Navigation at top of page -->
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="navbar-header">
@@ -75,27 +40,74 @@
                 <li> <a href="{% url 'testimonials'%}"> Testimonials </a> </li>
             </ul>
             </div>
-
         </nav>
 
-        <br>
 
-        <!-- Think about laying text on top of img -->
-        <p>Find the perfect home today.</p>
-        <p>Start here.</p>
+        <!--Carousel-->
+        <div id="carousel" class="carousel slide" data-ride="carousel">
+            <!-- Menu -->
+            <ol class="carousel-indicators">
+                <li data-target="#carousel" data-slide-to="0" class="active"></li>
+                <li data-target="#carousel" data-slide-to="1"></li>
+                <li data-target="#carousel" data-slide-to="2"></li>
+                <li data-target="#carousel" data-slide-to="3"></li>
+            </ol>
+
+            <!-- Items -->
+            <div class="carousel-inner">
+
+                <div class="item active">
+                    <img src="{% static 'images/pool.jpg' %}" alt="Slide 1" />
+                </div>
+                <div class="item">
+                    <img src="{% static 'images/gym.jpg' %}" alt="Slide 2" />
+                </div>
+                <div class="item">
+                    <img src="{% static 'images/kitchen.jpg' %}" alt="Slide 3" />
+                </div>
+                <div class="item">
+                    <img src="{% static 'images/bedroom.jpg' %}" alt="Slide 3" />
+                </div>
+            </div>
+            <a href="#carousel" class="left carousel-control" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+            </a>
+            <a href="#carousel" class="right carousel-control" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+            </a>
+        </div>
+
+
+
+        <br>
+        <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-6">
+                <!-- Think about laying text on top of img -->
+                <p>Find the perfect home today.</p>
+                <p>Start here.</p>
+            </div>
+
+        </div>
 
     </div>
+
+
+<!--For Carousel-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
 
 </body>
 
 <footer>
-    <div class="container">
+    <div class="container-fluid">
         <hr>
         <div class="row">
-            <div class="col-sm-2 text-left">
+            <div class="col-sm-2">
                 <h4>Connect with us</h4>
             </div>
-            <div class="col-sm-4 text-left">
+            <div class="col-sm-6">
                 <ul class="list-inline">
                     <li class="fa fa-2x fa-linkedin"> </li>
                     <li class="fa fa-2x fa-facebook"> </li>
@@ -103,8 +115,7 @@
                     <li class="fa fa-2x fa-twitter"> </li>
                 </ul>
             </div>
-
-            <div class="col-sm-6 text-right">
+            <div class="col-sm-4 text-right">
                 <h4>Copyright &copy TEAM2OARS</h4>
             </div>
         </div>
