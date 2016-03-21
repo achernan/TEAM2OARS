@@ -2,7 +2,6 @@
 .navbar-default {
     border-color: transparent;
     opacity: 0.8;
-
 }
 
 /*nav 'header' custom */
@@ -57,7 +56,7 @@ p {
 }
 
 body {
-    background-color: floralwhite;
+    background-color: ghostwhite;
 }
 
 footer {

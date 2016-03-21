@@ -13,7 +13,7 @@
 }
 
 .navbar-default .navbar-collapse {
-    background-color: transparent; /*changes nav background color*/
+    background-color: ghostwhite; /*changes nav background color*/
 }
 
 /*navbar-right elements style*/
@@ -57,7 +57,7 @@ h1 {
 }
 
 body {
-    background-color: floralwhite;
+    background-color: ghostwhite;
 }
 
 footer {

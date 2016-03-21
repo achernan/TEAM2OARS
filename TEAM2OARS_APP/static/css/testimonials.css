@@ -13,7 +13,7 @@
 }
 
 .navbar-default .navbar-collapse {
-    background-color: transparent; /*changes nav background color*/
+    background-color: ghostwhite; /*changes nav background color*/
 }
 
 /*for navbar-right stuff */
@@ -69,7 +69,7 @@ footer {
 }
 
 body {
-    background-color: floralwhite;
+    background-color: ghostwhite;
 }
 
 /*search box wrapper*/
