@@ -24,12 +24,18 @@
     <!-- Navigation at top of page -->
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="navbar-header">
+                <!-- Collapses navbar onto a button when it doesn't fit on screen. Will display similar to dropdown menu -->
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
                 <a class="navbar-brand" href="{% url 'front_page'%}">TEAM2OARS</a>
             </div>
 
 
             <div class="collapse navbar-collapse">
-            <ul class="nav navbar-nav navbar-right">
+            <ul class="nav navbar-nav navbar-right" id="myNavbar">
                 <li> <a href="{% url 'about_us'%}"> About Us </a> </li>
                 <li> <a href="{% url 'contact_us'%}"> Contact Us </a> </li>
                 <li> <a href="#"> Testimonials </a> </li>
