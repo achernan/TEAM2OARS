@@ -1,5 +1,3 @@
-{% load staticfiles %}
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -13,14 +11,8 @@
 
     <title>TEAM2OARS</title>
 
-        <!--Bootstrap, CSS stylesheets-->
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-    <!--Font-Awesome stylesheet-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-	<!--Coming soon Css-->
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
 	<link href="css/coming_soon.css" rel="stylesheet" />
-	<link rel="stylesheet" href="{% static 'css/coming_soon.css' %}">
 
     <!--     Fonts     -->
     <link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet">
@@ -91,7 +83,7 @@
   </div><!-- /.container -->
 </nav>
 
-<div class="main" style="background-image: url('{% static 'images/background.gif' %}')">
+<div class="main" style="background-image: url('/img/background.gif')">
         <video id="video_background" preload="auto" autoplay="true" loop="loop" muted="muted" volume="0">
             <source src="video/time.webm" type="video/webm">
             <source src="video/time.mp4" type="video/mp4">
@@ -118,6 +110,6 @@
     </div>
  </div>
 </body>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+   <script src="js/jquery.js" type="text/javascript"></script>
+	<script src="js/bootstrap.min.js" type="text/javascript"></script>
 </html>
