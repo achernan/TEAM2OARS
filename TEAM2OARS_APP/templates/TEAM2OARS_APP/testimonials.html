@@ -55,7 +55,13 @@
   	        <input type="text" placeholder="Search here...">
 	        <button type="submit">Search</button>
         </form>
-
+        <br>
+        <br>
+        <ul>
+            {% for testimony in allTestimonies %}
+                <li>{{ testimony.testimonial_content }}</li>
+            {% endfor %}
+        </ul>
         <br>
         <br>
         <div class="row">
