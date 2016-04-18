@@ -85,7 +85,7 @@
 								<div class="social-buttons">
 									
 								</div>
-								 <form class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
+								 <form class="form" role="form" method="post" action="/login/" accept-charset="UTF-8" id="login-nav">
 										<div class="form-group">
 											 <label class="sr-only" for="exampleInputEmail2">Email address</label>
 											 <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Email address" required>
@@ -96,7 +96,7 @@
                                              <div class="help-block text-right"><a href="">Forgot password?</a></div>
 										</div>
 										<div class="form-group">
-											 <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+											 <a href="/login/"><button type="button" class="btn btn-primary btn-block">Sign In</button></a>
 										</div>
 										<div class="checkbox">
 											 <label>
@@ -117,9 +117,7 @@
 
 <div class="main" style="background-image: url('{% static 'images/background.gif' %}')">
         <video id="video_background" preload="auto" autoplay="true" loop="loop" muted="muted" volume="0">
-            <source src="video/time.webm" type="video/webm">
-            <source src="video/time.mp4" type="video/mp4">
-            Video not supported
+            
         </video>
 <!--    For adding background video. Couldn't figure it out so decided to use a gif instead - Idam     -->
 

@@ -9,5 +9,8 @@ def about_us(request):
 def contact_us(request):
     return render(request, 'TEAM2OARS_APP/contact_us.html', {'contact': contact_us})
 
+def login(request):
+    return render(request, 'TEAM2OARS_APP/tenant_login.html', {'login': login})
+
 def testimonials(request):
     return render(request, 'TEAM2OARS_APP/testimonials.html', {'testimonials': testimonials})
