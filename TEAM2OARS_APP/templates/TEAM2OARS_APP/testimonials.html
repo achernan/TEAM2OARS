@@ -49,19 +49,24 @@
 
         <br>
 
-
-<!-- FIX! The rest is not responsive!! -->
-        <form class="form-wrapper cf center-block">
-  	        <input type="text" placeholder="Search here...">
-	        <button type="submit">Search</button>
+        {#  search bar  #}
+        <form class="form-wrapper cf center-block" action="/search/" method="get">
+  	        <input type="text" name="q" placeholder="Type keyword here...">
+	        <button type="submit" value="Search">Search</button>
         </form>
         <br>
         <br>
-        <ul>
-            {% for testimony in allTestimonies %}
-                <li>{{ testimony.testimonial_content }}</li>
-            {% endfor %}
-        </ul>
+
+        {#  displays search results...look in search.html  #}
+        <div class="content container">
+            <div class="row">
+                <div class="col-md-8">
+                    {% block content %}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+
         <br>
         <br>
         <div class="row">

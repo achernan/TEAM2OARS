@@ -1,0 +1,9 @@
+{% extends 'TEAM2OARS_APP/testimonials.html' %}
+
+{% block content %}
+<ul>
+    {% for testimony in allTestimonies %}
+        <li>{{ testimony.testimonial_content }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}
