@@ -12,6 +12,9 @@ def about_us(request):
 def contact_us(request):
     return render(request, 'TEAM2OARS_APP/contact_us.html', {'contact': contact_us})
 
+def login(request):
+    return render(request, 'TEAM2OARS_APP/tenant_login.html', {'login': login})
+
 def testimonials(request):
     allTestimonies = Testimonies.objects.all()
     template = loader.get_template('TEAM2OARS_APP/testimonials.html')

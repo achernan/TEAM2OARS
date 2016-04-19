@@ -19,12 +19,13 @@
     <!--Font-Awesome stylesheet-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 	<!--Coming soon Css-->
-	<link href="css/coming_soon.css" rel="stylesheet" />
+	<!--<link href="css/coming_soon.css" rel="stylesheet" />-->
 	<link rel="stylesheet" href="{% static 'css/coming_soon.css' %}">
 
     <!--     Fonts     -->
     <link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Grand+Hotel' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Ubuntu:regular,bold&subset=Latin">
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Lobster" />
 
 </head>
@@ -34,7 +35,7 @@
   <div class="container">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -54,47 +55,69 @@
 
       </ul>
       <ul class="nav navbar-nav navbar-right">
-            <li>
-                <a href="#">
-                    <i class=" "></i>
-                    Sign Up
-                </a>
-            </li>
-             <li>
-                <a href="#">
-                    <i class=" "></i>
-                    Log In
-                </a>
-            </li>
-             <li>
+             <li class="dropdown">
                 <a href="/about/">
                     <i class=" "></i>
                     About Us
                 </a>
             </li>
-            <li>
+            <li class="dropdown">
                 <a href="/contact/">
                     <i class=" "></i>
                     Contact Us
                 </a>
             </li>
-            <li>
+            <li class="dropdown">
                 <a href="/testimonials/">
                     <i class=" "></i>
                     Testimonials
                 </a>
             </li>
-       </ul>
-
+            <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="session">
+            <b>Log In  </b><span class="caret"></span>
+            </a>
+            <ul id="login-dp" class="dropdown-menu">
+				<li class="dropdown">
+					 <div class="row">
+							<div class="col-md-12">
+								Already have an account? Log in
+								<div class="social-buttons">
+									
+								</div>
+								 <form class="form" role="form" method="post" action="/login/" accept-charset="UTF-8" id="login-nav">
+										<div class="form-group">
+											 <label class="sr-only" for="exampleInputEmail2">Email address</label>
+											 <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Email address" required>
+										</div>
+										<div class="form-group">
+											 <label class="sr-only" for="exampleInputPassword2">Password</label>
+											 <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password" required>
+                                             <div class="help-block text-right"><a href="">Forgot password?</a></div>
+										</div>
+										<div class="form-group">
+											 <a href="/login/"><button type="button" class="btn btn-primary btn-block">Sign In</button></a>
+										</div>
+										<div class="checkbox">
+											 <label>
+											 <input type="checkbox"> keep me logged in
+											 </label>
+										</div>
+								 </form>
+							</div>
+							<div class="bottom text-center">
+								Don't have an account? <a href="#"><b>Sign Up</b></a>
+							</div>
+					 </div>
+				</li>
+			</ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container -->
 </nav>
 
-<div class="main" style="background-image: url('http://i.imgur.com/bjrYmWU.gif')">
+<div class="main" style="background-image: url('{% static 'images/background.gif' %}')">
         <video id="video_background" preload="auto" autoplay="true" loop="loop" muted="muted" volume="0">
-            <source src="video/time.webm" type="video/webm">
-            <source src="video/time.mp4" type="video/mp4">
-            Video not supported
+            
         </video>
 <!--    For adding background video. Couldn't figure it out so decided to use a gif instead - Idam     -->
 
@@ -117,6 +140,17 @@
     </div>
  </div>
 </body>
-   <script src="js/jquery.js" type="text/javascript"></script>
-	<script src="js/bootstrap.min.js" type="text/javascript"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script>
+  $(function() {
+  // Setup drop down menu
+  $('.dropdown-toggle').dropdown();
+ 
+  // Fix input element click problem
+  $('.dropdown input, .dropdown label').click(function(e) {
+    e.stopPropagation();
+  });
+});
+</script>
 </html>
