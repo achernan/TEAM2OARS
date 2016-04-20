@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'TEAM2OARS_APP.apps.Team2OarsAppConfig',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -115,7 +116,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-
+APPEND_SLASH=True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
