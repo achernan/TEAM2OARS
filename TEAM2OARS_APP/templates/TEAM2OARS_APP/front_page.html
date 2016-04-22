@@ -86,6 +86,16 @@
 									
 								</div>
 								 <form class="form" role="form" method="post" action="/login/" accept-charset="UTF-8" id="login-nav">
+										<div class="bottom text-center">
+								Login as:
+								<select class="form-control" id="actors" onchange="redir_options()" style="background-color=#800020; color=white;">
+                                      <option>Tenant</option>
+                                      <option>Assistant</option>
+                                      <option>Manager</option>
+                                      <option>Supervisor</option>
+                    </select>
+							</div>
+										<br>
 										<div class="form-group">
 											 <label class="sr-only" for="exampleInputEmail2">Email address</label>
 											 <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Email address" required>
@@ -96,7 +106,7 @@
                                              <div class="help-block text-right"><a href="">Forgot password?</a></div>
 										</div>
 										<div class="form-group">
-											 <a href="/login/"><button type="button" class="btn btn-primary btn-block">Sign In</button></a>
+											 <a id="login_redir" href="/Tenant/"><button type="button" class="btn btn-primary btn-block">Sign In</button></a>
 										</div>
 										<div class="checkbox">
 											 <label>
@@ -152,5 +162,12 @@
     e.stopPropagation();
   });
 });
+</script>
+<script>
+  function redir_options(){
+  var x = document.getElementById("actors").value;
+  var href_to_change=document.getElementById("login_redir");
+  href_to_change.href="/"+x+"/";
+  }
 </script>
 </html>

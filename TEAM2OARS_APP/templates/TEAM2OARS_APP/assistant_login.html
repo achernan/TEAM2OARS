@@ -42,7 +42,7 @@
                 <span class="icon-bar"></span>
               </button>
               <a class="navbar-brand navbar-brand-logo" href="#">
-                    <div class="brand">Welcome, Khoi [Tenant]</div>
+                    <div class="brand">Welcome, Khoi [Assistant]</div>
               </a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -50,45 +50,44 @@
               <ul class="nav navbar-nav navbar-right">
                     <li>
                         <a href="#Checkout">
-                            <i class="pe-7s-cash">
-                                <span class="label">1</span>
+                            <i class="pe-7s-id">
                             </i>
-                            <p>Pay Rent</p>
+                            <p>Tenant List</p>
                         </a>
                     </li> 
                     <li>
                         <a href="#viewAgreement" class="portfolio-link" data-toggle="modal">
-                            <i class="pe-7s-note2"></i>
+                            <i class="pe-7s-cash"></i>
                             </i>
-                            <p>View Agreement</p>
-                        </a>
-                    </li> 
-                    <li>
-                        <a href="#" class="portfolio-link" data-toggle="modal">
-                            <i class="pe-7s-home"></i>
-                            </i>
-                            <p>Apartment Rates</p>
-                        </a>
-                    </li> 
-                    <li>
-                        <a href="#writeComplaint" class="portfolio-link" data-toggle="modal">
-                            <i class="pe-7s-tools"></i>
-                            </i>
-                            <p>Enter Complaint</p>
-                        </a>
-                    </li> 
-                    <li>
-                        <a href="#writeTestimonial" class="portfolio-link" data-toggle="modal">
-                            <i class="pe-7s-ribbon"></i>
-                            </i>
-                            <p>Enter Testimonial</p>
+                            <p>Payment List</p>
                         </a>
                     </li> 
                     <li>
                         <a href="/testimonials/" class="portfolio-link" data-toggle="modal">
-                            <i class="pe-7s-search"></i>
+                            <i class="pe-7s-ribbon"></i>
                             </i>
                             <p>Search Testimonials</p>
+                        </a>
+                    </li> 
+                    <li>
+                        <a href="#writeTestimonial" class="portfolio-link" data-toggle="modal">
+                            <i class="pe-7s-home"></i>
+                            </i>
+                            <p>Apartments Available</p>
+                        </a>
+                    </li> 
+                    <li>
+                      <a href="#writeTestimonial" class="portfolio-link" data-toggle="modal">
+                            <i class="pe-7s-note2"></i>
+                            </i>
+                            <p>Rental Rates</p>
+                        </a>
+                    </li>
+                     <li>
+                        <a href="/testimonials/" class="portfolio-link" data-toggle="modal">
+                            <i class="pe-7s-search"></i>
+                            </i>
+                            <p>Search Agreements</p>
                         </a>
                     </li> 
                     <li class="dropdown">
@@ -117,63 +116,70 @@
 
 </div> <!-- end menu-dropdown -->
 
-<div class="main" style="padding-top:10px">
-         <div id="Checkout" class="inline">
-      <h1>Pay Rent</h1>
-      <div class="card-row">
-          <span class="visa"></span>
-          <span class="mastercard"></span>
-          <span class="amex"></span>
-          <span class="discover"></span>
-      </div>
-      <form class="form" role="form" method="post" action="/login/" accept-charset="UTF-8" id="testimonial_form">
-          <div class="security-code-group form-group">
-              <label or="EnterAmount">Enter Amount</label>
-              <input id="EnterAmount" class="form-control" type="text" maxlength="10" required></input>
-          </div>
-          <div class="security-code-group form-group">
-              <label for="PaymentAmount">Outstanding Balance:</label>
-              <div class="amount-placeholder">
-                  <span style="color:red;">$</span>
-                  <span style="color:red;">500.00</span>
-              </div>
-          </div>
-          <div class="form-group">
-              <label or="NameOnCard">Name on card</label>
-              <input id="NameOnCard" class="form-control" type="text" maxlength="255" required></input>
-          </div>
-          <div class="form-group">
-              <label for="CreditCardNumber">Card number</label>
-              <input id="CreditCardNumber" class="null card-image form-control" type="text" required></input>
-          </div>
-          <div class="expiry-date-group form-group">
-              <label for="ExpiryDate">Expiry date</label>
-              <input id="ExpiryDate" class="form-control" type="text" placeholder="MM / YY" maxlength="7" required></input>
-          </div>
-          <div class="security-code-group form-group">
-              <label for="SecurityCode">Security code</label>
-              <div class="input-container" >
-                  <input id="SecurityCode" class="form-control" type="text" required></input>
-                  <i id="cvc" class="fa fa-question-circle"></i>
-              </div>
-              <div class="cvc-preview-container two-card hide">
-                  <div class="amex-cvc-preview"></div>
-                  <div class="visa-mc-dis-cvc-preview"></div>
-              </div>
-          </div>
-          <div class="zip-code-group form-group">
-              <label for="ZIPCode">ZIP/Postal code</label>
-              <div class="input-container">
-                  <input id="ZIPCode" class="form-control" type="text" maxlength="10" required></input>
-                  <a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-placement="left" data-content="Enter the ZIP/Postal code for your credit card billing address."><i class="fa fa-question-circle"></i></a>
-              </div>
-          </div>
-          <button id="PayButton" class="btn btn-block btn-success submit-button" type="submit">
-              <span class="submit-button-lock"></span>
-              <span class="align-middle">Submit Pay</span>
-          </button>
-      </form>
-  </div>
+<div class="main" style="padding-top:10px; padding-left:250px; padding-right:250px">
+      <h2>Tenant List</h2>
+  <p>DISCLAIMER: This information is sensitive, and should not be released under any circumstances.</p>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Social Security</th>
+        <th>Name</th>
+        <th>Apt No.</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>000-00-1738</td>
+        <td>Jane Doe</td>
+        <td>100</td>
+      </tr>
+      <tr>
+        <td>1920-44-1198</td>
+        <td>Karen Fletch</td>
+        <td>104</td>
+      </tr>
+      <tr>
+        <td>670-11-1738</td>
+        <td>Beyoncé Knowles</td>
+        <td>102</td>
+      </tr>
+      <tr>
+        <td>554-00-1738</td>
+        <td>Nitesh Ramwani</td>
+        <td>106</td>
+      </tr>
+      <tr>
+        <td>212-88-1738</td>
+        <td>Ayomide Olukoya</td>
+        <td>200</td>
+      </tr>
+      <tr>
+        <td>111-64-1738</td>
+        <td>Kat Nguyen</td>
+        <td>202</td>
+      </tr>
+      <tr>
+        <td>233-04-1738</td>
+        <td>Cristiano Ronaldo</td>
+        <td>204</td>
+      </tr>
+      <tr>
+        <td>220-24-1738</td>
+        <td>James Rodriguez</td>
+        <td>206</td>
+      </tr>
+      <tr>
+        <td>111-64-1738</td>
+        <td>Noor Ahmad</td>
+        <td>208</td>
+      </tr>
+      <tr>
+        <td>992-44-1738</td>
+        <td>Maureen Kemp</td>
+        <td>210</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 <!-- end main -->
 
@@ -190,6 +196,7 @@
 													<div class="row">
 														<div class="col-lg-8 col-lg-offset-2">
 															<div class="modal-body">
+																<!-- Project Details Go Here -->
 																<h2>Current Lease Agreement</h2>
 																<p class="item-intro text-muted">Preview</p>
 																<img class="img-responsive" src="http://printableagreements.com/wp-content/uploads/2013/10/Alaska-Residential-Lease-Agreement.jpg" alt="">
@@ -202,9 +209,8 @@
 												</div>
 											</div>
 										</div>
-
-<!--Complaint Form-->										
-<div class="portfolio-modal modal fade" id="writeComplaint" tabindex="-1" role="dialog" aria-hidden="true">
+										
+										<div class="portfolio-modal modal fade" id="writeComplaint" tabindex="-1" role="dialog" aria-hidden="true">
 											<div class="modal-content">
 												<div class="close-modal" data-dismiss="modal">
 													<div class="lr">
@@ -218,24 +224,26 @@
 														<div class="col-lg-8 col-lg-offset-2">
 															<div class="modal-body">
 															  <h2>Complaint Form</h2>
-															  <form class="form" role="form" method="post" action="/login/" accept-charset="UTF-8" id="testimonial_form">
+															  <form role="form">
                                   <div class="form-group">
                                     <label for="sel1">Select complaint priority:</label>
-                                    <select class="form-control" id="sel1" required>
+                                    <select class="form-control" id="sel1">
                                       <option>--</option>
                                       <option>Low</option>
                                       <option>Medium</option>
                                       <option>High</option>
                                     </select>
                                   </div>
-                  
+                                  </form>
+															
+                                  <form role="form">
                                   <div class="form-group">
                                   <label for="comment" style="text-align: left;">Please enter complaint in the form below:</label>
-                                  <textarea class="form-control" rows="10" id="comment" required></textarea>
+                                  <textarea class="form-control" rows="10" id="comment"></textarea>
                                  </div>
-                                <button type="submit" style="background-color:#000000;" class="btn btn-primary" a href="#"><i class="fa fa-send"></i> Submit </button>
+                                 </form>
+                                <button type="reset" style="background-color:#000000;" class="btn btn-primary" data-dismiss="modal" a href="#"><i class="fa fa-send"></i> Submit </button>
 																<button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-reply"></i> Go Back </button>
-															</form>
 															</div>
 														</div>
 													</div>
@@ -258,18 +266,20 @@
 															<div class="modal-body">
 																<!-- Project Details Go Here -->
 																<h2>Enter Testimonial</h2>
-															<form class="form" role="form" method="post" action="/login/" accept-charset="UTF-8" id="testimonial_form">
+															<form role="form">
 															  
                                   <div class="form-group">
                                   <label for="comment" style="text-align: left;">Name:</label>
-                                  <textarea class="form-control" rows="1" id="comment" required></textarea>
+                                  <textarea class="form-control" rows="1" id="comment"></textarea>
                                  </div>
+                                 </form>
+															<form role="form">
 															  
                                   <div class="form-group">
                                   <label for="comment" style="text-align: left;">Testimonial:</label>
-                                  <textarea class="form-control" rows="10" id="comment" required></textarea>
+                                  <textarea class="form-control" rows="10" id="comment"></textarea>
                                  </div>
-  
+                                 </form>
                                 <label for="comment" style="text-align: left;">Star rating</label>
                               <div class="star-rating"> 
                                 <span class="fa fa-star-o" data-rating="1"></span>
@@ -280,10 +290,9 @@
                                 <input type="hidden" name="whatever" class="rating-value" value="0">
                               </div>
                               <br>
-                                <button type="submit" style="background-color:#000000;" class="btn btn-primary" a href="#"><i class="fa fa-send"></i> Submit </button>
+                                <button type="reset" style="background-color:#000000;" class="btn btn-primary" data-dismiss="modal" a href="#"><i class="fa fa-send"></i> Submit </button>
 																<button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-reply"></i> Go Back </button>
 															</div>
-															</form>
 														</div>
 													</div>
 												</div>

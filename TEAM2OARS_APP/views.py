@@ -9,8 +9,14 @@ def about_us(request):
 def contact_us(request):
     return render(request, 'TEAM2OARS_APP/contact_us.html', {'contact': contact_us})
 
-def login(request):
-    return render(request, 'TEAM2OARS_APP/tenant_login.html', {'login': login})
+def Tenant(request):
+    return render(request, 'TEAM2OARS_APP/tenant_login.html', {'Tenant': Tenant})
+    
+def Assistant(request):
+    return render(request, 'TEAM2OARS_APP/assistant_login.html', {'Assistant': Assistant})
+    
+def Supervisor(request):
+    return render(request, 'TEAM2OARS_APP/supervisor_login.html', {'Supervisor': Supervisor})
 
 def testimonials(request):
     return render(request, 'TEAM2OARS_APP/testimonials.html', {'testimonials': testimonials})
