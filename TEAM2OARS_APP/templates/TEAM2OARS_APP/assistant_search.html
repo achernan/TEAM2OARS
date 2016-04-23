@@ -1,0 +1,13 @@
+{% extends 'TEAM2OARS_APP/assistant_login.html' %}
+
+{% block tenants %}
+<ul>
+    {% for tenants in allTenants %}
+        <tr>
+        <th>{{ tenants.tenant_ss }}</th>
+        <th>{{ tenants.tenant_name }}</th>
+        <th>{{ tenants.work_phone }}</th>
+        </tr>
+    {% endfor %}
+</ul>
+{% endblock %}

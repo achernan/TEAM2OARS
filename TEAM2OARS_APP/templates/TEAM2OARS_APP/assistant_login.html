@@ -42,7 +42,7 @@
                 <span class="icon-bar"></span>
               </button>
               <a class="navbar-brand navbar-brand-logo" href="#">
-                    <div class="brand">Welcome, Khoi [Assistant]</div>
+                    <div class="brand">Welcome, {{ person_name }} [{{ person_title }}]</div>
               </a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -121,63 +121,11 @@
   <p>DISCLAIMER: This information is sensitive, and should not be released under any circumstances.</p>
   <table class="table">
     <thead>
-      <tr>
-        <th>Social Security</th>
-        <th>Name</th>
-        <th>Apt No.</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>000-00-1738</td>
-        <td>Jane Doe</td>
-        <td>100</td>
-      </tr>
-      <tr>
-        <td>1920-44-1198</td>
-        <td>Karen Fletch</td>
-        <td>104</td>
-      </tr>
-      <tr>
-        <td>670-11-1738</td>
-        <td>Beyoncé Knowles</td>
-        <td>102</td>
-      </tr>
-      <tr>
-        <td>554-00-1738</td>
-        <td>Nitesh Ramwani</td>
-        <td>106</td>
-      </tr>
-      <tr>
-        <td>212-88-1738</td>
-        <td>Ayomide Olukoya</td>
-        <td>200</td>
-      </tr>
-      <tr>
-        <td>111-64-1738</td>
-        <td>Kat Nguyen</td>
-        <td>202</td>
-      </tr>
-      <tr>
-        <td>233-04-1738</td>
-        <td>Cristiano Ronaldo</td>
-        <td>204</td>
-      </tr>
-      <tr>
-        <td>220-24-1738</td>
-        <td>James Rodriguez</td>
-        <td>206</td>
-      </tr>
-      <tr>
-        <td>111-64-1738</td>
-        <td>Noor Ahmad</td>
-        <td>208</td>
-      </tr>
-      <tr>
-        <td>992-44-1738</td>
-        <td>Maureen Kemp</td>
-        <td>210</td>
-      </tr>
+       <form class="form-wrapper cf center-block" action="/tenantslist/" method="get">
+	        <button type="submit" value="Search">Search</button>
+        </form>
+      {% block tenants %}
+      {% endblock %}
     </tbody>
   </table>
 </div>
