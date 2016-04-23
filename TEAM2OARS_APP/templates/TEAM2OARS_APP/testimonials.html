@@ -50,10 +50,13 @@
         <br>
 
         {#  search bar  #}
-        <form class="form-wrapper cf center-block" action="/search/" method="get">
-  	        <input type="text" name="q" placeholder="Type keyword here...">
-	        <button type="submit" value="Search">Search</button>
-        </form>
+    {% for tenants in allTenants %}
+        <tr>
+          <th>{{ tenants.tenant_ss }}</th>
+          <th>{{ tenants.tenant_name }}</th>
+          <th>{{ tenants.work_phone }}</th>
+        </tr>
+    {% endfor %}
         <br>
         <br>
 
