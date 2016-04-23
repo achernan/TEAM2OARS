@@ -1,0 +1,157 @@
+{% load staticfiles %}
+
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<link rel="apple-touch-icon" sizes="76x76" href="http://i.imgur.com/6w3Xc2F.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="http://i.imgur.com/6w3Xc2F.png">
+
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+
+    <title>TEAM2OARS</title>
+
+        <!--Bootstrap, CSS stylesheets-->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <!--Font-Awesome stylesheet-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+	<!--Coming soon Css-->
+	<!--<link href="css/coming_soon.css" rel="stylesheet" />-->
+	<link rel="stylesheet" href="{% static 'css/coming_soon.css' %}">
+
+    <!--     Fonts     -->
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Grand+Hotel' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Ubuntu:regular,bold&subset=Latin">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Lobster" />
+
+</head>
+
+<body>
+<nav class="navbar navbar-transparent navbar-fixed-top" role="navigation">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling--> 
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              </a>
+
+              </ul>
+        </li>
+
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+             <li class="dropdown">
+                <a href="/about/">
+                    <i class=" "></i>
+                    About Us
+                </a>
+            </li>
+            <li class="dropdown">
+                <a href="/contact/">
+                    <i class=" "></i>
+                    Contact Us
+                </a>
+            </li>
+            <li class="dropdown">
+                <a href="/testimonials/">
+                    <i class=" "></i>
+                    Testimonials
+                </a>
+            </li>
+            <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="session">
+            <b>Log In  </b><span class="caret"></span>
+            </a>
+            <ul id="login-dp" class="dropdown-menu">
+				<li class="dropdown">
+					 <div class="row">
+							<div class="col-md-12">
+								Already have an account? Log in
+								<div class="social-buttons">
+									
+								</div>
+								 <form class="form" role="form" method="post" action="/enter_credentials/" accept-charset="UTF-8" id="login-nav">
+                                         {% csrf_token %}
+										<div class="form-group">
+											 <label class="sr-only" for="exampleInputEmail2">Email address</label>
+											 <input type="text" name=uname class="form-control" id="exampleInputEmail2" placeholder="Username" required>
+										</div>
+										<div class="form-group">
+											 <label class="sr-only" for="exampleInputPassword2">Password</label>
+											 <input type="password" name=pwd class="form-control" id="exampleInputPassword2" placeholder="Password" required>
+                                             <div class="help-block text-right"><a href="">Forgot password?</a></div>
+										</div>
+										<div class="form-group">
+											 <a href="/login/"><button type="submit" class="btn btn-primary btn-block">Sign In</button></a>
+										</div>
+										<div class="checkbox">
+											 <label>
+											 <input type="checkbox"> keep me logged in
+											 </label>
+										</div>
+								 </form>
+							</div>
+							<div class="bottom text-center">
+								Don't have an account? <a href="#"><b>Sign Up</b></a>
+							</div>
+					 </div>
+				</li>
+			</ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container -->
+</nav>
+
+<div class="main" style="background-image: url('{% static 'images/background.gif' %}')">
+        <video id="video_background" preload="auto" autoplay="true" loop="loop" muted="muted" volume="0">
+            
+        </video>
+<!--    For adding background video. Couldn't figure it out so decided to use a gif instead - Idam     -->
+
+    <div class="cover black" data-color="black"></div>
+
+    <div class="container">
+        <h1 class="logo cursive"><!--Lobster font-->
+            TEAM2OARS
+        </h1>
+
+        <div class="content">
+            <h4 class="motto">Find the perfect home today. Start here!</h4>
+            <div class="subscribe"></div>
+        </div>
+    </div>
+    <div class="footer">
+      <div class="container">
+             Made with <i class="fa fa-heart heart"></i> by <a href="/about/">TEAM2OARS</a>
+      </div>
+    </div>
+ </div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script>
+  $(function() {
+  // Setup drop down menu
+  $('.dropdown-toggle').dropdown();
+ 
+  // Fix input element click problem
+  $('.dropdown input, .dropdown label').click(function(e) {
+    e.stopPropagation();
+  });
+});
+</script>
+</html>
