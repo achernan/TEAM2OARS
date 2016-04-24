@@ -1,9 +1,10 @@
 from django.shortcuts import render
+from django.utils import timezone
 from .models import Testimonies
 from .models import Staff
 from .models import Tenant
 from django.template import loader
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 
 def front_page(request):
     return render(request, 'TEAM2OARS_APP/front_page.html', {})
@@ -17,7 +18,7 @@ def enter_credentials(request):
             precords = Tenant.objects.filter(password__exact=request.POST['pwd'])
             context = {
                 'urecords': urecords, 'query': urecords,
-                'precords': precords, 'query': precords
+                'precords': precords, 'query': precords,
             }
 
     if Staff.objects.filter(username__exact=request.POST['uname']):
@@ -45,8 +46,18 @@ def contact_us(request):
 def login(request):
     return render(request, 'TEAM2OARS_APP/tenant_login.html', {'login': login})
 
+
 def testimonials(request):
     return render(request, 'TEAM2OARS_APP/testimonials.html', {'testimonials': testimonials})
+
+def save_testimonial(request):
+    content = request.POST.get('c')
+    userdata = request.POST.get('social')
+    content_object = Testimonies(testimonial_date=timezone.now(),
+                                 testimonial_content=content,
+                                 tenant_ss=Tenant.objects.get(tenant_ss__exact=userdata))
+    content_object.save()
+    return HttpResponseRedirect('/testimonials/')
 
 def search(request):
     allTestimonies = Testimonies.objects.filter(testimonial_content__contains=request.GET['q'])
