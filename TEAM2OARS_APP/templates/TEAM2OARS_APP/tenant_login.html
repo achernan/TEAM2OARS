@@ -42,9 +42,15 @@
                 <span class="icon-bar"></span>
               </button>
               <a class="navbar-brand navbar-brand-logo" href="#">
+<<<<<<< HEAD
                     {% for tenants in urecords %}
                     <div class="brand">Welcome, {{ tenants.tenant_name }} [Tenant]</div>
                     {% endfor %}
+=======
+                  {% for u in urecords %}
+                    <div class="brand">Welcome, {{ u.tenant_name }} {{ u.first_name }} {{ u.last_name }}</div>
+                  {% endfor %}
+>>>>>>> 2e68b1a0bbc7f0936112d61e6e30c4c77d7238b0
               </a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -243,6 +249,7 @@
 										
 	<!--Enter Testimonial-->
 	<div class="portfolio-modal modal fade" id="writeTestimonial" tabindex="-1" role="dialog" aria-hidden="true">
+<<<<<<< HEAD
 											<div class="modal-content">
 												<div class="close-modal" data-dismiss="modal">
 													<div class="lr">
@@ -521,6 +528,45 @@
 												</div>
 											</div>
 										</div>
+=======
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <!-- Project Details Go Here -->
+                            <h2>Enter Testimonial:</h2>
+                            <form action="/save_testimonial/" method="POST">{% csrf_token %}
+                                <div class="form-group">
+                                    <textarea class="form-control" name=c rows="10" id="comment"></textarea>
+                                </div>
+                                <button type="submit"
+                                        style="background-color:#000000;"
+                                        class="btn btn-primary">
+                                    <i class="fa fa-send"></i> Submit
+                                </button><br>
+                                {% for ss in urecords %}
+                                    <textarea style="visibility:hidden;" name=social>{{ ss.tenant_ss }}</textarea>
+                                {% endfor %}
+                            </form>
+                            <button type="button"
+                                    class="btn btn-primary"
+                                    data-dismiss="modal">
+                                <i class="fa fa-reply"></i> Go Back
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+>>>>>>> 2e68b1a0bbc7f0936112d61e6e30c4c77d7238b0
 
 </body>
 

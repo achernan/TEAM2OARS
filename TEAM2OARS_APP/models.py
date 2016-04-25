@@ -16,7 +16,7 @@ class Staff (models.Model):
     CUSTOMERSERVICE = 'Customer Service'
     POSITION_CHOICES = ((ASSISTANT, 'assistant'), (MANAGER, 'manager'),
                         (SUPERVISOR, 'supervisor'), (CUSTOMERSERVICE, 'customer service'))
-    staff_no = models.PositiveIntegerField(primary_key=True)
+    staff_no = models.TextField(primary_key=True)
     first_name = models.TextField()
     last_name = models.TextField()
     position = models.CharField(max_length=16, choices=POSITION_CHOICES, default=ASSISTANT)
@@ -26,8 +26,11 @@ class Staff (models.Model):
     username = models.CharField(max_length=50)
     password = models.CharField(max_length=50)
 
+    def __str__(self):
+        return self.first_name + " " + self.last_name + " - " + self.username
+
 class Tenant(models.Model):
-    tenant_ss = models.PositiveIntegerField(primary_key=True)
+    tenant_ss = models.TextField(primary_key=True)
     tenant_name = models.TextField()
     tenant_DOB = models.DateField()
     marital = models.CharField(max_length=15, choices=MARRIAGE_CHOICES, default='S')
@@ -37,6 +40,9 @@ class Tenant(models.Model):
     employer = models.TextField()
     username = models.CharField(max_length=50)
     password = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.tenant_name + " - " + self.username
 
 class Apartment (models.Model):
     VACANT = 'V'
@@ -105,7 +111,10 @@ class Handle_Rents (models.Model):
     complaint_no = models.ForeignKey(Complaints, on_delete=models.CASCADE)
 
 class Testimonies(models.Model):
-    testimonial_id = models.IntegerField(primary_key=True)
+    testimonial_id = models.AutoField(primary_key=True)
     testimonial_date = models.DateField()
     testimonial_content = models.TextField()
     tenant_ss = models.ForeignKey(Tenant, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.testimonial_content
