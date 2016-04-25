@@ -3,6 +3,7 @@ from django.utils import timezone
 from .models import Testimonies
 from .models import Staff
 from .models import Tenant
+from .models import Tenant_Family
 from .models import Invoices
 from .models import Apartment
 from .models import Automobiles
@@ -24,11 +25,13 @@ def enter_credentials(request):
               invoices = Invoices.objects.filter(tenant_ss__exact=info.tenant_ss)
               apartment = Apartment.objects.filter(tenant_ss__exact=info.tenant_ss)
               automobiles = Automobiles.objects.filter(tenant_ss__exact=info.tenant_ss)
+              family = Tenant_Family.objects.filter(tenant_ss__exact=info.tenant_ss)
             context = {
                 'urecords': urecords, 'query': urecords,
                 'precords': precords, 'query': precords,
                 'invoices': invoices, 'apartment' : apartment,
-                'automobiles': automobiles, 'allTenants' : allTenants
+                'automobiles': automobiles, 'allTenants' : allTenants,
+                'family' : family
             }
         if context:
           return render(request, 'TEAM2OARS_APP/tenant_login.html', context)

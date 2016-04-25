@@ -42,15 +42,10 @@
                 <span class="icon-bar"></span>
               </button>
               <a class="navbar-brand navbar-brand-logo" href="#">
-<<<<<<< HEAD
-                    {% for tenants in urecords %}
-                    <div class="brand">Welcome, {{ tenants.tenant_name }} [Tenant]</div>
-                    {% endfor %}
-=======
+
                   {% for u in urecords %}
-                    <div class="brand">Welcome, {{ u.tenant_name }} {{ u.first_name }} {{ u.last_name }}</div>
+                    <div class="brand">Welcome, {{ u.tenant_name }} {{ u.first_name }} {{ u.last_name }} [Tenant]</div>
                   {% endfor %}
->>>>>>> 2e68b1a0bbc7f0936112d61e6e30c4c77d7238b0
               </a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -249,51 +244,44 @@
 										
 	<!--Enter Testimonial-->
 	<div class="portfolio-modal modal fade" id="writeTestimonial" tabindex="-1" role="dialog" aria-hidden="true">
-<<<<<<< HEAD
-											<div class="modal-content">
-												<div class="close-modal" data-dismiss="modal">
-													<div class="lr">
-														<div class="rl">
-														</div>
-													</div>
-												</div>
-												<div class="container">
-													<div class="row">
-														<div class="col-lg-8 col-lg-offset-2">
-															<div class="modal-body">
-																<!-- Project Details Go Here -->
-																<h2>Enter Testimonial</h2>
-															<form class="form" role="form" method="post" action="/login/" accept-charset="UTF-8" id="testimonial_form">
-															  
-                                  <div class="form-group">
-                                  <label for="comment" style="text-align: left;">Name:</label>
-                                  <textarea class="form-control" rows="1" id="comment" required></textarea>
-                                 </div>
-															  
-                                  <div class="form-group">
-                                  <label for="comment" style="text-align: left;">Testimonial:</label>
-                                  <textarea class="form-control" rows="10" id="comment" required></textarea>
-                                 </div>
-  
-                                <label for="comment" style="text-align: left;">Star rating</label>
-                              <div class="star-rating"> 
-                                <span class="fa fa-star-o" data-rating="1"></span>
-                                <span class="fa fa-star-o" data-rating="2"></span>
-                                <span class="fa fa-star-o" data-rating="3"></span>
-                                <span class="fa fa-star-o" data-rating="4"></span>
-                                <span class="fa fa-star-o" data-rating="5"></span>
-                                <input type="hidden" name="whatever" class="rating-value" value="0">
-                              </div>
-                              <br>
-                                <button type="submit" style="background-color:#000000;" class="btn btn-primary" a href="#"><i class="fa fa-send"></i> Submit </button>
-																<button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-reply"></i> Go Back </button>
-															</div>
-															</form>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
+											 <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <!-- Project Details Go Here -->
+                            <h2>Enter Testimonial:</h2>
+                            <form action="/save_testimonial/" method="POST">{% csrf_token %}
+                                <div class="form-group">
+                                    <textarea class="form-control" name=c rows="10" id="comment"></textarea>
+                                </div>
+                                <button type="submit"
+                                        style="background-color:#000000;"
+                                        class="btn btn-primary">
+                                    <i class="fa fa-send"></i> Submit
+                                </button>
+                                <button type="button"
+                                    class="btn btn-primary"
+                                    data-dismiss="modal">
+                                <i class="fa fa-reply"></i> Go Back
+                                </button>
+                                <br>
+                                {% for ss in urecords %}
+                                    <textarea style="visibility:hidden;" name=social>{{ ss.tenant_ss }}</textarea>
+                                {% endfor %}
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 <div class="portfolio-modal modal fade" id="personalInfo" tabindex="-1" role="dialog" aria-hidden="true">
 											<div class="modal-content">
@@ -372,42 +360,47 @@
 															<div class="modal-body" style="text-align:left;">
 															  <br>
 															  <table class="table">
+                                 {% if family %}
                                   <tbody>
-                                  {% for tenants in urecords %}
+                                  {% for person in family %}
                                     <tr>
                                       <td><b>Social Security: </b></td>
-                                      <td>{{ tenants.tenant_ss }}</td>
+                                      <td>{{ person.family_ss }}</td>
                                     </tr>
                                     <tr>
                                       <td><b>Name: </b></td>
-                                      <td>{{ tenants.tenant_name }}</td>
+                                      <td>{{ person.name }}</td>
                                     </tr>
                                     <tr>
-                                      <td><b>DOB: </b></td>
-                                      <td>{{ tenants.tenant_DOB }}</td>
+                                      <td><b>Spouse: </b></td>
+                                      <td>{{ person.spouse }}</td>
                                     </tr>
                                     <tr>
-                                      <td><b>Marital Status: </b></td>
-                                      <td>{{ tenants.marital }}</td>
+                                      <td><b>Child: </b></td>
+                                      <td>{{ person.child }}</td>
                                     </tr>
                                     <tr>
-                                      <td><b>Work Phone: </b></td>
-                                      <td>{{ tenants.work_phone }}</td>
+                                      <td><b>Divorced: </b></td>
+                                      <td>{{ person.divorced }}</td>
                                     </tr>
                                     <tr>
-                                      <td><b>Home Phone: </b></td>
-                                      <td>{{ tenants.home_phone }}</td>
+                                      <td><b>Single: </b></td>
+                                      <td>{{ person.single }}</td>
                                     </tr>
                                     <tr>
                                       <td><b>Gender: </b></td>
-                                      <td>{{ tenants.gender }}</td>
+                                      <td>{{ person.gender }}</td>
                                     </tr>
                                     <tr>
-                                      <td><b>Employer: </b></td>
-                                      <td>{{ tenants.employer }}</td>
+                                      <td><b>DOB: </b></td>
+                                      <td>{{ person.DOB }}</td>
                                     </tr>
                                   {% endfor %}
                                   </tbody>
+                                {% else %}
+                                <p style="text-align:center;">Our records indicate that you currently have no family members registered on this account.</p>
+                                {% endif %}
+                                </table>
                                 </table>
                                 </div>
 																<button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-reply"></i> Go Back </button>
@@ -432,6 +425,7 @@
 														  <h1>Automobile Information</h1>
 															<div class="modal-body" style="text-align:left;">
 															  <br>
+															  {% if automobiles %}
 															  <table class="table">
                                   <tbody>
                                   {% for auto in automobiles %}
@@ -458,6 +452,9 @@
                                   {% endfor %}
                                   </tbody>
                                 </table>
+                                {% else %}
+                                <p style="text-align:center;">Our records indicate that you currently have no automobiles registered on this account.</p>
+                                {% endif %}
                                 </div>
 																<button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-reply"></i> Go Back </button>
 														</div>
@@ -481,6 +478,7 @@
 														  <h1>Rent Receipt</h1>
 															<div class="modal-body" style="text-align:left;">
 															  <br>
+															  {% if receipt %}
 															  <table class="table">
                                   <tbody>
                                     <tr>
@@ -521,6 +519,9 @@
                                     </tr>
                                   </tbody>
                                 </table>
+                                {% else %}
+                                <p style="text-align:center;">Our current records indicate that you haven't paid rent using this account.</p>
+                                {% endif %}
                                 </div>
 																<button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-reply"></i> Go Back </button>
 														</div>
@@ -528,45 +529,6 @@
 												</div>
 											</div>
 										</div>
-=======
-        <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
-                <div class="lr">
-                    <div class="rl">
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2">
-                        <div class="modal-body">
-                            <!-- Project Details Go Here -->
-                            <h2>Enter Testimonial:</h2>
-                            <form action="/save_testimonial/" method="POST">{% csrf_token %}
-                                <div class="form-group">
-                                    <textarea class="form-control" name=c rows="10" id="comment"></textarea>
-                                </div>
-                                <button type="submit"
-                                        style="background-color:#000000;"
-                                        class="btn btn-primary">
-                                    <i class="fa fa-send"></i> Submit
-                                </button><br>
-                                {% for ss in urecords %}
-                                    <textarea style="visibility:hidden;" name=social>{{ ss.tenant_ss }}</textarea>
-                                {% endfor %}
-                            </form>
-                            <button type="button"
-                                    class="btn btn-primary"
-                                    data-dismiss="modal">
-                                <i class="fa fa-reply"></i> Go Back
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
->>>>>>> 2e68b1a0bbc7f0936112d61e6e30c4c77d7238b0
 
 </body>
 
