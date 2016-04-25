@@ -42,7 +42,9 @@
                 <span class="icon-bar"></span>
               </button>
               <a class="navbar-brand navbar-brand-logo" href="#">
-                    <div class="brand">Welcome, Khoi [Tenant]</div>
+                    {% for tenants in urecords %}
+                    <div class="brand">Welcome, {{ tenants.tenant_name }} [Tenant]</div>
+                    {% endfor %}
               </a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -61,13 +63,6 @@
                             <i class="pe-7s-note2"></i>
                             </i>
                             <p>View Agreement</p>
-                        </a>
-                    </li> 
-                    <li>
-                        <a href="#" class="portfolio-link" data-toggle="modal">
-                            <i class="pe-7s-home"></i>
-                            </i>
-                            <p>Apartment Rates</p>
                         </a>
                     </li> 
                     <li>
@@ -97,10 +92,10 @@
                                 <p>Account <b class="caret"></b></p>
                             </a>
                           <ul class="dropdown-menu">
-                            <li><a href="#">Personal Information</a></li>
-                            <li><a href="#">My Complaints</a></li>
-                            <li><a href="#">My Testimonials</a></li>
-                            <li><a href="#">Privacy Settings</a></li>
+                            <li><a href="#personalInfo" class="portfolio-link" data-toggle="modal">Personal Information</a></li>
+                            <li><a href="#tenantFamily" class="portfolio-link" data-toggle="modal">My Family</a></li>
+                            <li><a href="#tenantAuto" class="portfolio-link" data-toggle="modal">My Automobiles</a></li>
+                            <li><a href="#rentReceipt" class="portfolio-link" data-toggle="modal">My Rent Receipt</a></li>
                             <li class="divider"></li>
                             <li><a href="/">Sign Out</a></li>
                           </ul>
@@ -168,9 +163,12 @@
                   <a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-placement="left" data-content="Enter the ZIP/Postal code for your credit card billing address."><i class="fa fa-question-circle"></i></a>
               </div>
           </div>
-          <button id="PayButton" class="btn btn-block btn-success submit-button" type="submit">
+          <button id="PayButton" class="btn btn-block btn-success submit-button" type="submit" style="background-color: #54C7C3!important;">
               <span class="submit-button-lock"></span>
               <span class="align-middle">Submit Pay</span>
+          </button>
+          <button id="PayButton" class="btn btn-block btn-success submit-button" type="reset" style="background-color: #F16664!important;">
+              <span class="align-middle">Clear</span>
           </button>
       </form>
   </div>
@@ -284,6 +282,240 @@
 																<button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-reply"></i> Go Back </button>
 															</div>
 															</form>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+
+<div class="portfolio-modal modal fade" id="personalInfo" tabindex="-1" role="dialog" aria-hidden="true">
+											<div class="modal-content">
+												<div class="close-modal" data-dismiss="modal">
+													<div class="lr">
+														<div class="rl">
+														  
+														</div>
+													</div>
+												</div>
+												<div class="container">
+													<div class="row">
+														<div class="col-lg-8 col-lg-offset-2">
+														  <h1>Account Information</h1>
+															<div class="modal-body" style="text-align:left;">
+															  <br>
+															  <table class="table">
+                                  <tbody>
+                                  {% for tenants in urecords %}
+                                    <tr>
+                                      <td><b>Social Security: </b></td>
+                                      <td>{{ tenants.tenant_ss }}</td>
+                                    </tr>
+                                    <tr>
+                                      <td><b>Name: </b></td>
+                                      <td>{{ tenants.tenant_name }}</td>
+                                    </tr>
+                                    <tr>
+                                      <td><b>DOB: </b></td>
+                                      <td>{{ tenants.tenant_DOB }}</td>
+                                    </tr>
+                                    <tr>
+                                      <td><b>Marital Status: </b></td>
+                                      <td>{{ tenants.marital }}</td>
+                                    </tr>
+                                    <tr>
+                                      <td><b>Work Phone: </b></td>
+                                      <td>{{ tenants.work_phone }}</td>
+                                    </tr>
+                                    <tr>
+                                      <td><b>Home Phone: </b></td>
+                                      <td>{{ tenants.home_phone }}</td>
+                                    </tr>
+                                    <tr>
+                                      <td><b>Gender: </b></td>
+                                      <td>{{ tenants.gender }}</td>
+                                    </tr>
+                                    <tr>
+                                      <td><b>Employer: </b></td>
+                                      <td>{{ tenants.employer }}</td>
+                                    </tr>
+                                  {% endfor %}
+                                  </tbody>
+                                </table>
+                                </div>
+																<button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-reply"></i> Go Back </button>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+
+<div class="portfolio-modal modal fade" id="tenantFamily" tabindex="-1" role="dialog" aria-hidden="true">
+											<div class="modal-content">
+												<div class="close-modal" data-dismiss="modal">
+													<div class="lr">
+														<div class="rl">
+														  
+														</div>
+													</div>
+												</div>
+												<div class="container">
+													<div class="row">
+														<div class="col-lg-8 col-lg-offset-2">
+														  <h1>Family Information</h1>
+															<div class="modal-body" style="text-align:left;">
+															  <br>
+															  <table class="table">
+                                  <tbody>
+                                  {% for tenants in urecords %}
+                                    <tr>
+                                      <td><b>Social Security: </b></td>
+                                      <td>{{ tenants.tenant_ss }}</td>
+                                    </tr>
+                                    <tr>
+                                      <td><b>Name: </b></td>
+                                      <td>{{ tenants.tenant_name }}</td>
+                                    </tr>
+                                    <tr>
+                                      <td><b>DOB: </b></td>
+                                      <td>{{ tenants.tenant_DOB }}</td>
+                                    </tr>
+                                    <tr>
+                                      <td><b>Marital Status: </b></td>
+                                      <td>{{ tenants.marital }}</td>
+                                    </tr>
+                                    <tr>
+                                      <td><b>Work Phone: </b></td>
+                                      <td>{{ tenants.work_phone }}</td>
+                                    </tr>
+                                    <tr>
+                                      <td><b>Home Phone: </b></td>
+                                      <td>{{ tenants.home_phone }}</td>
+                                    </tr>
+                                    <tr>
+                                      <td><b>Gender: </b></td>
+                                      <td>{{ tenants.gender }}</td>
+                                    </tr>
+                                    <tr>
+                                      <td><b>Employer: </b></td>
+                                      <td>{{ tenants.employer }}</td>
+                                    </tr>
+                                  {% endfor %}
+                                  </tbody>
+                                </table>
+                                </div>
+																<button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-reply"></i> Go Back </button>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										
+<div class="portfolio-modal modal fade" id="tenantAuto" tabindex="-1" role="dialog" aria-hidden="true">
+											<div class="modal-content">
+												<div class="close-modal" data-dismiss="modal">
+													<div class="lr">
+														<div class="rl">
+														  
+														</div>
+													</div>
+												</div>
+												<div class="container">
+													<div class="row">
+														<div class="col-lg-8 col-lg-offset-2">
+														  <h1>Automobile Information</h1>
+															<div class="modal-body" style="text-align:left;">
+															  <br>
+															  <table class="table">
+                                  <tbody>
+                                  {% for auto in automobiles %}
+                                    <tr>
+                                      <td><b>License No: </b></td>
+                                      <td>{{ auto.license_no }}</td>
+                                    </tr>
+                                    <tr>
+                                      <td><b>Auto Make: </b></td>
+                                      <td>{{ auto.auto_make }}</td>
+                                    </tr>
+                                    <tr>
+                                      <td><b>Auto Model: </b></td>
+                                      <td>{{ auto.auto_model }}</td>
+                                    </tr>
+                                    <tr>
+                                      <td><b>Auto Year: </b></td>
+                                      <td>{{ auto.auto_year }}</td>
+                                    </tr>
+                                    <tr>
+                                      <td><b>Auto Color: </b></td>
+                                      <td>{{ auto.auto_color }}</td>
+                                    </tr>
+                                  {% endfor %}
+                                  </tbody>
+                                </table>
+                                </div>
+																<button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-reply"></i> Go Back </button>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+
+<div class="portfolio-modal modal fade" id="rentReceipt" tabindex="-1" role="dialog" aria-hidden="true">
+											<div class="modal-content">
+												<div class="close-modal" data-dismiss="modal">
+													<div class="lr">
+														<div class="rl">
+														  
+														</div>
+													</div>
+												</div>
+												<div class="container">
+													<div class="row">
+														<div class="col-lg-8 col-lg-offset-2">
+														  <h1>Rent Receipt</h1>
+															<div class="modal-body" style="text-align:left;">
+															  <br>
+															  <table class="table">
+                                  <tbody>
+                                    <tr>
+                                      <td><b>Name: </b></td>
+                                      {% for tenants in urecords %}
+                                      <td>{{ tenants.tenant_name }}</td>
+                                      {% endfor %}
+                                    </tr>
+                                    <tr>
+                                      <td><b>Social Security: </b></td>
+                                      {% for receipt in invoices %}
+                                      <td>{{ info.tenant_ss }}</td>
+                                      {% endfor %}
+                                    </tr>
+                                    <tr>
+                                      <td><b>Rental No: </b></td>
+                                      {% for receipt in invoices %}
+                                      <td>{{ info.tenant_DOB }}</td>
+                                      {% endfor %}
+                                    </tr>
+                                    <tr>
+                                      <td><b>Apt No: </b></td>
+                                      {% for apt in apartment %}
+                                      <td>{{ apartment.apt_no }}</td>
+                                      {% endfor %}
+                                    </tr>
+                                    <tr>
+                                      <td><b>Invoice No: </b></td>
+                                      {% for receipt in invoices %}
+                                      <td>{{ info.invoice_no }}</td>
+                                      {% endfor %}
+                                    </tr>
+                                    <tr>
+                                      <td><b>Rent Amount: </b></td>
+                                      {% for receipt in invoices %}
+                                      <td>{{ info.CC_amt }}</td>
+                                      {% endfor %}
+                                    </tr>
+                                  </tbody>
+                                </table>
+                                </div>
+																<button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-reply"></i> Go Back </button>
 														</div>
 													</div>
 												</div>

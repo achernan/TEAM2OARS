@@ -42,7 +42,9 @@
                 <span class="icon-bar"></span>
               </button>
               <a class="navbar-brand navbar-brand-logo" href="#">
-                    <div class="brand">Welcome, {{ person_name }} [Assistant]</div>
+                    {% for managers in urecords %}
+                    <div class="brand">Welcome, {{ managers.first_name }} [Manager]</div>
+                    {% endfor %}
               </a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -77,7 +79,7 @@
                         </a>
                     </li> 
                     <li>
-                      <a href="#writeTestimonial" class="portfolio-link" data-toggle="modal">
+                      <a href="#rentalRates" class="portfolio-link" data-toggle="modal">
                             <i class="pe-7s-note2"></i>
                             </i>
                             <p>Rental Rates</p>
@@ -202,6 +204,48 @@
                                 <button type="reset" style="background-color:#000000;" class="btn btn-primary" data-dismiss="modal" a href="#"><i class="fa fa-send"></i> Submit </button>
 																<button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-reply"></i> Go Back </button>
 															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+
+<!--Rental Rates-->
+<div class="portfolio-modal modal fade" id="rentalRates" tabindex="-1" role="dialog" aria-hidden="true">
+											<div class="modal-content">
+												<div class="close-modal" data-dismiss="modal">
+													<div class="lr">
+														<div class="rl">
+														  
+														</div>
+													</div>
+												</div>
+												<div class="container">
+													<div class="row">
+														<div class="col-lg-8 col-lg-offset-2">
+														  <h1>Rental Rates</h1>
+															<div class="modal-body" style="text-align:left;">
+															  <br>
+															  <table class="table">
+                                  <thead>
+                                    <tr>
+                                      <th>Apartment No:</th></th>
+                                      <th>Apartment Type:</th>
+                                      <th>Rental Amount</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                  {% for rates in allApartments %}
+                                    <tr>
+                                      <td>{{ rates.apt_no }}</td>
+                                      <td>{{ rates.apt_type }}</td>
+                                      <td>{{ rates.apt_rent_amt }}</td>
+                                    </tr>
+                                  {% endfor %}
+                                  </tbody>
+                                </table>
+                                </div>
+																<button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-reply"></i> Go Back </button>
 														</div>
 													</div>
 												</div>
