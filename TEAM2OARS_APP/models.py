@@ -7,8 +7,6 @@ YESNO_CHOICES = (('Y', 'Yes'), ('N', "No"))
 MARRIAGE_CHOICES = (('M', 'Married'), ('S', 'Single'))
 RENTAL_STATUS_CHOICES = (('S', 'Signed but Not Occupied'), ('O', 'Occupied'))
 
-
-
 class Staff (models.Model):
     ASSISTANT = 'Assistant'
     MANAGER = 'Manager'
@@ -29,6 +27,37 @@ class Staff (models.Model):
     def __str__(self):
         return self.first_name + " " + self.last_name + " - " + self.username
 
+class Apartment (models.Model):
+    VACANT = 'V'
+    RENTED = 'R'
+    STATUS_CHOICES = ((VACANT, 'Vacant'), (RENTED, 'Rented'))
+    apt_no = models.PositiveSmallIntegerField(primary_key=True)
+    apt_type = models.CharField(max_length=1)
+    apt_status = models.CharField(max_length=6, choices=STATUS_CHOICES,  default=VACANT)
+    apt_utility = models.CharField(max_length=3, choices=YESNO_CHOICES, default='N')
+    apt_deposit_amt = models.FloatField(max_length=5)
+    apt_rent_amt = models.FloatField(max_length=5)
+
+    def __str__(self):
+        return "Apt Num - " + self.apt_no
+
+class Handle_Rents (models.Model):
+    LEASE_OPTION_CHOICES = (('one', 'One'), ('six', 'Six'))
+    rental_no = models.PositiveIntegerField(primary_key=True)
+    rental_date = models.DateField()
+    rental_status = models.CharField(max_length=50, choices=RENTAL_STATUS_CHOICES, default='S')
+    cancel_date = models.DateField()
+    lease_type = models.CharField(max_length=50, choices=LEASE_OPTION_CHOICES, default='one')
+    lease_start = models.DateField()
+    lease_end = models.DateField()
+    renewal_date = models.DateField()
+    staff_no = models.ForeignKey(Staff, on_delete=models.CASCADE)
+    apt_no = models.ForeignKey(Apartment, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return "Rental Num - " + self.rental_no
+
+
 class Tenant(models.Model):
     tenant_ss = models.TextField(primary_key=True)
     tenant_name = models.TextField()
@@ -45,19 +74,6 @@ class Tenant(models.Model):
     def __str__(self):
         return self.tenant_name + " - " + self.username
 
-class Apartment (models.Model):
-    VACANT = 'V'
-    RENTED = 'R'
-    STATUS_CHOICES = ((VACANT, 'Vacant'), (RENTED, 'Rented'))
-    apt_no = models.PositiveSmallIntegerField(primary_key=True)
-    apt_type = models.CharField(max_length=1)
-    apt_status = models.CharField(max_length=6, choices=STATUS_CHOICES,  default=VACANT)
-    apt_utility = models.CharField(max_length=3, choices=YESNO_CHOICES, default='N')
-    apt_deposit_amt = models.FloatField(max_length=5)
-    apt_rent_amt = models.FloatField(max_length=5)
-
-    def __str__(self):
-        return "Apt Num - " + self.apt_no
 
 class Automobiles (models.Model):
     license_no = models.CharField(max_length=8, primary_key=True)
@@ -111,22 +127,6 @@ class Complaints (models.Model):
 
     def __str__(self):
         return "Complaint Num - " + self.complaint_id
-
-class Handle_Rents (models.Model):
-    LEASE_OPTION_CHOICES = (('one', 'One'), ('six', 'Six'))
-    rental_no = models.PositiveIntegerField(primary_key=True)
-    rental_date = models.DateField()
-    rental_status = models.CharField(max_length=50, choices=RENTAL_STATUS_CHOICES, default='S')
-    cancel_date = models.DateField()
-    lease_type = models.CharField(max_length=50, choices=LEASE_OPTION_CHOICES, default='one')
-    lease_start = models.DateField()
-    lease_end = models.DateField()
-    renewal_date = models.DateField()
-    staff_no = models.ForeignKey(Staff, on_delete=models.CASCADE)
-    apt_no = models.ForeignKey(Apartment, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return "Rental Num - " + self.rental_no
 
 class Testimonies(models.Model):
     testimonial_id = models.AutoField(primary_key=True)
