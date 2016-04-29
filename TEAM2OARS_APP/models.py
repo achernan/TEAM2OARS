@@ -40,6 +40,7 @@ class Tenant(models.Model):
     employer = models.TextField()
     username = models.CharField(max_length=50)
     password = models.CharField(max_length=50)
+    rental_no = models.ForeignKey(Handle_Rents, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.tenant_name + " - " + self.username
@@ -54,8 +55,9 @@ class Apartment (models.Model):
     apt_utility = models.CharField(max_length=3, choices=YESNO_CHOICES, default='N')
     apt_deposit_amt = models.FloatField(max_length=5)
     apt_rent_amt = models.FloatField(max_length=5)
-    tenant_ss = models.ForeignKey(Tenant, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return "Apt Num - " + self.apt_no
 
 class Automobiles (models.Model):
     license_no = models.CharField(max_length=8, primary_key=True)
@@ -64,6 +66,9 @@ class Automobiles (models.Model):
     auto_year = models.DateField()
     auto_color = models.TextField(max_length=20)
     tenant_ss = models.ForeignKey(Tenant, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.license_no + " - " + self.auto_model
 
 class Tenant_Family(models.Model):
     family_ss = models.PositiveIntegerField(primary_key=True)
@@ -76,6 +81,9 @@ class Tenant_Family(models.Model):
     date_of_birth = models.DateField()
     tenant_ss = models.ForeignKey(Tenant, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return "Name - " + self.name
+
 class Invoices (models.Model):
     CC_CHOICES = (('visa', 'Visa'), ('mastercard', 'Mastercard'),
               ('american express', 'American Express'), ('discover', 'Discover'))
@@ -86,7 +94,10 @@ class Invoices (models.Model):
     CC_type = models.CharField(max_length=30, choices=CC_CHOICES, default='visa')
     CC_exp_date = models.DateField()
     CC_amt = models.FloatField(max_length=5)
-    tenant_ss = models.ForeignKey(Tenant, on_delete=models.CASCADE)
+    rental_no = models.ForeignKey(Handle_Rents, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return "Invoice Num - " + self.invoice_no
 
 class Complaints (models.Model):
     COMPLAINT_STATUS_CHOICES = (('F', 'Fixed'), ('P', 'Pending'), ('Null', 'Undetermined'))
@@ -95,7 +106,11 @@ class Complaints (models.Model):
     rental_complaint = models.TextField()
     apt_complaint = models.TextField()
     status = models.CharField(max_length=30, choices=COMPLAINT_STATUS_CHOICES, default='Null')
-    tenant_ss = models.ForeignKey(Tenant, on_delete=models.CASCADE)
+    rental_no = models.ForeignKey(Handle_Rents, on_delete=models.CASCADE)
+    apt_no = models.ForeignKey(Apartment, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return "Complaint Num - " + self.complaint_id
 
 class Handle_Rents (models.Model):
     LEASE_OPTION_CHOICES = (('one', 'One'), ('six', 'Six'))
@@ -108,7 +123,10 @@ class Handle_Rents (models.Model):
     lease_end = models.DateField()
     renewal_date = models.DateField()
     staff_no = models.ForeignKey(Staff, on_delete=models.CASCADE)
-    complaint_no = models.ForeignKey(Complaints, on_delete=models.CASCADE)
+    apt_no = models.ForeignKey(Apartment, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return "Rental Num - " + self.rental_no
 
 class Testimonies(models.Model):
     testimonial_id = models.AutoField(primary_key=True)
