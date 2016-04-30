@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.utils import timezone
 from .models import Testimonies
 from .models import Staff
@@ -7,8 +7,12 @@ from .models import Tenant_Family
 from .models import Invoices
 from .models import Apartment
 from .models import Automobiles
+from .models import Handle_Rents
+from .models import Complaints
 from django.template import loader
 from django.http import HttpResponse, HttpResponseRedirect
+from django.core.urlresolvers import reverse
+from django.utils.safestring import SafeUnicode
 
 def front_page(request):
     return render(request, 'TEAM2OARS_APP/front_page.html', {})
@@ -22,8 +26,14 @@ def enter_credentials(request):
             precords = Tenant.objects.filter(password__exact=request.POST['pwd'])
             allTenants = Tenant.objects.all()
             for info in urecords:
-              invoices = Invoices.objects.filter(tenant_ss__exact=info.tenant_ss)
-              apartment = Apartment.objects.filter(tenant_ss__exact=info.tenant_ss)
+              invoices = Invoices.objects.filter(rental_no__exact=info.rental_no)
+              R_num = SafeUnicode(info.rental_no)[12:] #removes rental number string for comparison
+              rental = Handle_Rents.objects.filter(rental_no__exact=str(R_num))
+              apartment = rental
+              for apt in rental:
+                A_num = SafeUnicode(apt.apt_no)[9:] #removes apt number string for comparison
+                apartment = Apartment.objects.filter(apt_no__exact=A_num)
+    
               automobiles = Automobiles.objects.filter(tenant_ss__exact=info.tenant_ss)
               family = Tenant_Family.objects.filter(tenant_ss__exact=info.tenant_ss)
             context = {
@@ -31,7 +41,7 @@ def enter_credentials(request):
                 'precords': precords, 'query': precords,
                 'invoices': invoices, 'apartment' : apartment,
                 'automobiles': automobiles, 'allTenants' : allTenants,
-                'family' : family
+                'family' : family, 'rental': rental
             }
         if context:
           return render(request, 'TEAM2OARS_APP/tenant_login.html', context)
@@ -44,10 +54,12 @@ def enter_credentials(request):
             precords = Staff.objects.filter(password__exact=request.POST['pwd'])
             allTenants = Tenant.objects.all()
             allApartments = Apartment.objects.all()
+            allComplaints = Complaints.objects.all()
             context = {
                 'urecords': urecords, 'query': urecords,
                 'precords': precords, 'query': precords,
-                'allTenants' : allTenants, 'allApartments' : allApartments
+                'allTenants' : allTenants, 'allApartments' : allApartments,
+                'allComplaints': allComplaints
             }
             if urecords.filter(position__contains='supervisor'):
               if context:
@@ -60,8 +72,6 @@ def enter_credentials(request):
                 return render(request, 'TEAM2OARS_APP/assistant_login.html', context)
               
         return render(request, 'TEAM2OARS_APP/front_page.html', {})
-
-
 
 def about_us(request):
     return render(request, 'TEAM2OARS_APP/about_us.html', {'about': about_us})
@@ -87,6 +97,25 @@ def save_testimonial(request):
                                  tenant_ss=Tenant.objects.get(tenant_ss__exact=userdata))
     content_object.save()
     return HttpResponseRedirect('/testimonials/')
+
+def update_status(request): # of complaints to Fixed
+    template = loader.get_template('TEAM2OARS_APP/supervisor_login.html')
+    urecords = Staff.objects.filter(username__exact='supervisor')
+    allApartments = Apartment.objects.all()
+    allComplaints = Complaints.objects.all()
+    allTenants = Tenant.objects.all()
+    context = {
+        'urecords': urecords,
+        'allApartments': allApartments,
+        'allComplaints': allComplaints,
+        'allTenants': allTenants
+    }
+    if Complaints.objects.get(complaint_id__exact=request.GET['cn']):
+        Complaints.objects.filter(complaint_id__exact=request.GET['cn']).update(status='F')
+        return HttpResponse(template.render(context, request))
+
+    else:
+        return HttpResponse("invalid complaint number")
 
 def search(request):
     allTestimonies = Testimonies.objects.filter(testimonial_content__contains=request.GET['q'])
