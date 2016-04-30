@@ -42,7 +42,9 @@
                 <span class="icon-bar"></span>
               </button>
               <a class="navbar-brand navbar-brand-logo" href="#">
-                    <div class="brand">Welcome, {{ person_name }} [Assistant]</div>
+                {% for u in urecords %}
+                    <div class="brand">Welcome, {{ u.first_name }} {{ u.last_name }} [Assistant]</div>
+                {% endfor %}
               </a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->

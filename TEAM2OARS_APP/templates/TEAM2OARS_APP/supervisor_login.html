@@ -42,7 +42,9 @@
                 <span class="icon-bar"></span>
               </button>
               <a class="navbar-brand navbar-brand-logo" href="#">
-                    <div class="brand">Welcome, {{ person_name }} [Supervisor]</div>
+                  {% for u in urecords %}
+                      <div class="brand">Welcome, {{ u.first_name }} {{ u.last_name }} [Supervisor]</div>
+                  {% endfor %}
               </a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -77,7 +79,7 @@
                         </a>
                     </li> 
                     <li>
-                      <a href="#writeTestimonial" class="portfolio-link" data-toggle="modal">
+                      <a href="#rentalRates" class="portfolio-link" data-toggle="modal">
                             <i class="pe-7s-note2"></i>
                             </i>
                             <p>Rental Rates</p>
@@ -89,7 +91,14 @@
                             </i>
                             <p>Search Agreements</p>
                         </a>
-                    </li> 
+                    </li>
+                    <li>
+                      <a href="#complaints" class="portfolio-link" data-toggle="modal">
+                            <i class="pe-7s-note2"></i>
+                            </i>
+                            <p>Complaints</p>
+                        </a>
+                    </li>
                     <li class="dropdown">
                           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="pe-7s-user"></i>
@@ -141,47 +150,47 @@
 <!-- end main -->
 
 <!--Rental Agreement-->
-								<div class="portfolio-modal modal fade" id="viewAgreement" tabindex="-1" role="dialog" aria-hidden="true">
-											<div class="modal-content">
-												<div class="close-modal" data-dismiss="modal">
-													<div class="lr">
-														<div class="rl">
-														</div>
-													</div>
-												</div>
-												<div class="container">
-													<div class="row">
-														<div class="col-lg-8 col-lg-offset-2">
-															<div class="modal-body">
-																<!-- Project Details Go Here -->
-																<h2>Current Lease Agreement</h2>
-																<p class="item-intro text-muted">Preview</p>
-																<img class="img-responsive" src="http://printableagreements.com/wp-content/uploads/2013/10/Alaska-Residential-Lease-Agreement.jpg" alt="">
-																<p>To view the full rental agreement, <b><a href="#" style="color:red;">click here</a></b></p>
-                           
-																<button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-reply"></i> Go Back </button>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
+<div class="portfolio-modal modal fade" id="viewAgreement" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-content">
+                <div class="close-modal" data-dismiss="modal">
+                    <div class="lr">
+                        <div class="rl">
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8 col-lg-offset-2">
+                            <div class="modal-body">
+                                <!-- Project Details Go Here -->
+                                <h2>Current Lease Agreement</h2>
+                                <p class="item-intro text-muted">Preview</p>
+                                <img class="img-responsive" src="http://printableagreements.com/wp-content/uploads/2013/10/Alaska-Residential-Lease-Agreement.jpg" alt="">
+                                <p>To view the full rental agreement, <b><a href="#" style="color:red;">click here</a></b></p>
+
+                                <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-reply"></i> Go Back </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 										
-										<div class="portfolio-modal modal fade" id="writeComplaint" tabindex="-1" role="dialog" aria-hidden="true">
-											<div class="modal-content">
-												<div class="close-modal" data-dismiss="modal">
-													<div class="lr">
-														<div class="rl">
-														  
-														</div>
-													</div>
-												</div>
-												<div class="container">
-													<div class="row">
-														<div class="col-lg-8 col-lg-offset-2">
-															<div class="modal-body">
-															  <h2>Complaint Form</h2>
-															  <form role="form">
+        <div class="portfolio-modal modal fade" id="writeComplaint" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-content">
+                <div class="close-modal" data-dismiss="modal">
+                    <div class="lr">
+                        <div class="rl">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8 col-lg-offset-2">
+                            <div class="modal-body">
+                              <h2>Complaint Form</h2>
+                              <form role="form">
                                   <div class="form-group">
                                     <label for="sel1">Select complaint priority:</label>
                                     <select class="form-control" id="sel1">
@@ -191,70 +200,167 @@
                                       <option>High</option>
                                     </select>
                                   </div>
-                                  </form>
+                              </form>
 															
-                                  <form role="form">
-                                  <div class="form-group">
-                                  <label for="comment" style="text-align: left;">Please enter complaint in the form below:</label>
-                                  <textarea class="form-control" rows="10" id="comment"></textarea>
-                                 </div>
-                                 </form>
-                                <button type="reset" style="background-color:#000000;" class="btn btn-primary" data-dismiss="modal" a href="#"><i class="fa fa-send"></i> Submit </button>
-																<button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-reply"></i> Go Back </button>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-										
+                          <form role="form">
+                              <div class="form-group">
+                              <label for="comment" style="text-align: left;">Please enter complaint in the form below:</label>
+                              <textarea class="form-control" rows="10" id="comment"></textarea>
+                             </div>
+                         </form>
+                        <button type="reset" style="background-color:#000000;" class="btn btn-primary" data-dismiss="modal" a href="#"><i class="fa fa-send"></i> Submit </button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-reply"></i> Go Back </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Rental Rates-->
+    <div class="portfolio-modal modal fade" id="rentalRates" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                      <h1>Rental Rates</h1>
+                        <div class="modal-body" style="text-align:left;">
+                              <br>
+                              <table class="table">
+                              <thead>
+                                <tr>
+                                  <th>Apartment No:</th></th>
+                                  <th>Apartment Type:</th>
+                                  <th>Rental Amount</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                              {% for rates in allApartments %}
+                                <tr>
+                                  <td>{{ rates.apt_no }}</td>
+                                  <td>{{ rates.apt_type }}</td>
+                                  <td>${{ rates.apt_rent_amt }}0</td>
+                                </tr>
+                              {% endfor %}
+                              </tbody>
+                            </table>
+                        </div>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-reply"></i> Go Back </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!--Complaints-->
+    <div class="portfolio-modal modal fade" id="complaints" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                      <h1>Pending Apartment Complaints</h1>
+                        <div class="modal-body" style="text-align:left;">
+                              <br>
+                              <table class="table">
+                              <thead>
+                                <tr>
+                                  <th>Complaint No:</th></th>
+                                  <th>Apartment No:</th>
+                                  <th>Apartment Type:</th>
+                                  <th>Description:</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                              {% for c in allComplaints %}
+                                <tr> {% if 'F' not in c.status %}
+                                  <td>{{ c.complaint_id }}</td>
+                                  <td>{{ c.apt_no }}</td>
+                                  <td>{{ c.apt_type }}</td>
+                                  <td>{{ c.apt_complaint }}{{ c.rental_complaint }}</td>
+                                </tr> {% endif %}
+                              {% endfor %}
+                              </tbody>
+                            </table>
+                        </div>
+
+                        <h1>Update Status:</h1>
+                        <form action="/update_status/" method="GET">
+                            <div class="form-group">Type in complaint number:
+                                <input type="text" name="cn">
+                            </div>
+                            <button type="submit"
+                                    style="background-color:#000000;"
+                                    class="btn btn-primary">
+                                <i class="fa fa-send"></i> Fix!
+                            </button>
+                            <br>
+                        </form>
+
+                        <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-reply"></i> Go Back </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 	<!--Enter Testimonial-->
 	<div class="portfolio-modal modal fade" id="writeTestimonial" tabindex="-1" role="dialog" aria-hidden="true">
-											<div class="modal-content">
-												<div class="close-modal" data-dismiss="modal">
-													<div class="lr">
-														<div class="rl">
-														</div>
-													</div>
-												</div>
-												<div class="container">
-													<div class="row">
-														<div class="col-lg-8 col-lg-offset-2">
-															<div class="modal-body">
-																<!-- Project Details Go Here -->
-																<h2>Enter Testimonial</h2>
-															<form role="form">
-															  
-                                  <div class="form-group">
-                                  <label for="comment" style="text-align: left;">Name:</label>
-                                  <textarea class="form-control" rows="1" id="comment"></textarea>
-                                 </div>
-                                 </form>
-															<form role="form">
-															  
-                                  <div class="form-group">
-                                  <label for="comment" style="text-align: left;">Testimonial:</label>
-                                  <textarea class="form-control" rows="10" id="comment"></textarea>
-                                 </div>
-                                 </form>
-                                <label for="comment" style="text-align: left;">Star rating</label>
-                              <div class="star-rating"> 
-                                <span class="fa fa-star-o" data-rating="1"></span>
-                                <span class="fa fa-star-o" data-rating="2"></span>
-                                <span class="fa fa-star-o" data-rating="3"></span>
-                                <span class="fa fa-star-o" data-rating="4"></span>
-                                <span class="fa fa-star-o" data-rating="5"></span>
-                                <input type="hidden" name="whatever" class="rating-value" value="0">
-                              </div>
-                              <br>
-                                <button type="reset" style="background-color:#000000;" class="btn btn-primary" data-dismiss="modal" a href="#"><i class="fa fa-send"></i> Submit </button>
-																<button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-reply"></i> Go Back </button>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <!-- Project Details Go Here -->
+                            <h2>Enter Testimonial</h2>
+                        <form role="form">
+                              <div class="form-group">
+                              <label for="comment" style="text-align: left;">Name:</label>
+                              <textarea class="form-control" rows="1" id="comment"></textarea>
+                             </div>
+                        </form>
+                        <form role="form">
+                          <div class="form-group">
+                          <label for="comment" style="text-align: left;">Testimonial:</label>
+                          <textarea class="form-control" rows="10" id="comment"></textarea>
+                         </div>
+                        </form>
+                            <label for="comment" style="text-align: left;">Star rating</label>
+                          <div class="star-rating">
+                            <span class="fa fa-star-o" data-rating="1"></span>
+                            <span class="fa fa-star-o" data-rating="2"></span>
+                            <span class="fa fa-star-o" data-rating="3"></span>
+                            <span class="fa fa-star-o" data-rating="4"></span>
+                            <span class="fa fa-star-o" data-rating="5"></span>
+                            <input type="hidden" name="whatever" class="rating-value" value="0">
+                          </div>
+                            <br>
+                            <button type="reset" style="background-color:#000000;" class="btn btn-primary" data-dismiss="modal" a href="#"><i class="fa fa-send"></i> Submit </button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-reply"></i> Go Back </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </body>
 
