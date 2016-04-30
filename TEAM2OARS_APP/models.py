@@ -79,7 +79,7 @@ class Automobiles (models.Model):
     license_no = models.CharField(max_length=8, primary_key=True)
     auto_make = models.TextField(max_length=20)
     auto_model = models.CharField(max_length=20)
-    auto_year = models.DateField()
+    auto_year = models.TextField()
     auto_color = models.TextField(max_length=20)
     tenant_ss = models.ForeignKey(Tenant, on_delete=models.CASCADE)
 
