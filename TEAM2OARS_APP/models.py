@@ -39,7 +39,7 @@ class Apartment (models.Model):
     apt_rent_amt = models.FloatField(max_length=5)
 
     def __str__(self):
-        return "Apt Num - " + self.apt_no
+        return "Apt Num - " + str(self.apt_no)
 
 class Handle_Rents (models.Model):
     LEASE_OPTION_CHOICES = (('one', 'One'), ('six', 'Six'))
@@ -55,7 +55,7 @@ class Handle_Rents (models.Model):
     apt_no = models.ForeignKey(Apartment, on_delete=models.CASCADE)
 
     def __str__(self):
-        return "Rental Num - " + self.rental_no
+        return "Rental Num - " + str(self.rental_no)
 
 
 class Tenant(models.Model):
@@ -113,7 +113,7 @@ class Invoices (models.Model):
     rental_no = models.ForeignKey(Handle_Rents, on_delete=models.CASCADE)
 
     def __str__(self):
-        return "Invoice Num - " + self.invoice_no
+        return "Invoice Num - " + str(self.invoice_no)
 
 class Complaints (models.Model):
     COMPLAINT_STATUS_CHOICES = (('F', 'Fixed'), ('P', 'Pending'), ('Null', 'Undetermined'))

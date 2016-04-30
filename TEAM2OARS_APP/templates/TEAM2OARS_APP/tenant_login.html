@@ -122,7 +122,7 @@
           <span class="amex"></span>
           <span class="discover"></span>
       </div>
-      <form class="form" role="form" method="post" action="/login/" accept-charset="UTF-8" id="testimonial_form">
+      <form class="form" id="payForm" role="form" method="get" action="#rentPaid" accept-charset="UTF-8" id="testimonial_form">
           <div class="security-code-group form-group">
               <label or="EnterAmount">Enter Amount</label>
               <input id="EnterAmount" class="form-control" type="text" maxlength="10" required></input>
@@ -164,11 +164,11 @@
                   <a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-placement="left" data-content="Enter the ZIP/Postal code for your credit card billing address."><i class="fa fa-question-circle"></i></a>
               </div>
           </div>
-          <button id="PayButton" class="btn btn-block btn-success submit-button" type="submit" style="background-color: #54C7C3!important;">
+          <button id="PayButton" class="btn btn-block btn-success submit-button" type="button" style="background-color: #54C7C3!important;">
               <span class="submit-button-lock"></span>
               <span class="align-middle">Submit Pay</span>
           </button>
-          <button id="PayButton" class="btn btn-block btn-success submit-button" type="reset" style="background-color: #F16664!important;">
+          <button id="ClearButton" class="btn btn-block btn-success submit-button" type="reset" style="background-color: #F16664!important;">
               <span class="align-middle">Clear</span>
           </button>
       </form>
@@ -176,31 +176,151 @@
 </div>
 <!-- end main -->
 
+<!-- Modal -->
+  <div class="modal fade" id="rentPaid" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Transaction Confirmation/h4>
+        </div>
+        <div class="modal-body">
+          <p>Your payment was successfully received and is currently being processed</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
 <!--Rental Agreement-->
-<div class="portfolio-modal modal fade" id="viewAgreement" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-content">
-                <div class="close-modal" data-dismiss="modal">
-                    <div class="lr">
-                        <div class="rl">
-                        </div>
+    <div class="portfolio-modal modal fade" id="viewAgreement" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
                     </div>
                 </div>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-8 col-lg-offset-2">
-                            <div class="modal-body">
-                                <h2>Current Lease Agreement</h2>
-                                <p class="item-intro text-muted">Preview</p>
-                                <img class="img-responsive" src="http://printableagreements.com/wp-content/uploads/2013/10/Alaska-Residential-Lease-Agreement.jpg" alt="">
-                                <p>To view the full rental agreement, <b><a href="#" style="color:red;">click here</a></b></p>
-
-                                <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-reply"></i> Go Back </button>
-                            </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                          <h1>Rental Agreement</h1>
+                            <div class="modal-body" style="text-align:left;">
+                              <br>
+                              {% if rental %}
+                              {% for rent in rental %}
+                              <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th></th><th></th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                            <tr>
+                              <td><b>Rental Number: </b></td>
+                              <td>{{ rent.rental_no }}</td>
+                            </tr>
+                            <tr>
+                              <td><b>Rental Date: </b></td>
+                              <td>{{ rent.rental_date }}</td>
+                            </tr>
+                            <tr>
+                              <td><b>Apartment No: </b></td>
+                              {% for apt in apartment %}
+                              <td>{{ apt.apt_no }}</td>
+                              {% endfor %}
+                            </tr>
+                            <tr>
+                              <td><b>Apt Type: </b></td>
+                              {% for apt in apartment %}
+                                {% if apt.apt_type == "0" %}
+                                  <td>Studio</td>
+                                {% elif apt.apt_type == "1" %}
+                                  <td>One Bedroom</td>
+                                {% elif apt.apt_type == "2" %}
+                                  <td>Two Bedroom</td>
+                                {% else %}
+                                  <td>Three Bedroom</td>
+                                {% endif %}
+                              {% endfor %}
+                            </tr>
+                             <tr>
+                              <td><b>Apt Deposit: </b></td>
+                              {% for apt in apartment %}
+                              <td>${{ apt.apt_deposit_amt }}0</td>
+                              {% endfor %}
+                            </tr>
+                            <tr>
+                              <td><b>Lease Type: </b></td>
+                              {% if rent.lease_type == "One" %}
+                                <td>
+                                <input type="radio" name="radio" id="radio1" class="radio" checked disabled/>
+                                <label for="radio1">One Year</label>
+                                </td>
+                                </tr>
+                                
+                                <tr>
+                                <td></td>
+                                <td>
+                                <input type="radio" name="radio" id="radio2" class="radio" disabled/>
+                                <label for="radio2">Six Months</label></td>
+                              {% else %}
+                              <td>
+                                <input type="radio" name="radio" id="radio1" class="radio" disabled/>
+                                <label for="radio1">One Year</label>
+                                </td>
+                                </tr>
+                                
+                                <tr>
+                                <td></td>
+                                <td>
+                                <input type="radio" name="radio" id="radio2" class="radio" checked disabled/>
+                                <label for="radio2">Six Months</label></td>
+                              {% endif %}
+                            </tr>
+                            <tr>
+                              <td><b>Social Security: </b></td>
+                              {% for info in urecords %}
+                              <td>{{ info.tenant_ss }}</td>
+                              {% endfor %}
+                            </tr>
+                            <tr>
+                              <td><b>Name: </b></td>
+                              {% for info in urecords %}
+                              <td>{{ info.tenant_name }}</td>
+                              {% endfor %}
+                            </tr>
+                            <tr>
+                              <td><b>Work Phone: </b></td>
+                              {% for info in urecords %}
+                              <td>{{ info.work_phone }}</td>
+                              {% endfor %}
+                            </tr>
+                            <tr>
+                              <td><b>DOB: </b></td>
+                              {% for info in urecords %}
+                              <td>{{ info.tenant_DOB }}</td>
+                              {% endfor %}
+                            </tr>
+                          </tbody>
+                        </table>
+                        {% endfor %}
+                        {% else %}
+                        <p style="text-align:center;">Our current records indicate that you haven't paid rent using this account.</p>
+                        {% endif %}
                         </div>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-reply"></i> Go Back </button>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+
 
 <!--Complaint Form-->										
 <div class="portfolio-modal modal fade" id="writeComplaint" tabindex="-1" role="dialog" aria-hidden="true">
@@ -358,10 +478,15 @@
                   <h1>Family Information</h1>
                     <div class="modal-body" style="text-align:left;">
                       <br>
+                      {% if family %}
+                      {% for person in family %}
                       <table class="table">
-                                 {% if family %}
-                                  <tbody>
-                                  {% for person in family %}
+                                    <thead>
+                                      <tr>
+                                        <th></th><th></th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
                                     <tr>
                                       <td><b>Social Security: </b></td>
                                       <td>{{ person.family_ss }}</td>
@@ -392,15 +517,14 @@
                                     </tr>
                                     <tr>
                                       <td><b>DOB: </b></td>
-                                      <td>{{ person.DOB }}</td>
+                                      <td>{{ person.date_of_birth }}</td>
                                     </tr>
-                                  {% endfor %}
                                   </tbody>
-                                {% else %}
-                                <p style="text-align:center;">Our records indicate that you currently have no family members registered on this account.</p>
-                                {% endif %}
-                                </table>
                         </table>
+                        {% endfor %}
+                        {% else %}
+                          <p style="text-align:center;">Our records indicate that you currently have no family members registered on this account.</p>
+                        {% endif %}
                     </div>
                     <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-reply"></i> Go Back </button>
                 </div>
@@ -423,11 +547,16 @@
                 <div class="col-lg-8 col-lg-offset-2">
                   <h1>Automobile Information</h1>
                     <div class="modal-body" style="text-align:left;">
-                      <br>
+                    <br>
                       {% if automobiles %}
-                      <table class="table">
-                      <tbody>
                       {% for auto in automobiles %}
+                      <table class="table">
+                      <thead>
+                        <tr>
+                          <th></th><th></th>
+                        </tr>
+                      </thead>
+                      <tbody>
                         <tr>
                           <td><b>License No: </b></td>
                           <td>{{ auto.license_no }}</td>
@@ -448,9 +577,9 @@
                           <td><b>Auto Color: </b></td>
                           <td>{{ auto.auto_color }}</td>
                         </tr>
-                      {% endfor %}
                       </tbody>
                     </table>
+                    {% endfor %}
                     {% else %}
                     <p style="text-align:center;">Our records indicate that you currently have no automobiles registered on this account.</p>
                     {% endif %}
@@ -476,9 +605,15 @@
                           <h1>Rent Receipt</h1>
                             <div class="modal-body" style="text-align:left;">
                               <br>
-                              {% if receipt %}
+                              {% if invoices %}
+                              {% for receipt in invoices %}
                               <table class="table">
-                          <tbody>
+                                <thead>
+                                  <tr>
+                                    <th></th><th></th>
+                                  </tr>
+                              </thead>
+                              <tbody>
                             <tr>
                               <td><b>Name: </b></td>
                               {% for tenants in urecords %}
@@ -487,36 +622,33 @@
                             </tr>
                             <tr>
                               <td><b>Social Security: </b></td>
-                              {% for receipt in invoices %}
+                              {% for info in urecords %}
                               <td>{{ info.tenant_ss }}</td>
                               {% endfor %}
                             </tr>
                             <tr>
                               <td><b>Rental No: </b></td>
-                              {% for receipt in invoices %}
-                              <td>{{ info.tenant_DOB }}</td>
+                              {% for info in rental %}
+                              <td>{{ info.rental_no }}</td>
                               {% endfor %}
                             </tr>
                             <tr>
                               <td><b>Apt No: </b></td>
                               {% for apt in apartment %}
-                              <td>{{ apartment.apt_no }}</td>
+                              <td>{{ apt.apt_no }}</td>
                               {% endfor %}
                             </tr>
                             <tr>
                               <td><b>Invoice No: </b></td>
-                              {% for receipt in invoices %}
-                              <td>{{ info.invoice_no }}</td>
-                              {% endfor %}
+                              <td>{{ receipt.invoice_no }}</td>
                             </tr>
                             <tr>
                               <td><b>Rent Amount: </b></td>
-                              {% for receipt in invoices %}
-                              <td>{{ info.CC_amt }}</td>
-                              {% endfor %}
+                              <td>${{ receipt.CC_amt }}0</td>
                             </tr>
                           </tbody>
                         </table>
+                        {% endfor %}
                         {% else %}
                         <p style="text-align:center;">Our current records indicate that you haven't paid rent using this account.</p>
                         {% endif %}
@@ -531,7 +663,7 @@
 </body>
 
 <div class="footer">
-  <div class="container">
+  <div class="container" style="text-align:center;">
          Made with <i class="fa fa-heart heart"></i> by <a href="/about/">TEAM2OARS</a>
   </div>
 </div>
@@ -546,6 +678,10 @@ transparent = true;
 hasTransparent = false;
 
 $(document).ready(function(){
+   $('#PayButton').click(function() {
+        $("#payForm").valid();
+    });
+    
    if($('nav[role="navigation"]').hasClass('navbar-transparent')){
         hasTransparent = true;
    }

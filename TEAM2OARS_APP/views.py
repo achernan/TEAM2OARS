@@ -7,10 +7,12 @@ from .models import Tenant_Family
 from .models import Invoices
 from .models import Apartment
 from .models import Automobiles
+from .models import Handle_Rents
 from .models import Complaints
 from django.template import loader
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse
+from django.utils.safestring import SafeUnicode
 
 def front_page(request):
     return render(request, 'TEAM2OARS_APP/front_page.html', {})
@@ -24,8 +26,14 @@ def enter_credentials(request):
             precords = Tenant.objects.filter(password__exact=request.POST['pwd'])
             allTenants = Tenant.objects.all()
             for info in urecords:
-              invoices = Invoices.objects.filter(tenant_ss__exact=info.tenant_ss)
-              apartment = Apartment.objects.filter(tenant_ss__exact=info.tenant_ss)
+              invoices = Invoices.objects.filter(rental_no__exact=info.rental_no)
+              R_num = SafeUnicode(info.rental_no)[12:] #removes rental number string for comparison
+              rental = Handle_Rents.objects.filter(rental_no__exact=str(R_num))
+              apartment = rental
+              for apt in rental:
+                A_num = SafeUnicode(apt.apt_no)[9:] #removes apt number string for comparison
+                apartment = Apartment.objects.filter(apt_no__exact=A_num)
+    
               automobiles = Automobiles.objects.filter(tenant_ss__exact=info.tenant_ss)
               family = Tenant_Family.objects.filter(tenant_ss__exact=info.tenant_ss)
             context = {
@@ -33,7 +41,7 @@ def enter_credentials(request):
                 'precords': precords, 'query': precords,
                 'invoices': invoices, 'apartment' : apartment,
                 'automobiles': automobiles, 'allTenants' : allTenants,
-                'family' : family
+                'family' : family, 'rental': rental
             }
         if context:
           return render(request, 'TEAM2OARS_APP/tenant_login.html', context)
