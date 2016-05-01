@@ -51,14 +51,14 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="#Checkout">
+                        <a href="#tenantList" class="portfolio-link" data-toggle="modal">
                             <i class="pe-7s-id">
                             </i>
                             <p>Tenant List</p>
                         </a>
                     </li> 
                     <li>
-                        <a href="#viewAgreement" class="portfolio-link" data-toggle="modal">
+                        <a href="#paymentList" class="portfolio-link" data-toggle="modal">
                             <i class="pe-7s-cash"></i>
                             </i>
                             <p>Payment List</p>
@@ -66,43 +66,32 @@
                     </li> 
                     <li>
                         <a href="/testimonials/" class="portfolio-link" data-toggle="modal">
-                            <i class="pe-7s-ribbon"></i>
+                            <i class="pe-7s-search"></i>
                             </i>
                             <p>Search Testimonials</p>
                         </a>
                     </li> 
                     <li>
-                        <a href="#writeTestimonial" class="portfolio-link" data-toggle="modal">
+                        <a href="#availableApartments" class="portfolio-link" data-toggle="modal">
                             <i class="pe-7s-home"></i>
                             </i>
                             <p>Apartments Available</p>
                         </a>
                     </li> 
                     <li>
-                      <a href="#writeTestimonial" class="portfolio-link" data-toggle="modal">
+                      <a href="#rentalRates" class="portfolio-link" data-toggle="modal">
                             <i class="pe-7s-note2"></i>
                             </i>
                             <p>Rental Rates</p>
                         </a>
                     </li>
-                     <li>
-                        <a href="/testimonials/" class="portfolio-link" data-toggle="modal">
-                            <i class="pe-7s-search"></i>
-                            </i>
-                            <p>Search Agreements</p>
-                        </a>
-                    </li> 
                     <li class="dropdown">
                           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="pe-7s-user"></i>
                                 <p>Account <b class="caret"></b></p>
                             </a>
                           <ul class="dropdown-menu">
-                            <li><a href="#">Personal Information</a></li>
-                            <li><a href="#">My Complaints</a></li>
-                            <li><a href="#">My Testimonials</a></li>
-                            <li><a href="#">Privacy Settings</a></li>
-                            <li class="divider"></li>
+          
                             <li><a href="/">Sign Out</a></li>
                           </ul>
                     </li>
@@ -118,145 +107,290 @@
 
 </div> <!-- end menu-dropdown -->
 
-<div class="main" style="padding-top:10px; padding-left:250px; padding-right:250px">
-      <h2>Tenant List</h2>
-  <p>DISCLAIMER: This information is sensitive, and should not be released under any circumstances.</p>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Social Security</th>
-        <th>Name</th>
-        <th>Work Phone</th>
-      </tr>
-    </thead>
-    <tbody>
-    {% for tenants in allTenants %}
-      <tr>
-        <td>{{ tenants.tenant_ss }}</td>
-        <td>{{ tenants.tenant_name }}</td>
-        <td>{{ tenants.work_phone }}</td>
-      </tr>
-    {% endfor %}
-    </tbody>
-  </table>
+<!-- Create Rental Input form -->
+<div class="main" style="padding-top:10px">
+         <div id="Checkout" class="inline">
+      <h1>Create Rental</h1>
+      <div class="card-row">
+        <br>
+      </div>
+      <form class="form" id="payForm" role="form" method="get" action="#rentPaid" accept-charset="UTF-8" id="testimonial_form">
+          <div class="form-group">
+              <label for="sel1">Apartments Available:</label>
+                   <table class="table">
+                     <thead>
+                        <tr>
+                          <th>Select</th>
+                          <th>Apt. No</th>
+                          <th>Apt. Type</th>
+                          <th>Deposit Amount</th>
+                        </tr>
+                      </thead>
+                        <tbody>
+                          {% for status in allApartments %}
+                          {% if status.apt_status == 'V' %}
+                            <tr>
+                            <td><input type="radio" name="availApartments" id="{{ status.apt_no }}" value="{{ status.apt_no }}" class="radio"/>
+                                <label for="{{ status.apt_no }}">&nbsp;</label></td> <!--returns apartment number as value-->
+                            
+                              <td style="padding-top:30px">Apt {{ status.apt_no }}</td>
+                              <td style="padding-top:30px">{% if status.apt_type == "0" %}
+                                      Studio
+                                   {% elif status.apt_type == "1" %}
+                                      1 Bedroom
+                                   {% elif status.apt_type == "2" %}
+                                      2 Bedroom
+                                   {% else %}
+                                      3 Bedroom
+                                   {% endif %}</td>
+                              <td style="padding-top:30px"> ${{ status.apt_deposit_amt }}0</td>
+                            </tr>
+                         {% endif %}
+                         {% endfor %}
+                      </tbody>
+                </table>
+                <!--Lease Length for Input Form-->
+          </div>
+          <table class="table">
+              <thead>
+              </thead>
+              <tbody>
+                <label for="EnterAmount">Lease Length:</label>
+                  <td><div class="form-group">
+                       <input type="radio" name="leaseType" id="One" value="One" class="radio" checked/>
+                                        <label for="One">One Year</label>     <!--Returns "One" if one year lease-->
+                  </div></td>
+                  <td><div class="form-group">
+                  <input type="radio" name="leaseType" id="Six" value="Six" class="radio"/>
+                                        <label for="Six">Six Months</label>   <!--Returns "Six" if six month lease-->
+                  </div></td>
+            </tbody>
+                </table>
+                <!--Text Fields for input form-->
+
+          <!--Tenant SS-->
+          <div class="form-group">
+              <label or="tenantSS">Tenant SS:</label>
+              <input id="tenantSS" class="form-control" type="text" maxlength="15" required></input>
+          </div>
+          <!--Tenant Name-->
+          <div class="form-group">
+              <label for="tenantName">Tenant Name:</label>
+              <input id="tenantName" class="null card-image form-control" type="text" required></input>
+          </div>
+          <div class="expiry-date-group form-group">
+              <label for="tenantDOB">Tenant DOB:</label>
+              <input id="tenantDOB" class="form-control" type="date" placeholder="YYYY - MM - DD" maxlength="14" required></input>
+          </div>
+          <div class="security-code-group form-group">
+              <label for="workPhoone">Tenant Work Phone:</label>
+              <div class="input-container" >
+                  <input id="workPhone" class="form-control" type="text" required></input>
+              </div>
+              <div class="cvc-preview-container two-card hide">
+                  <div class="amex-cvc-preview"></div>
+                  <div class="visa-mc-dis-cvc-preview"></div>
+              </div>
+          </div>
+          <button id="createRentalButton" class="btn btn-block btn-success submit-button" type="submit" style="background-color: #54C7C3!important;border-color:#54C7C3!important">
+              <span class="submit-button-lock"></span>
+              <span class="align-middle">Create Rental</span>
+          </button>
+          <button id="ClearButton" class="btn btn-block btn-success submit-button" type="reset" style="background-color: #F16664!important;border-color:#F16664!important">
+              <span class="align-middle">Clear</span>
+          </button>
+      </form>
+  </div>
 </div>
 <!-- end main -->
 
-<!--Rental Agreement-->
-								<div class="portfolio-modal modal fade" id="viewAgreement" tabindex="-1" role="dialog" aria-hidden="true">
-											<div class="modal-content">
-												<div class="close-modal" data-dismiss="modal">
-													<div class="lr">
-														<div class="rl">
-														</div>
-													</div>
-												</div>
-												<div class="container">
-													<div class="row">
-														<div class="col-lg-8 col-lg-offset-2">
-															<div class="modal-body">
-																<!-- Project Details Go Here -->
-																<h2>Current Lease Agreement</h2>
-																<p class="item-intro text-muted">Preview</p>
-																<img class="img-responsive" src="http://printableagreements.com/wp-content/uploads/2013/10/Alaska-Residential-Lease-Agreement.jpg" alt="">
-																<p>To view the full rental agreement, <b><a href="#" style="color:red;">click here</a></b></p>
-                           
-																<button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-reply"></i> Go Back </button>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-										
-										<div class="portfolio-modal modal fade" id="writeComplaint" tabindex="-1" role="dialog" aria-hidden="true">
-											<div class="modal-content">
-												<div class="close-modal" data-dismiss="modal">
-													<div class="lr">
-														<div class="rl">
-														  
-														</div>
-													</div>
-												</div>
-												<div class="container">
-													<div class="row">
-														<div class="col-lg-8 col-lg-offset-2">
-															<div class="modal-body">
-															  <h2>Complaint Form</h2>
-															  <form role="form">
-                                  <div class="form-group">
-                                    <label for="sel1">Select complaint priority:</label>
-                                    <select class="form-control" id="sel1">
-                                      <option>--</option>
-                                      <option>Low</option>
-                                      <option>Medium</option>
-                                      <option>High</option>
-                                    </select>
-                                  </div>
-                                  </form>
-															
-                                  <form role="form">
-                                  <div class="form-group">
-                                  <label for="comment" style="text-align: left;">Please enter complaint in the form below:</label>
-                                  <textarea class="form-control" rows="10" id="comment"></textarea>
-                                 </div>
-                                 </form>
-                                <button type="reset" style="background-color:#000000;" class="btn btn-primary" data-dismiss="modal" a href="#"><i class="fa fa-send"></i> Submit </button>
-																<button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-reply"></i> Go Back </button>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-										
-	<!--Enter Testimonial-->
-	<div class="portfolio-modal modal fade" id="writeTestimonial" tabindex="-1" role="dialog" aria-hidden="true">
-											<div class="modal-content">
-												<div class="close-modal" data-dismiss="modal">
-													<div class="lr">
-														<div class="rl">
-														</div>
-													</div>
-												</div>
-												<div class="container">
-													<div class="row">
-														<div class="col-lg-8 col-lg-offset-2">
-															<div class="modal-body">
-																<!-- Project Details Go Here -->
-																<h2>Enter Testimonial</h2>
-															<form role="form">
-															  
-                                  <div class="form-group">
-                                  <label for="comment" style="text-align: left;">Name:</label>
-                                  <textarea class="form-control" rows="1" id="comment"></textarea>
-                                 </div>
-                                 </form>
-															<form role="form">
-															  
-                                  <div class="form-group">
-                                  <label for="comment" style="text-align: left;">Testimonial:</label>
-                                  <textarea class="form-control" rows="10" id="comment"></textarea>
-                                 </div>
-                                 </form>
-                                <label for="comment" style="text-align: left;">Star rating</label>
-                              <div class="star-rating"> 
-                                <span class="fa fa-star-o" data-rating="1"></span>
-                                <span class="fa fa-star-o" data-rating="2"></span>
-                                <span class="fa fa-star-o" data-rating="3"></span>
-                                <span class="fa fa-star-o" data-rating="4"></span>
-                                <span class="fa fa-star-o" data-rating="5"></span>
-                                <input type="hidden" name="whatever" class="rating-value" value="0">
-                              </div>
+<!--Tenant List-->
+    <div class="portfolio-modal modal fade" id="tenantList" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                      <div class="modal-body" style="padding-top:10px;">
+                        <h2 style="text-align: center;padding-top: 30px;">Tenant List</h2>
+                    <p style="text-align: center;">DISCLAIMER: This information is sensitive, and should not be released under any circumstances.</p>
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>Social Security</th>
+                          <th>Name</th>
+                          <th>Apt No.</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      {% for tenants in allTenants %}
+                        <tr>
+                          <td style="text-align: left;">{{ tenants.tenant_ss }}</td>
+                          <td style="text-align: left;">{{ tenants.tenant_name }}</td>
+                          <td style="text-align: left;">{% for apt in allRents %}
+                                        {% if tenants.rental_no|cut:"Rental Num - "|add:0 == apt.rental_no %}
+                                           {{ apt.apt_no|cut:"Apt Num - " }}
+                                        {% endif %}
+                                      {% endfor %}</td>
+                        </tr>
+                      {% endfor %}
+                      </tbody>
+                    </table>
+                     </div>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-reply"></i> Go Back </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!--end Tenant List-->
+
+<!--Available Apartments-->
+    <div class="portfolio-modal modal fade" id="availableApartments" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                      <h1>Vacant Apartments</h1>
+                        <div class="modal-body" style="text-align:left;">
                               <br>
-                                <button type="reset" style="background-color:#000000;" class="btn btn-primary" data-dismiss="modal" a href="#"><i class="fa fa-send"></i> Submit </button>
-																<button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-reply"></i> Go Back </button>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
+                              <table class="table">
+                              <thead>
+                                <tr>
+                                  <th>Apartment No:</th></th>
+                                  <th>Apartment Status:</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                              {% for status in allApartments %}
+                                <tr> {% if status.apt_status == 'V' %}
+                                  <td>{{ status.apt_no }}</td>
+                                  <td>{{ status.apt_status }}acant</td>
+                                </tr> {% endif %}
+                              {% endfor %}
+                              </tbody>
+                            </table>
+                        </div>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-reply"></i> Go Back </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!--Rental Rates-->
+    <div class="portfolio-modal modal fade" id="rentalRates" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                      <h1>Rental Rates</h1>
+                        <div class="modal-body" style="text-align:left;">
+                              <br>
+                              <table class="table">
+                              <thead>
+                                <tr>
+                                  <th>Apartment No:</th></th>
+                                  <th>Apartment Type:</th>
+                                  <th>Rental Amount</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                              {% for rates in allApartments %}
+                                <tr>
+                                  <td>{{ rates.apt_no }}</td>
+                                  <td>{% if rates.apt_type == "0" %}
+                                      Studio
+                                   {% elif rates.apt_type == "1" %}
+                                      1 Bedroom
+                                   {% elif rates.apt_type == "2" %}
+                                      2 Bedroom
+                                   {% else %}
+                                      3 Bedroom
+                                   {% endif %}</td>
+                                  <td>${{ rates.apt_rent_amt }}0</td>
+                                </tr>
+                              {% endfor %}
+                              </tbody>
+                            </table>
+                        </div>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-reply"></i> Go Back </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+					
+<!--Payment List-->
+    <div class="portfolio-modal modal fade" id="paymentList" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                      <h1>Payment List</h1>
+                        <div class="modal-body" style="text-align:left;">
+                              <br>
+                              <table class="table">
+                              <thead>
+                                <tr>
+                                  <th>Apartment No.</th>
+                                  <th>Rental No.</th>
+                                  <th>Invoice No.</th>
+                                  <th>Invoice Date</th>
+                                  <th>Card Type</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                              {% for rates in allInvoices %}
+                                <tr>
+                                  <td>{% for apt in allRents %}
+                                        {% if rates.rental_no|cut:"Rental Num - "|add:0 == apt.rental_no %}
+                                           {{ apt.apt_no|cut:"Apt Num - " }}
+                                        {% endif %}
+                                      {% endfor %}
+                                  </td>
+                                  <td>{{ rates.rental_no|cut:"Rental Num - "}}</td>
+                                  <td>{{ rates.invoice_no }}</td>
+                                  <td>{{ rates.invoice_date }}</td>
+                                  <td>{{ rates.CC_type }}</td>
+                                </tr>
+                              {% endfor %}
+                              </tbody>
+                            </table>
+                        </div>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-reply"></i> Go Back </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </body>
 
