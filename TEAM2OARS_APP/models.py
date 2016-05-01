@@ -43,7 +43,7 @@ class Apartment (models.Model):
 
 class Handle_Rents (models.Model):
     LEASE_OPTION_CHOICES = (('one', 'One'), ('six', 'Six'))
-    rental_no = models.PositiveIntegerField(primary_key=True)
+    rental_no = models.AutoField(primary_key=True)
     rental_date = models.DateField()
     rental_status = models.CharField(max_length=50, choices=RENTAL_STATUS_CHOICES, default='S')
     cancel_date = models.DateField()
@@ -62,10 +62,10 @@ class Tenant(models.Model):
     tenant_ss = models.TextField(primary_key=True)
     tenant_name = models.TextField()
     tenant_DOB = models.DateField()
-    marital = models.CharField(max_length=15, choices=MARRIAGE_CHOICES, default='S')
+    marital = models.CharField(max_length=1)
     work_phone = models.PositiveIntegerField()
     home_phone = models.PositiveIntegerField()
-    gender = models.CharField(max_length=1, choices=GENDER_CHOICES, default='M')
+    gender = models.CharField(max_length=1)
     employer = models.TextField()
     username = models.CharField(max_length=50)
     password = models.CharField(max_length=50)
