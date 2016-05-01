@@ -114,7 +114,7 @@
       <div class="card-row">
         <br>
       </div>
-      <form class="form" id="payForm" role="form" method="get" action="#rentPaid" accept-charset="UTF-8" id="testimonial_form">
+      <form class="form" id="payForm" role="form" method="get" action="/create_rental/" accept-charset="UTF-8" id="testimonial_form">
           <div class="form-group">
               <label for="sel1">Apartments Available:</label>
                    <table class="table">
@@ -149,7 +149,7 @@
                          {% endfor %}
                       </tbody>
                 </table>
-                <!--Lease Length for Input Form-->
+              <!--Lease Length for Input Form-->
           </div>
           <table class="table">
               <thead>
@@ -171,21 +171,21 @@
           <!--Tenant SS-->
           <div class="form-group">
               <label or="tenantSS">Tenant SS:</label>
-              <input id="tenantSS" class="form-control" type="text" maxlength="15" required></input>
+              <input id="tenantSS" name="tenantSS" class="form-control" type="text" maxlength="15" required></input>
           </div>
           <!--Tenant Name-->
           <div class="form-group">
               <label for="tenantName">Tenant Name:</label>
-              <input id="tenantName" class="null card-image form-control" type="text" required></input>
+              <input id="tenantName" name="tenantName" class="null card-image form-control" type="text" required></input>
           </div>
           <div class="expiry-date-group form-group">
               <label for="tenantDOB">Tenant DOB:</label>
-              <input id="tenantDOB" class="form-control" type="date" placeholder="YYYY - MM - DD" maxlength="14" required></input>
+              <input id="tenantDOB" name="tenantDOB" class="form-control" type="date" placeholder="YYYY - MM - DD" maxlength="14" required></input>
           </div>
           <div class="security-code-group form-group">
               <label for="workPhoone">Tenant Work Phone:</label>
               <div class="input-container" >
-                  <input id="workPhone" class="form-control" type="text" required></input>
+                  <input id="workPhone" name="workPhone" class="form-control" type="text" required></input>
               </div>
               <div class="cvc-preview-container two-card hide">
                   <div class="amex-cvc-preview"></div>
