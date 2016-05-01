@@ -52,6 +52,8 @@ def enter_credentials(request):
         if Staff.objects.filter(password__exact=request.POST['pwd']):
             urecords = Staff.objects.filter(username__exact=request.POST['uname'])
             precords = Staff.objects.filter(password__exact=request.POST['pwd'])
+            allInvoices = Invoices.objects.all()
+            allRents = Handle_Rents.objects.all()
             allTenants = Tenant.objects.all()
             allApartments = Apartment.objects.all()
             allComplaints = Complaints.objects.all()
@@ -59,7 +61,8 @@ def enter_credentials(request):
                 'urecords': urecords, 'query': urecords,
                 'precords': precords, 'query': precords,
                 'allTenants' : allTenants, 'allApartments' : allApartments,
-                'allComplaints': allComplaints
+                'allComplaints': allComplaints, 'allInvoices': allInvoices,
+                'allRents': allRents
             }
             if urecords.filter(position__contains='supervisor'):
               if context:
