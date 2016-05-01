@@ -13,6 +13,7 @@ from django.template import loader
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.utils.safestring import SafeUnicode
+from django.db.models import Count, Min, Sum, Avg
 
 def front_page(request):
     return render(request, 'TEAM2OARS_APP/front_page.html', {})
@@ -53,7 +54,10 @@ def enter_credentials(request):
             urecords = Staff.objects.filter(username__exact=request.POST['uname'])
             precords = Staff.objects.filter(password__exact=request.POST['pwd'])
             allInvoices = Invoices.objects.all()
+            allAutomobiles = Automobiles.objects.all()
+            autoCount = Automobiles.objects.values('auto_make').order_by().annotate(Count('auto_make'))
             allRents = Handle_Rents.objects.all()
+            rentCount = Apartment.objects.aggregate(Sum('apt_rent_amt')).values()[0]
             allTenants = Tenant.objects.all()
             allApartments = Apartment.objects.all()
             allComplaints = Complaints.objects.all()
@@ -62,7 +66,8 @@ def enter_credentials(request):
                 'precords': precords, 'query': precords,
                 'allTenants' : allTenants, 'allApartments' : allApartments,
                 'allComplaints': allComplaints, 'allInvoices': allInvoices,
-                'allRents': allRents
+                'allRents': allRents, 'autoCount': autoCount,
+                'allAutomobiles': allAutomobiles, 'rentCount': rentCount
             }
             if urecords.filter(position__contains='supervisor'):
               if context:

@@ -50,6 +50,13 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul class="nav navbar-nav navbar-right">
+                   <li>
+                        <a href="#" class="page-scroll">
+                            <i class="pe-7s-add-user">
+                            </i>
+                            <p>Create Rental</p>
+                        </a>
+                    </li> 
                     <li>
                         <a href="#tenantList" class="portfolio-link" data-toggle="modal">
                             <i class="pe-7s-id">
@@ -72,13 +79,6 @@
                         </a>
                     </li> 
                     <li>
-                        <a href="#availableApartments" class="portfolio-link" data-toggle="modal">
-                            <i class="pe-7s-home"></i>
-                            </i>
-                            <p>Apartments Available</p>
-                        </a>
-                    </li> 
-                    <li>
                       <a href="#rentalRates" class="portfolio-link" data-toggle="modal">
                             <i class="pe-7s-note2"></i>
                             </i>
@@ -91,7 +91,11 @@
                                 <p>Account <b class="caret"></b></p>
                             </a>
                           <ul class="dropdown-menu">
-          
+                            <li><a href="#tenantList" class="portfolio-link" data-toggle="modal">Tenant List</a></li>
+                            <li><a href="#paymentList" class="portfolio-link" data-toggle="modal">Payment List</a></li>
+                            <li><a href="/testimonials/" class="portfolio-link" data-toggle="modal">Search Testimonials</a></li>
+                            <li><a href="#rentalRates" class="portfolio-link" data-toggle="modal">Rental Rates</a></li>
+                            <li class="divider"></li>
                             <li><a href="/">Sign Out</a></li>
                           </ul>
                     </li>
@@ -250,46 +254,6 @@
         </div>
     </div>
 <!--end Tenant List-->
-
-<!--Available Apartments-->
-    <div class="portfolio-modal modal fade" id="availableApartments" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
-                <div class="lr">
-                    <div class="rl">
-
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2">
-                      <h1>Vacant Apartments</h1>
-                        <div class="modal-body" style="text-align:left;">
-                              <br>
-                              <table class="table">
-                              <thead>
-                                <tr>
-                                  <th>Apartment No:</th></th>
-                                  <th>Apartment Status:</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                              {% for status in allApartments %}
-                                <tr> {% if status.apt_status == 'V' %}
-                                  <td>{{ status.apt_no }}</td>
-                                  <td>{{ status.apt_status }}acant</td>
-                                </tr> {% endif %}
-                              {% endfor %}
-                              </tbody>
-                            </table>
-                        </div>
-                        <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-reply"></i> Go Back </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
 <!--Rental Rates-->
     <div class="portfolio-modal modal fade" id="rentalRates" tabindex="-1" role="dialog" aria-hidden="true">
@@ -468,7 +432,19 @@ $star_rating.on('click', function() {
 });
 
 SetRatingStar();
+
+$(function() {
+    $('a.page-scroll').bind('click', function(event) {
+        var $anchor = $(this);
+        $('html, body').stop().animate({
+            scrollTop: $($anchor.attr('href')).offset().top
+        }, 1500, 'easeInOutExpo');
+        event.preventDefault();
+    });
+});
+
 </script>
+
 	
 
 </html>
