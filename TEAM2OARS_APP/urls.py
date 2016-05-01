@@ -6,6 +6,7 @@ urlpatterns = [
     url(r'^enter_credentials/$', views.enter_credentials, name='enter_credentials'),
     url(r'^save_testimonial/$', views.save_testimonial, name='save_testimonial'),
     url(r'^update_status/$', views.update_status, name='update_status'),
+    url(r'^create_rental/$', views.create_rental, name='create_rental'),
     url(r'^about/$', views.about_us, name='about_us'),
     url(r'^tenantWelcome/$', views.login, name='tenant_login'),
     url(r'^assistantLogin/$', views.assistantLogin, name='assistant_login'),

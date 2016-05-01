@@ -13,6 +13,7 @@ from django.template import loader
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.utils.safestring import SafeUnicode
+from django.db.models import Count, Min, Sum, Avg
 
 def front_page(request):
     return render(request, 'TEAM2OARS_APP/front_page.html', {})
@@ -53,7 +54,10 @@ def enter_credentials(request):
             urecords = Staff.objects.filter(username__exact=request.POST['uname'])
             precords = Staff.objects.filter(password__exact=request.POST['pwd'])
             allInvoices = Invoices.objects.all()
+            allAutomobiles = Automobiles.objects.all()
+            autoCount = Automobiles.objects.values('auto_make').order_by().annotate(Count('auto_make'))
             allRents = Handle_Rents.objects.all()
+            rentCount = Apartment.objects.aggregate(Sum('apt_rent_amt')).values()[0]
             allTenants = Tenant.objects.all()
             allApartments = Apartment.objects.all()
             allComplaints = Complaints.objects.all()
@@ -62,7 +66,8 @@ def enter_credentials(request):
                 'precords': precords, 'query': precords,
                 'allTenants' : allTenants, 'allApartments' : allApartments,
                 'allComplaints': allComplaints, 'allInvoices': allInvoices,
-                'allRents': allRents
+                'allRents': allRents, 'autoCount': autoCount,
+                'allAutomobiles': allAutomobiles, 'rentCount': rentCount
             }
             if urecords.filter(position__contains='supervisor'):
               if context:
@@ -100,6 +105,55 @@ def save_testimonial(request):
                                  tenant_ss=Tenant.objects.get(tenant_ss__exact=userdata))
     content_object.save()
     return HttpResponseRedirect('/testimonials/')
+
+def create_rental(request):
+    template = loader.get_template('TEAM2OARS_APP/assistant_login.html')
+    urecords = Staff.objects.filter(username__exact='assistant1')
+    allInvoices = Invoices.objects.all()
+    allRents = Handle_Rents.objects.all()
+    allTenants = Tenant.objects.all()
+    allApartments = Apartment.objects.all()
+    allComplaints = Complaints.objects.all()
+
+    for s in urecords:
+        staffNumber = s.staff_no
+
+    aptNum = request.GET['availApartments']
+    leaseType = request.GET['leaseType']
+
+    tenantSS = request.GET['tenantSS']
+    tenantName = request.GET['tenantName']
+    tenantDOB = request.GET['tenantDOB']
+    workPhone = request.GET['workPhone']
+
+    content = Handle_Rents(apt_no=Apartment.objects.get(apt_no__exact=aptNum),
+                           lease_type=leaseType,
+                           rental_date=timezone.now(),
+                           cancel_date='2016-06-02',
+                           lease_start='2016-06-02',
+                           lease_end='2017-06-02',
+                           renewal_date='2017-06-01',
+                           staff_no=Staff.objects.get(staff_no__exact=staffNumber))
+    content.save()
+
+    content2 = Tenant(tenant_ss=tenantSS,
+                      tenant_name=tenantName,
+                      tenant_DOB=tenantDOB,
+                      work_phone=workPhone,
+                      home_phone=workPhone,
+                      username='tenant6',
+                      password='tenant6#',
+                      rental_no=Handle_Rents.objects.get(rental_no__exact='100106'))
+    content2.save()
+
+    Apartment.objects.filter(apt_no__exact=aptNum).update(apt_status='R')
+
+    context = {
+        'urecords': urecords, 'allTenants' : allTenants, 'allApartments' : allApartments,
+        'allComplaints': allComplaints, 'allInvoices': allInvoices, 'allRents': allRents
+    }
+
+    return HttpResponse(template.render(context, request))
 
 def update_status(request): # of complaints to Fixed
     template = loader.get_template('TEAM2OARS_APP/supervisor_login.html')

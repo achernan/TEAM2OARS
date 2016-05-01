@@ -51,14 +51,14 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="#Checkout">
+                        <a href="#tenantList" class="portfolio-link" data-toggle="modal">
                             <i class="pe-7s-id">
                             </i>
                             <p>Tenant List</p>
                         </a>
                     </li> 
                     <li>
-                        <a href="#viewAgreement" class="portfolio-link" data-toggle="modal">
+                        <a href="#paymentList" class="portfolio-link" data-toggle="modal">
                             <i class="pe-7s-cash"></i>
                             </i>
                             <p>Payment List</p>
@@ -66,42 +66,28 @@
                     </li> 
                     <li>
                         <a href="/testimonials/" class="portfolio-link" data-toggle="modal">
-                            <i class="pe-7s-ribbon"></i>
+                            <i class="pe-7s-search"></i>
                             </i>
                             <p>Search Testimonials</p>
                         </a>
                     </li> 
                     <li>
-                        <a href="#availableApartments" class="portfolio-link" data-toggle="modal">
-                            <i class="pe-7s-home"></i>
+                      <a href="#leaseLength" class="portfolio-link" data-toggle="modal">
+                            <i class="pe-7s-date"></i>
                             </i>
-                            <p>Apartments Available</p>
-                        </a>
-                    </li> 
-                    <li>
-                      <a href="#rentalRates" class="portfolio-link" data-toggle="modal">
-                            <i class="pe-7s-note2"></i>
-                            </i>
-                            <p>Rental Rates</p>
+                            <p>Lease Lengths</p>
                         </a>
                     </li>
-                     <li>
-                        <a href="/testimonials/" class="portfolio-link" data-toggle="modal">
-                            <i class="pe-7s-search"></i>
-                            </i>
-                            <p>Search Agreements</p>
-                        </a>
-                    </li> 
                     <li class="dropdown">
                           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="pe-7s-user"></i>
                                 <p>Account <b class="caret"></b></p>
                             </a>
                           <ul class="dropdown-menu">
-                            <li><a href="#">Personal Information</a></li>
-                            <li><a href="#">My Complaints</a></li>
-                            <li><a href="#">My Testimonials</a></li>
-                            <li><a href="#">Privacy Settings</a></li>
+                            <li><a href="#tenantList" class="portfolio-link" data-toggle="modal">Tenant List</a></li>
+                            <li><a href="#paymentList" class="portfolio-link" data-toggle="modal">Payment List</a></li>
+                            <li><a href="/testimonials/" class="portfolio-link" data-toggle="modal">Search Testimonials</a></li>
+                            <li><a href="#leaseLength" class="portfolio-link" data-toggle="modal">Lease Lengths</a></li>
                             <li class="divider"></li>
                             <li><a href="/">Sign Out</a></li>
                           </ul>
@@ -118,59 +104,138 @@
 
 </div> <!-- end menu-dropdown -->
 
-<div class="main" style="padding-top:10px; padding-left:250px; padding-right:250px">
-      <h2 style="text-align: center;padding-top: 30px;">Tenant List</h2>
-  <p style="text-align: center;">DISCLAIMER: This information is sensitive, and should not be released under any circumstances.</p>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Social Security</th>
-        <th>Name</th>
-        <th>Work Phone</th>
-      </tr>
-    </thead>
-    <tbody>
-    {% for tenants in allTenants %}
-      <tr>
-        <td>{{ tenants.tenant_ss }}</td>
-        <td>{{ tenants.tenant_name }}</td>
-        <td>{{ tenants.apt_no }}</td>
-      </tr>
-    {% endfor %}
-    </tbody>
-  </table>
+<div class="main" style="padding-top:10px">
+         <div id="Checkout" class="inline">
+      <h1>Manager Home</h1>
+      <div class="card-row">
+        <br>
+      </div>
+      <form class="form" id="payForm" role="form" method="get" action="//" accept-charset="UTF-8" id="testimonial_form">
+          <div class="form-group">
+              <label for="sel1">Vacant Apartments:</label>
+                   <table class="table">
+                     <thead>
+                        <tr>
+                          <th> </th>
+                          <th>Apt. No</th>
+                          <th>Apt. Type</th>
+                          <th>Status</th>
+                        </tr>
+                      </thead>
+                        <tbody>
+                          {% for status in allApartments %}
+                          {% if status.apt_status == 'V' %}
+                            <tr>
+                            <td><input type="radio" name="availApartments" id="{{ status.apt_no }}" value="{{ status.apt_no }}" class="radio" disabled/>
+                                <label for="{{ status.apt_no }}">&nbsp;</label></td> <!--returns apartment number as value-->
+                            
+                              <td style="padding-top:30px">Apt {{ status.apt_no }}</td>
+                              <td style="padding-top:30px">{% if status.apt_type == "0" %}
+                                      Studio
+                                   {% elif status.apt_type == "1" %}
+                                      1 Bedroom
+                                   {% elif status.apt_type == "2" %}
+                                      2 Bedroom
+                                   {% else %}
+                                      3 Bedroom
+                                   {% endif %}</td>
+                              <td style="padding-top:30px">Vacant</td>
+                            </tr>
+                         {% endif %}
+                         {% endfor %}
+                      </tbody>
+                </table>
+              <!--Lease Length for Input Form-->
+          </div>
+           <label for="sel1">Automobile List:</label>
+                   <table class="table">
+                     <thead>
+                        <tr>
+                          <th> </th>
+                          <th>Auto Make</th>
+                          <th>Auto Count</th>
+                        </tr>
+                      </thead>
+                        <tbody>
+                          {% for status in autoCount %}
+                            <tr>
+                            <td><input type="radio" name="availApartments" id="{{ status.apt_no }}" value="{{ status.apt_no }}" class="radio" disabled/>
+                                <label for="{{ status.apt_no }}">&nbsp;</label></td> <!--returns apartment number as value-->
+                            
+                              <td style="padding-top:30px"> {{ status.auto_make }}</td>
+                              <td style="padding-top:30px"> {{ status.auto_make__count }}</td>
+                            </tr>
+                         {% endfor %}
+                      </tbody>
+                </table>
+                <!--Text Fields for input form-->
+           <label for="sel1">Max. Total Possible Rent Revenue:</label>
+                   <table class="table">
+                        <tbody>
+                            <tr>
+                            <td style="padding-top:30px">Revenue per month:</td> <!--returns apartment number as value-->
+                              <td style="padding-top:30px"> ${{ rentCount }}0</td>
+                            </tr>
+                      </tbody>
+                </table>
+                <hr>
+                <!--Text Fields for input form-->
+          
+      </form>
+  </div>
 </div>
 <!-- end main -->
 
-    <!--Rental Agreement-->
-    <div class="portfolio-modal modal fade" id="viewAgreement" tabindex="-1" role="dialog" aria-hidden="true">
+    <!--Tenant List-->
+    <div class="portfolio-modal modal fade" id="tenantList" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-content">
             <div class="close-modal" data-dismiss="modal">
                 <div class="lr">
                     <div class="rl">
+
                     </div>
                 </div>
             </div>
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8 col-lg-offset-2">
-                        <div class="modal-body">
-                            <!-- Project Details Go Here -->
-                            <h2>Current Lease Agreement</h2>
-                            <p class="item-intro text-muted">Preview</p>
-                            <img class="img-responsive" src="http://printableagreements.com/wp-content/uploads/2013/10/Alaska-Residential-Lease-Agreement.jpg" alt="">
-                            <p>To view the full rental agreement, <b><a href="#" style="color:red;">click here</a></b></p>
-
-                            <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-reply"></i> Go Back </button>
-                        </div>
+                      <div class="modal-body" style="padding-top:10px;">
+                        <h2 style="text-align: center;padding-top: 30px;">Tenant List</h2>
+                    <p style="text-align: center;">DISCLAIMER: This information is sensitive, and should not be released under any circumstances.</p>
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>Social Security</th>
+                          <th>Name</th>
+                          <th>Apt No.</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      {% for tenants in allTenants %}
+                        <tr>
+                          <td style="text-align: left;">{{ tenants.tenant_ss }}</td>
+                          <td style="text-align: left;">{{ tenants.tenant_name }}</td>
+                          <td style="text-align: left;">{% for apt in allRents %}
+                                        {% if tenants.rental_no|cut:"Rental Num - "|add:0 == apt.rental_no %}
+                                           {{ apt.apt_no|cut:"Apt Num - " }}
+                                        {% endif %}
+                                      {% endfor %}</td>
+                        </tr>
+                      {% endfor %}
+                      </tbody>
+                    </table>
+                     </div>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-reply"></i> Go Back </button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+<!--end Tenant List-->
 
-     <div class="portfolio-modal modal fade" id="writeComplaint" tabindex="-1" role="dialog" aria-hidden="true">
-         <div class="modal-content">
+     <!--Payment List-->
+    <div class="portfolio-modal modal fade" id="paymentList" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
             <div class="close-modal" data-dismiss="modal">
                 <div class="lr">
                     <div class="rl">
@@ -178,32 +243,41 @@
                     </div>
                 </div>
             </div>
-             <div class="container">
-                 <div class="row">
-                     <div class="col-lg-8 col-lg-offset-2">
-                         <div class="modal-body">
-                             <h2>Complaint Form</h2>
-                             <form role="form">
-                                <div class="form-group">
-                                    <label for="sel1">Select complaint priority:</label>
-                                    <select class="form-control" id="sel1">
-                                    <option>--</option>
-                                    <option>Low</option>
-                                    <option>Medium</option>
-                                    <option>High</option>
-                                    </select>
-                                </div>
-                             </form>
-
-                              <form role="form">
-                                  <div class="form-group">
-                                      <label for="comment" style="text-align: left;">Please enter complaint in the form below:</label>
-                                      <textarea class="form-control" rows="10" id="comment"></textarea>
-                                 </div>
-                             </form>
-                            <button type="reset" style="background-color:#000000;" class="btn btn-primary" data-dismiss="modal" a href="#"><i class="fa fa-send"></i> Submit </button>
-                            <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-reply"></i> Go Back </button>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                      <h1>Payment List</h1>
+                        <div class="modal-body" style="text-align:left;">
+                              <br>
+                              <table class="table">
+                              <thead>
+                                <tr>
+                                  <th>Apartment No.</th>
+                                  <th>Rental No.</th>
+                                  <th>Invoice No.</th>
+                                  <th>Invoice Date</th>
+                                  <th>Card Type</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                              {% for rates in allInvoices %}
+                                <tr>
+                                  <td>{% for apt in allRents %}
+                                        {% if rates.rental_no|cut:"Rental Num - "|add:0 == apt.rental_no %}
+                                           {{ apt.apt_no|cut:"Apt Num - " }}
+                                        {% endif %}
+                                      {% endfor %}
+                                  </td>
+                                  <td>{{ rates.rental_no|cut:"Rental Num - "}}</td>
+                                  <td>{{ rates.invoice_no }}</td>
+                                  <td>{{ rates.invoice_date }}</td>
+                                  <td>{{ rates.CC_type }}</td>
+                                </tr>
+                              {% endfor %}
+                              </tbody>
+                            </table>
                         </div>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-reply"></i> Go Back </button>
                     </div>
                 </div>
             </div>
@@ -211,7 +285,7 @@
     </div>
 
     <!--Rental Rates-->
-    <div class="portfolio-modal modal fade" id="rentalRates" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="portfolio-modal modal fade" id="leaseLength" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-content">
             <div class="close-modal" data-dismiss="modal">
                 <div class="lr">
@@ -223,23 +297,25 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8 col-lg-offset-2">
-                      <h1>Rental Rates</h1>
+                      <h1>Lease Lengths</h1>
                         <div class="modal-body" style="text-align:left;">
                               <br>
                               <table class="table">
                               <thead>
                                 <tr>
-                                  <th>Apartment No:</th></th>
-                                  <th>Apartment Type:</th>
-                                  <th>Rental Amount</th>
+                                  <th>Rental No</th></th>
+                                  <th>Start Date</th>
+                                  <th>End Date</th>
+                                  <th>Renewal Date</th>
                                 </tr>
                               </thead>
                               <tbody>
-                              {% for rates in allApartments %}
+                              {% for rates in allRents %}
                                 <tr>
-                                  <td>{{ rates.apt_no }}</td>
-                                  <td>{{ rates.apt_type }}</td>
-                                  <td>${{ rates.apt_rent_amt }}0</td>
+                                  <td>{{ rates.rental_no }}</td>
+                                  <td>{{ rates.lease_start }}</td>
+                                  <td>{{ rates.lease_end }}</td>
+                                  <td>{{ rates.renewal_date }}</td>
                                 </tr>
                               {% endfor %}
                               </tbody>
@@ -279,7 +355,7 @@
                               {% for status in allApartments %}
                                 <tr> {% if status.apt_status == 'V' %}
                                   <td>{{ status.apt_no }}</td>
-                                  <td>{{ status.apt_status }}</td>
+                                  <td>{{ status.apt_status }}acant</td>
                                 </tr> {% endif %}
                               {% endfor %}
                               </tbody>
@@ -291,6 +367,7 @@
             </div>
         </div>
     </div>
+    
 	<!--Enter Testimonial-->
 	<div class="portfolio-modal modal fade" id="writeTestimonial" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-content">
