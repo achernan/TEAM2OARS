@@ -18,13 +18,24 @@ from django.db.models import Count, Min, Sum, Avg
 def front_page(request):
     return render(request, 'TEAM2OARS_APP/front_page.html', {})
 
-def enter_credentials(request):
-    context = False
+def logout(request):
+    request.session.delete()
+    return render(request, 'TEAM2OARS_APP/front_page.html', {})
 
-    if Tenant.objects.filter(username__exact=request.POST['uname']):
-        if Tenant.objects.filter(password__exact=request.POST['pwd']):
-            urecords = Tenant.objects.filter(username__exact=request.POST['uname'])
-            precords = Tenant.objects.filter(password__exact=request.POST['pwd'])
+def enter_credentials(request):
+    request.session.load()
+
+    if (request.session.exists() == False):
+        request.session['uname'] = request.POST['uname']
+        request.session['pwd'] = request.POST['pwd']
+        print request.session['uname']
+
+    request.session.save()
+
+    if Tenant.objects.filter(username__exact=request.session['uname']):
+        if Tenant.objects.filter(password__exact=request.session['pwd']):
+            urecords = Tenant.objects.filter(username__exact=request.session['uname'])
+            precords = Tenant.objects.filter(password__exact=request.session['pwd'])
             allTenants = Tenant.objects.all()
             for info in urecords:
               invoices = Invoices.objects.filter(rental_no__exact=info.rental_no)
@@ -32,9 +43,15 @@ def enter_credentials(request):
               rental = Handle_Rents.objects.filter(rental_no__exact=str(R_num))
               apartment = rental
               for apt in rental:
+<<<<<<< HEAD
                 A_num = SafeUnicode(apt.apt_no)[10:] #removes apt number string for comparison
                 apartment = Apartment.objects.filter(apt_no__contains=A_num)
     
+=======
+                A_num = SafeUnicode(apt.apt_no)[9:] #removes apt number string for comparison
+                apartment = Apartment.objects.filter(apt_no__exact=A_num)
+
+>>>>>>> master
               automobiles = Automobiles.objects.filter(tenant_ss__exact=info.tenant_ss)
               family = Tenant_Family.objects.filter(tenant_ss__exact=info.tenant_ss)
             context = {
@@ -46,13 +63,12 @@ def enter_credentials(request):
             }
         if context:
           return render(request, 'TEAM2OARS_APP/tenant_login.html', context)
-        else:
-          return render(request, 'TEAM2OARS_APP/front_page.html', {})
 
-    if Staff.objects.filter(username__exact=request.POST['uname']):
-        if Staff.objects.filter(password__exact=request.POST['pwd']):
-            urecords = Staff.objects.filter(username__exact=request.POST['uname'])
-            precords = Staff.objects.filter(password__exact=request.POST['pwd'])
+
+    elif Staff.objects.filter(username__exact=request.session['uname']):
+        if Staff.objects.filter(password__exact=request.session['pwd']):
+            urecords = Staff.objects.filter(username__exact=request.session['uname'])
+            precords = Staff.objects.filter(password__exact=request.session['pwd'])
             allInvoices = Invoices.objects.all()
             allStaff = Staff.objects.all()
             allAutomobiles = Automobiles.objects.all()
@@ -81,7 +97,8 @@ def enter_credentials(request):
             if urecords.filter(position__contains="assistant"):
               if context:
                 return render(request, 'TEAM2OARS_APP/assistant_login.html', context)
-              
+
+    else:
         return render(request, 'TEAM2OARS_APP/front_page.html', {})
 
 def about_us(request):
@@ -168,10 +185,11 @@ def create_rental(request):
     aptNum = request.GET['availApartments']
     leaseType = request.GET['leaseType']
 
-    tenantSS = request.GET['tenantSS']
-    tenantName = request.GET['tenantName']
-    tenantDOB = request.GET['tenantDOB']
-    workPhone = request.GET['workPhone']
+    # use later possibly
+    # tenantSS = request.GET['tenantSS']
+    # tenantName = request.GET['tenantName']
+    # tenantDOB = request.GET['tenantDOB']
+    # workPhone = request.GET['workPhone']
 
     content = Handle_Rents(apt_no=Apartment.objects.get(apt_no__exact=aptNum),
                            lease_type=leaseType,
@@ -183,16 +201,6 @@ def create_rental(request):
                            staff_no=Staff.objects.get(staff_no__exact=staffNumber))
     content.save()
 
-    content2 = Tenant(tenant_ss=tenantSS,
-                      tenant_name=tenantName,
-                      tenant_DOB=tenantDOB,
-                      work_phone=workPhone,
-                      home_phone=workPhone,
-                      username='tenant6',
-                      password='tenant6#',
-                      rental_no=Handle_Rents.objects.get(rental_no__exact='100106'))
-    content2.save()
-
     Apartment.objects.filter(apt_no__exact=aptNum).update(apt_status='R')
 
     context = {
@@ -201,6 +209,31 @@ def create_rental(request):
     }
 
     return HttpResponse(template.render(context, request))
+
+def new_tenant(request):
+    tenantSS = request.GET['tenantSS']
+    tenantName = request.GET['tenantName']
+    tenantDOB = request.GET['tenantDOB']
+    marital = request.GET['marital']
+    workPhone = request.GET['workPhone']
+    homePhone = request.GET['homePhone']
+    employer = request.GET['employer']
+    gender = request.GET['gender']
+
+    Tenant(tenant_ss=tenantSS,
+           tenant_name=tenantName,
+           tenant_DOB=tenantDOB,
+           marital=marital,
+           work_phone=workPhone,
+           home_phone=homePhone,
+           employer=employer,
+           gender=gender,
+           username='tenant6',
+           password='tenant6#',
+           rental_no=Handle_Rents.objects.get(rental_no__exact='100106')).save()
+
+    return render(request, 'TEAM2OARS_APP/front_page.html', {})
+
 
 def update_status(request): # of complaints to Fixed
     template = loader.get_template('TEAM2OARS_APP/supervisor_login.html')
