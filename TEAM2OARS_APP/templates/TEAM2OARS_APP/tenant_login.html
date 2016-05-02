@@ -361,6 +361,9 @@
                           {% for an in rental %}
                               <textarea style="visibility:hidden;" name=an>{{ an.apt_no }}</textarea>
                           {% endfor %}
+                          {% for u in urecords %}
+                              <textarea style="visibility:hidden;" name=u>{{ u.username }}</textarea>
+                          {% endfor %}
                     </form>
 
                     </div>

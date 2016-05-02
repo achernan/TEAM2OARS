@@ -108,7 +108,8 @@ def save_testimonial(request):
 
 def submit_complaint(request):
     template = loader.get_template('TEAM2OARS_APP/tenant_login.html')
-    urecords = Tenant.objects.filter(username__exact='tenant1')
+    username = request.GET['u']
+    urecords = Tenant.objects.filter(username__exact=username)
     allTenants = Tenant.objects.all()
     for info in urecords:
       invoices = Invoices.objects.filter(rental_no__exact=info.rental_no)
