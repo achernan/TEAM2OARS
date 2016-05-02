@@ -14,9 +14,9 @@ class Staff (models.Model):
     CUSTOMERSERVICE = 'Customer Service'
     POSITION_CHOICES = ((ASSISTANT, 'assistant'), (MANAGER, 'manager'),
                         (SUPERVISOR, 'supervisor'), (CUSTOMERSERVICE, 'customer service'))
-    staff_no = models.TextField(primary_key=True)
-    first_name = models.TextField()
-    last_name = models.TextField()
+    staff_no = models.CharField(primary_key=True, max_length=5)
+    first_name = models.CharField(max_length=20)
+    last_name = models.CharField(max_length=20)
     position = models.CharField(max_length=16, choices=POSITION_CHOICES, default=ASSISTANT)
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES, default='M')
     date_of_birth = models.DateField()
@@ -59,14 +59,14 @@ class Handle_Rents (models.Model):
 
 
 class Tenant(models.Model):
-    tenant_ss = models.TextField(primary_key=True)
-    tenant_name = models.TextField()
+    tenant_ss = models.CharField(primary_key=True, max_length=9)
+    tenant_name = models.CharField(max_length=50)
     tenant_DOB = models.DateField()
     marital = models.CharField(max_length=1)
     work_phone = models.PositiveIntegerField()
     home_phone = models.PositiveIntegerField()
     gender = models.CharField(max_length=1)
-    employer = models.TextField()
+    employer = models.CharField(max_length=50)
     username = models.CharField(max_length=50)
     password = models.CharField(max_length=50)
     rental_no = models.ForeignKey(Handle_Rents, on_delete=models.CASCADE)
@@ -77,10 +77,10 @@ class Tenant(models.Model):
 
 class Automobiles (models.Model):
     license_no = models.CharField(max_length=8, primary_key=True)
-    auto_make = models.TextField(max_length=20)
+    auto_make = models.CharField(max_length=20)
     auto_model = models.CharField(max_length=20)
-    auto_year = models.TextField()
-    auto_color = models.TextField(max_length=20)
+    auto_year = models.CharField(max_length=4)
+    auto_color = models.CharField(max_length=20)
     tenant_ss = models.ForeignKey(Tenant, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -88,9 +88,9 @@ class Automobiles (models.Model):
 
 class Tenant_Family(models.Model):
     family_ss = models.PositiveIntegerField(primary_key=True)
-    name = models.TextField()
-    spouse = models.TextField()
-    child = models.TextField()
+    name = models.CharField(max_length=50)
+    spouse = models.CharField(max_length=50)
+    child = models.CharField(max_length=50)
     divorced = models.CharField(max_length=3, choices=YESNO_CHOICES, default='N')
     single = models.CharField(max_length=3, choices=YESNO_CHOICES, default='N')
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES, default='M')
