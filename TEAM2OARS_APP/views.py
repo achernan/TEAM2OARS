@@ -168,10 +168,11 @@ def create_rental(request):
     aptNum = request.GET['availApartments']
     leaseType = request.GET['leaseType']
 
-    tenantSS = request.GET['tenantSS']
-    tenantName = request.GET['tenantName']
-    tenantDOB = request.GET['tenantDOB']
-    workPhone = request.GET['workPhone']
+    # use later possibly
+    # tenantSS = request.GET['tenantSS']
+    # tenantName = request.GET['tenantName']
+    # tenantDOB = request.GET['tenantDOB']
+    # workPhone = request.GET['workPhone']
 
     content = Handle_Rents(apt_no=Apartment.objects.get(apt_no__exact=aptNum),
                            lease_type=leaseType,
@@ -183,16 +184,6 @@ def create_rental(request):
                            staff_no=Staff.objects.get(staff_no__exact=staffNumber))
     content.save()
 
-    content2 = Tenant(tenant_ss=tenantSS,
-                      tenant_name=tenantName,
-                      tenant_DOB=tenantDOB,
-                      work_phone=workPhone,
-                      home_phone=workPhone,
-                      username='tenant6',
-                      password='tenant6#',
-                      rental_no=Handle_Rents.objects.get(rental_no__exact='100106'))
-    content2.save()
-
     Apartment.objects.filter(apt_no__exact=aptNum).update(apt_status='R')
 
     context = {
@@ -201,6 +192,31 @@ def create_rental(request):
     }
 
     return HttpResponse(template.render(context, request))
+
+def new_tenant(request):
+    tenantSS = request.GET['tenantSS']
+    tenantName = request.GET['tenantName']
+    tenantDOB = request.GET['tenantDOB']
+    marital = request.GET['marital']
+    workPhone = request.GET['workPhone']
+    homePhone = request.GET['homePhone']
+    employer = request.GET['employer']
+    gender = request.GET['gender']
+
+    Tenant(tenant_ss=tenantSS,
+           tenant_name=tenantName,
+           tenant_DOB=tenantDOB,
+           marital=marital,
+           work_phone=workPhone,
+           home_phone=homePhone,
+           employer=employer,
+           gender=gender,
+           username='tenant6',
+           password='tenant6#',
+           rental_no=Handle_Rents.objects.get(rental_no__exact='100106')).save()
+
+    return render(request, 'TEAM2OARS_APP/front_page.html', {})
+
 
 def update_status(request): # of complaints to Fixed
     template = loader.get_template('TEAM2OARS_APP/supervisor_login.html')

@@ -160,7 +160,7 @@
                     <div class="col-lg-8 col-lg-offset-2">
     
     <!--Sign Up form-->                      
-    <form class="form" id="payForm" role="form" method="get" action="//" accept-charset="UTF-8" id="signUpForm">
+    <form class="form" id="payForm" role="form" method="get" action="/new_tenant/" accept-charset="UTF-8" id="signUpForm">
           <!--Tenant SS-->
           <h1>Tenant Registration</h1>
           <br>
@@ -211,20 +211,12 @@
           </div>
           <div class="expiry-date-group form-group">
               <label for="tenantGender">Gender</label>
-              <select class="form-control" name="marital" id="marital" required>
-                              <option value="">--</option>
-                              <option value="M">Male</option>
-                              <option value="F">Female</option>
-                            </select>
+              <select class="form-control" name="gender" id="marital" required>
+                  <option value="">--</option>
+                  <option value="M">Male</option>
+                  <option value="F">Female</option>
+              </select>
           </div>
-          <div class="form-group">
-              <label for="tenantUsername">Username:</label>
-              <input id="tenantUsername" name="tenantUsername" class="null card-image form-control" type="text" required></input>
-          </div>
-          <div class="form-group">
-											 <label for="tenantPassword">Password</label>
-											 <input type="password" name=tenantPassword class="form-control" id="exampleInputPassword2" required>
-					</div>
           <button type="submit" class="btn btn-primary"><i class="fa fa-send"></i> Submit </button>
       </form>
       <!-- End of Sign Up form-->    
