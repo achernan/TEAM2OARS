@@ -31,7 +31,7 @@ class Apartment (models.Model):
     VACANT = 'V'
     RENTED = 'R'
     STATUS_CHOICES = ((VACANT, 'Vacant'), (RENTED, 'Rented'))
-    apt_no = models.CharField(primary_key=True, max_length=3)
+    apt_no = models.CharField(primary_key=True, max_length=20)
     apt_type = models.CharField(max_length=1)
     apt_status = models.CharField(max_length=6, choices=STATUS_CHOICES,  default=VACANT)
     apt_utility = models.CharField(max_length=3, choices=YESNO_CHOICES, default='N')

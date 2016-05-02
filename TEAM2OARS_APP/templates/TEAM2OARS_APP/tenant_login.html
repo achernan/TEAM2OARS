@@ -86,7 +86,14 @@
                             </i>
                             <p>Search Testimonials</p>
                         </a>
-                    </li> 
+                    </li>
+                  <li>
+                      <a href="#rentalRates" class="portfolio-link" data-toggle="modal">
+                            <i class="pe-7s-note2"></i>
+                            </i>
+                            <p>Rental Rates</p>
+                        </a>
+                    </li>
                     <li class="dropdown">
                           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="pe-7s-user"></i>
@@ -372,7 +379,57 @@
         </div>
     </div>
 </div>
-										
+
+ <!--Rental Rates-->
+    <div class="portfolio-modal modal fade" id="rentalRates" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                      <h1>Rental Rates</h1>
+                        <div class="modal-body" style="text-align:left;">
+                              <br>
+                              <table class="table">
+                              <thead>
+                                <tr>
+                                  <th>Apartment No:</th></th>
+                                  <th>Apartment Type:</th>
+                                  <th>Rental Amount</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                              {% for rates in allApartments %}
+                                <tr>
+                                  <td>{{ rates.apt_no }}</td>
+                                  <td>{% if rates.apt_type == "0" %}
+                                      Studio
+                                   {% elif rates.apt_type == "1" %}
+                                      1 Bedroom
+                                   {% elif rates.apt_type == "2" %}
+                                      2 Bedroom
+                                   {% else %}
+                                      3 Bedroom
+                                   {% endif %}</td>
+                                  <td>${{ rates.apt_rent_amt }}0</td>
+                                </tr>
+                              {% endfor %}
+                              </tbody>
+                            </table>
+                        </div>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-reply"></i> Go Back </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 	<!--Enter Testimonial-->
 	<div class="portfolio-modal modal fade" id="writeTestimonial" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-content">

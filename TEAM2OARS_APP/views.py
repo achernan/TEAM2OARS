@@ -26,15 +26,16 @@ def enter_credentials(request):
             urecords = Tenant.objects.filter(username__exact=request.POST['uname'])
             precords = Tenant.objects.filter(password__exact=request.POST['pwd'])
             allTenants = Tenant.objects.all()
+            allApartments = Apartment.objects.all()
             for info in urecords:
               invoices = Invoices.objects.filter(rental_no__exact=info.rental_no)
               R_num = SafeUnicode(info.rental_no)[12:] #removes rental number string for comparison
               rental = Handle_Rents.objects.filter(rental_no__exact=str(R_num))
               apartment = rental
               for apt in rental:
-                A_num = SafeUnicode(apt.apt_no)[9:] #removes apt number string for comparison
-                apartment = Apartment.objects.filter(apt_no__exact=A_num)
-    
+                  A_num = SafeUnicode(apt.apt_no)[10:] #removes apt number string for comparison
+                  apartment = Apartment.objects.filter(apt_no__contains=A_num)
+
               automobiles = Automobiles.objects.filter(tenant_ss__exact=info.tenant_ss)
               family = Tenant_Family.objects.filter(tenant_ss__exact=info.tenant_ss)
             context = {
@@ -42,7 +43,7 @@ def enter_credentials(request):
                 'precords': precords, 'query': precords,
                 'invoices': invoices, 'apartment' : apartment,
                 'automobiles': automobiles, 'allTenants' : allTenants,
-                'family' : family, 'rental': rental
+                'family' : family, 'rental': rental, 'allApartments': allApartments
             }
         if context:
           return render(request, 'TEAM2OARS_APP/tenant_login.html', context)
