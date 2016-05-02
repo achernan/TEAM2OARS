@@ -27,7 +27,6 @@
     <link href='http://fonts.googleapis.com/css?family=Grand+Hotel' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Ubuntu:regular,bold&subset=Latin">
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Lobster" />
-
 </head>
 
 <body>
@@ -114,7 +113,7 @@
 								 </form>
 							</div>
 							<div class="bottom text-center">
-								Don't have an account? <a href="#"><b>Sign Up</b></a>
+								Don't have an account? <a href="#signUp" class="portfolio-link" data-toggle="modal"><b>Sign Up</b></a>
 							</div>
 					 </div>
 				</li>
@@ -147,6 +146,94 @@
       </div>
     </div>
  </div>
+
+<div class="portfolio-modal modal fade" id="signUp" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+    
+    <!--Sign Up form-->                      
+    <form class="form" id="payForm" role="form" method="get" action="//" accept-charset="UTF-8" id="signUpForm">
+          <!--Tenant SS-->
+          <h1>Tenant Registration</h1>
+          <br>
+          <div class="form-group">
+              <label or="tenantSS">Social Security:</label>
+              <input id="tenantSS" name="tenantSS" class="form-control" type="text" maxlength="15" required></input>
+          </div>
+          <!--Tenant Name-->
+          <div class="form-group">
+              <label for="tenantName">Full Name:</label>
+              <input id="tenantName" name="tenantName" class="null card-image form-control" type="text" required></input>
+          </div>
+          <div class="expiry-date-group form-group">
+              <label for="tenantDOB">DOB:</label>
+              <input id="tenantDOB" name="tenantDOB" class="form-control" type="date" placeholder="YYYY - MM - DD" maxlength="14" required></input>
+          </div>
+          <div class="expiry-date-group form-group">
+              <label for="tenantDOB">Marital</label>
+              <select class="form-control" name="marital" id="marital" required>
+                              <option value="">--</option>
+                              <option value="S">Single</option>
+                              <option value="M">Married</option>
+                            </select>
+          </div>
+          <div class="security-code-group form-group">
+              <label for="workPhoone">Work Phone:</label>
+              <div class="input-container" >
+                  <input id="workPhone" name="workPhone" class="form-control" type="text" required></input>
+              </div>
+              <div class="cvc-preview-container two-card hide">
+                  <div class="amex-cvc-preview"></div>
+                  <div class="visa-mc-dis-cvc-preview"></div>
+              </div>
+          </div>
+          <div class="security-code-group form-group">
+              <label for="homePhoone">Home Phone:</label>
+              <div class="input-container" >
+                  <input id="workPhone" name="homePhone" class="form-control" type="text" required></input>
+              </div>
+              <div class="cvc-preview-container two-card hide">
+                  <div class="amex-cvc-preview"></div>
+                  <div class="visa-mc-dis-cvc-preview"></div>
+              </div>
+          </div>
+          <div class="form-group">
+              <label for="tenantEmployer">Employer:</label>
+              <input id="tenantEmployer" name="employer" class="null card-image form-control" type="text" required></input>
+          </div>
+          <div class="expiry-date-group form-group">
+              <label for="tenantGender">Gender</label>
+              <select class="form-control" name="marital" id="marital" required>
+                              <option value="">--</option>
+                              <option value="M">Male</option>
+                              <option value="F">Female</option>
+                            </select>
+          </div>
+          <div class="form-group">
+              <label for="tenantUsername">Username:</label>
+              <input id="tenantUsername" name="tenantUsername" class="null card-image form-control" type="text" required></input>
+          </div>
+          <div class="form-group">
+											 <label for="tenantPassword">Password</label>
+											 <input type="password" name=tenantPassword class="form-control" id="exampleInputPassword2" required>
+					</div>
+          <button type="submit" class="btn btn-primary"><i class="fa fa-send"></i> Submit </button>
+      </form>
+      <!-- End of Sign Up form-->    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
