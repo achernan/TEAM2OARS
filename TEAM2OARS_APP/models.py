@@ -117,16 +117,16 @@ class Invoices (models.Model):
 
 class Complaints (models.Model):
     COMPLAINT_STATUS_CHOICES = (('F', 'Fixed'), ('P', 'Pending'), ('Null', 'Undetermined'))
-    complaint_id = models.PositiveIntegerField(primary_key=True)
+    complaint_id = models.AutoField(primary_key=True)
     complaint_date = models.DateField()
     rental_complaint = models.TextField()
     apt_complaint = models.TextField()
-    status = models.CharField(max_length=30, choices=COMPLAINT_STATUS_CHOICES, default='Null')
+    status = models.CharField(max_length=30, choices=COMPLAINT_STATUS_CHOICES)
     rental_no = models.ForeignKey(Handle_Rents, on_delete=models.CASCADE)
     apt_no = models.ForeignKey(Apartment, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.complaint_id
+        return str(self.complaint_id)
 
 class Testimonies(models.Model):
     testimonial_id = models.AutoField(primary_key=True)

@@ -109,6 +109,50 @@ def save_testimonial(request):
     content_object.save()
     return HttpResponseRedirect('/testimonials/')
 
+def submit_complaint(request):
+    template = loader.get_template('TEAM2OARS_APP/tenant_login.html')
+    username = request.GET['u']
+    urecords = Tenant.objects.filter(username__exact=username)
+    allTenants = Tenant.objects.all()
+    for info in urecords:
+      invoices = Invoices.objects.filter(rental_no__exact=info.rental_no)
+      R_num = SafeUnicode(info.rental_no)[12:] #removes rental number string for comparison
+      rental = Handle_Rents.objects.filter(rental_no__exact=str(R_num))
+      apartment = rental
+      for apt in rental:
+        A_num = SafeUnicode(apt.apt_no)[9:] #removes apt number string for comparison
+        apartment = Apartment.objects.filter(apt_no__exact=A_num)
+
+      automobiles = Automobiles.objects.filter(tenant_ss__exact=info.tenant_ss)
+      family = Tenant_Family.objects.filter(tenant_ss__exact=info.tenant_ss)
+    context = {
+        'urecords': urecords,
+        'invoices': invoices, 'apartment' : apartment,
+        'automobiles': automobiles, 'allTenants' : allTenants,
+        'family' : family, 'rental': rental
+    }
+
+    complaint = request.GET['complaint']
+    type = request.GET['type']
+    rental_no = request.GET['rn']
+    apt_no = request.GET['an']
+
+    R_num = SafeUnicode(rental_no)[13:]
+    A_num = SafeUnicode(apt_no)[10:]
+
+    if type == 'rental':
+        Complaints(complaint_date=timezone.now(),
+                   rental_complaint=complaint,
+                   rental_no=Handle_Rents.objects.get(rental_no__exact=str(R_num)),
+                   apt_no=Apartment.objects.get(apt_no__exact=A_num)).save()
+    elif type == 'apartment':
+        Complaints(complaint_date=timezone.now(),
+                   apt_complaint=complaint,
+                   rental_no=Handle_Rents.objects.get(rental_no__exact=str(R_num)),
+                   apt_no=Apartment.objects.get(apt_no__exact=A_num)).save()
+
+    return HttpResponse(template.render(context, request))
+
 def create_rental(request):
     template = loader.get_template('TEAM2OARS_APP/assistant_login.html')
     urecords = Staff.objects.filter(username__exact='assistant1')

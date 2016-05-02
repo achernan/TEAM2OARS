@@ -5,6 +5,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    	<link rel="apple-touch-icon" sizes="76x76" href="http://i.imgur.com/6w3Xc2F.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="http://i.imgur.com/6w3Xc2F.png">
     <title>About us</title>
 
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
@@ -54,17 +56,17 @@
         <!-- Row 1 of Team -->
         <div class="row text-center text-style">
             <div class="col-sm-4 center-block">
-                <img class="img-responsive img-circle" src="http://www.altinawildlife.com/portals/0/Yawning-Red-Panda.jpg" style="width:500px;height:350px" alt="puppy">
+                <img class="img-responsive img-circle" src="{% static 'images/ana.jpg' %}" style="width:500px;height:350px" alt="puppy">
                 <h4>Ana Hernandez</h4>
                 <p class="text-muted"> Team Leader</p>
             </div>
             <div class="col-sm-4">
-                <img class="img-responsive img-circle" src="http://www.iflscience.com/sites/www.iflscience.com/files/blog/%5Bnid%5D/u.jpg" style="width:500px;height:350px" alt="puppy">
-                <h4>Idam Obiahu</h4>
+                <img class="img-responsive img-circle" src="{% static 'images/khoi.jpg' %}" style="width:500px;height:350px" alt="puppy">
+                <h4>Khoi Pham</h4>
                 <p class="text-muted"> Software Quality Assurance</p>
             </div>
             <div class="col-sm-4">
-                <img class="img-responsive img-circle" src="http://imgfave-chat-herokuapp-com.global.ssl.fastly.net/image_cache/1312908111988739.jpg" style="width:500px;height:350px" alt="puppy">
+                <img class="img-responsive img-circle" src="{% static 'images/gaby.jpg' %}" style="width:500px;height:350px" alt="puppy">
                 <h4>Gabriela Cruz</h4>
                 <p class="text-muted">Database Administrator</p>
             </div>
@@ -75,16 +77,18 @@
 
         <!-- Row 2 of Team -->
         <div class="row text-center text-style">
-            <div class="col-sm-2">
-                <!-- Blank col for spacing purposes -->
-            </div>
             <div class="col-sm-4">
-                <img class="img-responsive img-circle" src="http://blog.boostability.com/wp-content/uploads/2014/09/Panda-Update.jpg" style="width:500px;height:350px" alt="puppy">
+                <img class="img-responsive img-circle" src="{% static 'images/rashan.jpg' %}" style="width:500px;height:350px" alt="puppy">
                 <h4>Rashan Whittaker</h4>
                 <p class="text-muted">Database Administrator</p>
             </div>
+            <div class="col-sm-4">
+                <img class="img-responsive img-circle" src="{% static 'images/idam.jpg' %}" style="width:500px;height:350px" alt="puppy">
+                <h4>Idam Obiahu</h4>
+                <p class="text-muted"> Team Member</p>
+            </div>
             <div class="col-sm-4 text-center">
-                <img class="img-responsive img-circle" src="http://static1.squarespace.com/static/5005afd7e4b0a6953320bf3f/t/528cfce6e4b0c1452601a558/1384971527352/4651364311_f505cc3cc3_o.jpg" style="width:500px;height:350px" alt="puppy">
+                <img class="img-responsive img-circle" src="{% static 'images/korede.jpg' %}" style="width:500px;height:350px" alt="puppy">
                 <h4>Korede Allen</h4>
                 <p class="text-muted">Team Member</p>
             </div>
