@@ -16,24 +16,36 @@ from django.utils.safestring import SafeUnicode
 from django.db.models import Count, Min, Sum, Avg
 
 def front_page(request):
+    request.session.flush()
+    return render(request, 'TEAM2OARS_APP/front_page.html', {})
+
+def logout(request):
+    request.session.flush()
     return render(request, 'TEAM2OARS_APP/front_page.html', {})
 
 def login(request):
     return render(request, 'TEAM2OARS_APP/tenant_login.html', {'login': login})
 
-def logout(request):
-    request.session.delete()
-    return render(request, 'TEAM2OARS_APP/front_page.html', {})
-
 def enter_credentials(request):
     request.session.load()
 
-    if request.session.exists() == False:
+    if (request.session.load() == {}):
         request.session['uname'] = request.POST['uname']
         request.session['pwd'] = request.POST['pwd']
-        print 'no cookies saved'
 
-    request.session.save()
+
+    #This is the code from before, that is not working now:
+        #I'm not sure why it is not working anymore
+
+    #request.session.load()
+
+    #if (request.session.exists() == False):
+        #request.session['uname'] = request.POST['uname']
+        #request.session['pwd'] = request.POST['pwd']
+        #print request.session['uname']
+
+    #request.session.save() <-- this was messing up the new code, seemed to be deleting cookie instead of saving it
+
 
     if Tenant.objects.filter(username__exact=request.session['uname']):
         if Tenant.objects.filter(password__exact=request.session['pwd']):
@@ -41,16 +53,16 @@ def enter_credentials(request):
             precords = Tenant.objects.filter(password__exact=request.session['pwd'])
             allTenants = Tenant.objects.all()
             for info in urecords:
-              invoices = Invoices.objects.filter(rental_no__exact=info.rental_no)
-              R_num = SafeUnicode(info.rental_no)[12:] #removes rental number string for comparison
-              rental = Handle_Rents.objects.filter(rental_no__exact=str(R_num))
-              apartment = rental
-              for apt in rental:
-                A_num = SafeUnicode(apt.apt_no)[10:] #removes apt number string for comparison
-                apartment = Apartment.objects.filter(apt_no__contains=A_num)
+                invoices = Invoices.objects.filter(rental_no__exact=info.rental_no)
+                R_num = SafeUnicode(info.rental_no)[12:] #removes rental number string for comparison
+                rental = Handle_Rents.objects.filter(rental_no__exact=str(R_num))
+                apartment = rental
+                for apt in rental:
+                    A_num = SafeUnicode(apt.apt_no)[10:] #removes apt number string for comparison
+                    apartment = Apartment.objects.filter(apt_no__contains=A_num)
                 
-              automobiles = Automobiles.objects.filter(tenant_ss__exact=info.tenant_ss)
-              family = Tenant_Family.objects.filter(tenant_ss__exact=info.tenant_ss)
+                automobiles = Automobiles.objects.filter(tenant_ss__exact=info.tenant_ss)
+                family = Tenant_Family.objects.filter(tenant_ss__exact=info.tenant_ss)
             context = {
                 'urecords': urecords, 'query': urecords,
                 'precords': precords, 'query': precords,
