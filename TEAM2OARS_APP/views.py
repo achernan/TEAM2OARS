@@ -46,15 +46,9 @@ def enter_credentials(request):
               rental = Handle_Rents.objects.filter(rental_no__exact=str(R_num))
               apartment = rental
               for apt in rental:
-<<<<<<< HEAD
                 A_num = SafeUnicode(apt.apt_no)[10:] #removes apt number string for comparison
                 apartment = Apartment.objects.filter(apt_no__contains=A_num)
-    
-=======
-                A_num = SafeUnicode(apt.apt_no)[9:] #removes apt number string for comparison
-                apartment = Apartment.objects.filter(apt_no__exact=A_num)
-
->>>>>>> master
+                
               automobiles = Automobiles.objects.filter(tenant_ss__exact=info.tenant_ss)
               family = Tenant_Family.objects.filter(tenant_ss__exact=info.tenant_ss)
             context = {
