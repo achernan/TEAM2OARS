@@ -51,14 +51,14 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="#Checkout">
+                        <a href="#tenantList" class="portfolio-link" data-toggle="modal">
                             <i class="pe-7s-id">
                             </i>
                             <p>Tenant List</p>
                         </a>
                     </li> 
                     <li>
-                        <a href="#viewAgreement" class="portfolio-link" data-toggle="modal">
+                        <a href="#paymentList" class="portfolio-link" data-toggle="modal">
                             <i class="pe-7s-cash"></i>
                             </i>
                             <p>Payment List</p>
@@ -66,37 +66,23 @@
                     </li> 
                     <li>
                         <a href="/testimonials/" class="portfolio-link" data-toggle="modal">
-                            <i class="pe-7s-ribbon"></i>
+                            <i class="pe-7s-search"></i>
                             </i>
                             <p>Search Testimonials</p>
                         </a>
                     </li> 
+                     <li>
+                        <a href="#staffList" class="portfolio-link" data-toggle="modal">
+                            <i class="pe-7s-glasses"></i>
+                            </i>
+                            <p>Staff List</p>
+                        </a>
+                    </li>
                     <li>
-                        <a href="#writeTestimonial" class="portfolio-link" data-toggle="modal">
+                      <a href="#staffApt" class="portfolio-link" data-toggle="modal">
                             <i class="pe-7s-home"></i>
                             </i>
-                            <p>Apartments Available</p>
-                        </a>
-                    </li> 
-                    <li>
-                      <a href="#rentalRates" class="portfolio-link" data-toggle="modal">
-                            <i class="pe-7s-note2"></i>
-                            </i>
-                            <p>Rental Rates</p>
-                        </a>
-                    </li>
-                     <li>
-                        <a href="/testimonials/" class="portfolio-link" data-toggle="modal">
-                            <i class="pe-7s-search"></i>
-                            </i>
-                            <p>Search Agreements</p>
-                        </a>
-                    </li>
-                    <li>
-                      <a href="#complaints" class="portfolio-link" data-toggle="modal">
-                            <i class="pe-7s-note2"></i>
-                            </i>
-                            <p>Complaints</p>
+                            <p>Staff Apartments</p>
                         </a>
                     </li>
                     <li class="dropdown">
@@ -105,10 +91,11 @@
                                 <p>Account <b class="caret"></b></p>
                             </a>
                           <ul class="dropdown-menu">
-                            <li><a href="#">Personal Information</a></li>
-                            <li><a href="#">My Complaints</a></li>
-                            <li><a href="#">My Testimonials</a></li>
-                            <li><a href="#">Privacy Settings</a></li>
+                            <li><a href="#tenantList" class="portfolio-link" data-toggle="modal">Tenant List</a></li>
+                            <li><a href="#paymentList" class="portfolio-link" data-toggle="modal">Payment List</a></li>
+                            <li><a href="/testimonials/" class="portfolio-link" data-toggle="modal">Search Testimonials</a></li>
+                            <li><a href="#staffList" class="portfolio-link" data-toggle="modal">Staff List</a></li>
+                            <li><a href="#staffApt" class="portfolio-link" data-toggle="modal">Staff Apartments</a></li>
                             <li class="divider"></li>
                             <li><a href="/">Sign Out</a></li>
                           </ul>
@@ -125,56 +112,217 @@
 
 </div> <!-- end menu-dropdown -->
 
-<div class="main" style="padding-top:10px; padding-left:250px; padding-right:250px">
-      <h2>Tenant List</h2>
-  <p>DISCLAIMER: This information is sensitive, and should not be released under any circumstances.</p>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Social Security</th>
-        <th>Name</th>
-        <th>Work Phone</th>
-      </tr>
-    </thead>
-    <tbody>
-    {% for tenants in allTenants %}
-      <tr>
-        <td>{{ tenants.tenant_ss }}</td>
-        <td>{{ tenants.tenant_name }}</td>
-        <td>{{ tenants.work_phone }}</td>
-      </tr>
-    {% endfor %}
-    </tbody>
-  </table>
+<div class="main" style="padding-top:10px">
+         <div id="Checkout" class="inline">
+      <h1>Update Pending Complaints</h1>
+      <div class="card-row">
+        <br>
+      </div>
+      <form class="form" class="form" action="/update_status/" method="GET" role="form" accept-charset="UTF-8" id="testimonial_form">
+          <div class="form-group">
+            
+                   <table class="table">
+                     <thead>
+                        <tr>
+                          <th>Fixed?</th>
+                          <th>Complaint No</th>
+                          <th>Apartment No</th>
+                          <th>Apartment Type</th>
+                          <th>Description</th>
+                        </tr>
+                      </thead>
+                        <tbody>
+                          {% for c in allComplaints %}
+                          {% if 'F' not in c.status %}
+                            <tr>
+                            <td><input type="radio" name="cn" id="{{ c.complaint_id }}" value="{{ c.complaint_id }}" class="radio" required/>
+                                <label for="{{ c.complaint_id }}">&nbsp;</label></td>
+                            <td style="padding-top:30px">{{ c.complaint_id }}</td>
+                            <td style="padding-top:30px">{% if c.apt_no == "" %}
+                                &#8212;
+                              {% else %}
+                                {{ c.apt_no|cut:"Apt Num - " }}
+                              {% endif %}
+                              </td>
+                            <td style="padding-top:30px">
+                              {% if c.apt_no == "" %}
+                                &#8212;
+                              {% else %}
+                                {% if rates.apt_type == "0" %}
+                                      Studio
+                                   {% elif rates.apt_type == "1" %}
+                                      1 Bedroom
+                                   {% elif rates.apt_type == "2" %}
+                                      2 Bedroom
+                                   {% else %}
+                                      3 Bedroom
+                                   {% endif %}
+                              {% endif %}
+                            </td>
+                            <td style="padding-top:30px">{{ c.apt_complaint }}{{ c.rental_complaint }}</td>
+                               <!--returns "apartment number"cn" as value-->
+                            </tr>
+                         {% endif %}
+                         {% endfor %}
+                      </tbody>
+                </table>
+                <br>
+                <center><p style="font-size:12px;"><em>To update a complaint status to "Fixed", please select complaint from the list above and hit the Update button.</em></p></center>
+          <button id="updateComplaint" class="btn btn-block btn-success submit-button" type="submit" style="background-color: #54C7C3!important;border-color:#54C7C3!important">
+              <i class="pe-7s-refresh"></i>
+              <span class="align-middle"> Update Status</span>
+          </button>
+              <!--Lease Length for Input Form-->
+          </div>
+      </form>
+  </div>
 </div>
-<!-- end main -->
 
-<!--Rental Agreement-->
-<div class="portfolio-modal modal fade" id="viewAgreement" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-content">
-                <div class="close-modal" data-dismiss="modal">
-                    <div class="lr">
-                        <div class="rl">
-                        </div>
+<!--Tenant List-->
+    <div class="portfolio-modal modal fade" id="tenantList" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+
                     </div>
                 </div>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-8 col-lg-offset-2">
-                            <div class="modal-body">
-                                <!-- Project Details Go Here -->
-                                <h2>Current Lease Agreement</h2>
-                                <p class="item-intro text-muted">Preview</p>
-                                <img class="img-responsive" src="http://printableagreements.com/wp-content/uploads/2013/10/Alaska-Residential-Lease-Agreement.jpg" alt="">
-                                <p>To view the full rental agreement, <b><a href="#" style="color:red;">click here</a></b></p>
-
-                                <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-reply"></i> Go Back </button>
-                            </div>
-                        </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                      <div class="modal-body" style="padding-top:10px;">
+                        <h2 style="text-align: center;padding-top: 30px;">Tenant List</h2>
+                    <center><p style="font-size:12px;"><em>DISCLAIMER: This information is sensitive and should not released under any circumstances.</em></p></center>
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>Social Security</th>
+                          <th>Name</th>
+                          <th>Apt No.</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      {% for tenants in allTenants %}
+                        <tr>
+                          <td style="text-align: left;">{{ tenants.tenant_ss }}</td>
+                          <td style="text-align: left;">{{ tenants.tenant_name }}</td>
+                          <td style="text-align: left;">{% for apt in allRents %}
+                                        {% if tenants.rental_no|cut:"Rental Num - "|add:0 == apt.rental_no %}
+                                           {{ apt.apt_no|cut:"Apt Num - " }}
+                                        {% endif %}
+                                      {% endfor %}</td>
+                        </tr>
+                      {% endfor %}
+                      </tbody>
+                    </table>
+                     </div>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-reply"></i> Go Back </button>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+<!--end Tenant List-->
+
+<!--Staff List-->
+    <div class="portfolio-modal modal fade" id="staffList" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                      <h1>Staff List</h1>
+                        <div class="modal-body" style="text-align:left;">
+                              <br>
+                              <table class="table">
+                              <thead>
+                                <tr>
+                                  <th>Staff Name</th>
+                                  <th>Position</th>
+                                  <th>No. of Rentals</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                              {% for rates in allStaff %}
+                                {% if rates.position != "Supervisor" %}
+                                <tr>
+                                  <td>{{ rates.first_name }} {{ rates.last_name }}</td>
+                                  <td>{{ rates.position }}</td>
+                                  <td>{% for apt in staffCount %}
+                                        {% if rates.staff_no == apt.staff_no %}
+                                           {{ apt.staff_no__count }}
+                                        {% endif %}
+                                      {% endfor %}</td>
+                                </tr>
+                                {% endif %}
+                              {% endfor %}
+                              </tbody>
+                            </table>
+                        </div>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-reply"></i> Go Back </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!--Staff List-->
+    <div class="portfolio-modal modal fade" id="staffApt" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                      <h1>Staff Apartments</h1>
+                        <div class="modal-body" style="text-align:left;">
+                              <br>
+                              <table class="table">
+                              <thead>
+                                <tr>
+                                  <th>First Name</th>
+                                  <th>Last Name</th>
+                                  <th>Position</th>
+                                  <th>Apt No.</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                              {% for rates in allStaff %}
+                                {% if rates.position != "Supervisor" %}
+                                <tr>
+                                  <td>{{ rates.first_name }}</td>
+                                  <td> {{ rates.last_name }}</td>
+                                  <td>{{ rates.position }}</td>
+                                  <td>{% for apt in allRents %}
+                                        {% if rates.staff_no|stringformat:"s" == apt.staff_no|stringformat:"s" %}
+                                           {{ apt.apt_no|cut:"Apt Num - " }}<br>
+                                        {% endif %}
+                                      {% endfor %}</td>
+                                </tr>
+                                {% endif %}
+                              {% endfor %}
+                              </tbody>
+                            </table>
+                        </div>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-reply"></i> Go Back </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 										
         <div class="portfolio-modal modal fade" id="writeComplaint" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-content">
@@ -216,8 +364,9 @@
         </div>
     </div>
 </div>
-<!--Rental Rates-->
-    <div class="portfolio-modal modal fade" id="rentalRates" tabindex="-1" role="dialog" aria-hidden="true">
+
+<!--Payment List-->
+    <div class="portfolio-modal modal fade" id="paymentList" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-content">
             <div class="close-modal" data-dismiss="modal">
                 <div class="lr">
@@ -229,86 +378,37 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8 col-lg-offset-2">
-                      <h1>Rental Rates</h1>
+                      <h1>Payment List</h1>
                         <div class="modal-body" style="text-align:left;">
                               <br>
                               <table class="table">
                               <thead>
                                 <tr>
-                                  <th>Apartment No:</th></th>
-                                  <th>Apartment Type:</th>
-                                  <th>Rental Amount</th>
+                                  <th>Apartment No.</th>
+                                  <th>Rental No.</th>
+                                  <th>Invoice No.</th>
+                                  <th>Invoice Date</th>
+                                  <th>Card Type</th>
                                 </tr>
                               </thead>
                               <tbody>
-                              {% for rates in allApartments %}
+                              {% for rates in allInvoices %}
                                 <tr>
-                                  <td>{{ rates.apt_no }}</td>
-                                  <td>{{ rates.apt_type }}</td>
-                                  <td>${{ rates.apt_rent_amt }}0</td>
+                                  <td>{% for apt in allRents %}
+                                        {% if rates.rental_no|cut:"Rental Num - "|add:0 == apt.rental_no %}
+                                           {{ apt.apt_no|cut:"Apt Num - " }}
+                                        {% endif %}
+                                      {% endfor %}
+                                  </td>
+                                  <td>{{ rates.rental_no|cut:"Rental Num - "}}</td>
+                                  <td>{{ rates.invoice_no }}</td>
+                                  <td>{{ rates.invoice_date }}</td>
+                                  <td>{{ rates.CC_type }}</td>
                                 </tr>
                               {% endfor %}
                               </tbody>
                             </table>
                         </div>
-                        <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-reply"></i> Go Back </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-<!--Complaints-->
-    <div class="portfolio-modal modal fade" id="complaints" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
-                <div class="lr">
-                    <div class="rl">
-
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2">
-                      <h1>Pending Apartment Complaints</h1>
-                        <div class="modal-body" style="text-align:left;">
-                              <br>
-                              <table class="table">
-                              <thead>
-                                <tr>
-                                  <th>Complaint No:</th></th>
-                                  <th>Apartment No:</th>
-                                  <th>Apartment Type:</th>
-                                  <th>Description:</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                              {% for c in allComplaints %}
-                                <tr> {% if 'F' not in c.status %}
-                                  <td>{{ c.complaint_id }}</td>
-                                  <td>{{ c.apt_no }}</td>
-                                  <td>{{ c.apt_type }}</td>
-                                  <td>{{ c.apt_complaint }}{{ c.rental_complaint }}</td>
-                                </tr> {% endif %}
-                              {% endfor %}
-                              </tbody>
-                            </table>
-                        </div>
-
-                        <h1>Update Status:</h1>
-                        <form action="/update_status/" method="GET">
-                            <div class="form-group">Type in complaint number:
-                                <input type="text" name="cn">
-                            </div>
-                            <button type="submit"
-                                    style="background-color:#000000;"
-                                    class="btn btn-primary">
-                                <i class="fa fa-send"></i> Fix!
-                            </button>
-                            <br>
-                        </form>
-
                         <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-reply"></i> Go Back </button>
                     </div>
                 </div>
