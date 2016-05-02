@@ -25,13 +25,13 @@ class Staff (models.Model):
     password = models.CharField(max_length=50)
 
     def __str__(self):
-        return self.first_name + " " + self.last_name + " - " + self.username
+        return str(self.staff_no)
 
 class Apartment (models.Model):
     VACANT = 'V'
     RENTED = 'R'
     STATUS_CHOICES = ((VACANT, 'Vacant'), (RENTED, 'Rented'))
-    apt_no = models.PositiveSmallIntegerField(primary_key=True)
+    apt_no = models.CharField(primary_key=True, max_length=3)
     apt_type = models.CharField(max_length=1)
     apt_status = models.CharField(max_length=6, choices=STATUS_CHOICES,  default=VACANT)
     apt_utility = models.CharField(max_length=3, choices=YESNO_CHOICES, default='N')
@@ -126,7 +126,7 @@ class Complaints (models.Model):
     apt_no = models.ForeignKey(Apartment, on_delete=models.CASCADE)
 
     def __str__(self):
-        return "Complaint Num - " + self.complaint_id
+        return self.complaint_id
 
 class Testimonies(models.Model):
     testimonial_id = models.AutoField(primary_key=True)
