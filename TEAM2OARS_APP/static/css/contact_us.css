@@ -1,3 +1,4 @@
+
 .navbar-default {
     border-color: transparent;
 }
@@ -13,6 +14,7 @@
 
 .navbar-default .navbar-collapse {
     background-color: ghostwhite; /*changes nav background color*/
+    padding-right: 50px;
 }
 
 /*for navbar-right stuff */
@@ -37,10 +39,7 @@
     color: black;
 }
 
-label {
-    font-family: Ubuntu, sans-serif;
-}
-
+/*header styling*/
 h1 {
     padding-top: 100px;
     text-align: center;
@@ -48,13 +47,18 @@ h1 {
     font-size: 50px;
 }
 
-p {
-    font-size: 10px;
+h3 {
     font-family: Ubuntu, sans-serif;
 }
 
-body {
-    background-color: ghostwhite;
+.text-style {
+    text-align: center;
+    font-family: Ubuntu, sans-serif;
+}
+
+p {
+    font-family: Ubuntu, sans-serif;
+    font-size: 20px;
 }
 
 footer {
@@ -64,3 +68,113 @@ footer {
     width:100%;
     bottom:0;*/
 }
+
+body {
+    background-color: ghostwhite;
+}
+
+/*search box wrapper*/
+.form-wrapper {
+    width: 800px;
+    padding: 15px;
+    background: darkgray;
+    border-radius: 10px;
+}
+
+/*search input box styling*/
+.form-wrapper input {
+    width: 660px;
+    height: 40px;
+    padding: 10px 5px;
+    font: bold 15px 'Ubuntu';
+    border: 1px;
+    background: whitesmoke;
+    border-radius: 3px 0 0 3px;
+}
+
+/*search button*/
+.form-wrapper button {
+    float: right;
+    border: 0;
+    padding: 0;
+    height: 40px;
+    width: 110px;
+    font: bold 15px/40px 'Ubuntu';
+    color: #fff;
+    background: #d83c3c;
+    border-radius: 0 3px 3px 0;
+    text-shadow: 0 -1px 0 rgba(0, 0 ,0, .3);
+}
+
+/*This is for search box, not sure for what*/
+ .cf:before, .cf:after{
+    content:"";
+    display:table;
+ }
+
+.cf:after{
+    clear:both;
+}
+
+.cf{
+    zoom:1;
+}
+
+.star-rating {
+  line-height:32px;
+  font-size:1.25em;
+  cursor: pointer;
+}
+
+/* Login CSS */
+#login-dp{
+    min-width: 250px;
+    padding: 14px 14px 0;
+    overflow:hidden;
+    background-color:rgba(255,255,255,.8);
+}
+#login-dp .help-block{
+    font-size:12px
+}
+#login-dp .bottom{
+    background-color:rgba(255,255,255,.8);
+    border-top:1px solid #ddd;
+    clear:both;
+    padding:14px;
+}
+#login-dp .social-buttons{
+    margin:12px 0
+}
+#login-dp .social-buttons a{
+    width: 49%;
+}
+#login-dp .form-group {
+    margin-bottom: 10px;
+}
+.btn-fb{
+    color: #fff;
+    background-color:#3b5998;
+}
+.btn-fb:hover{
+    color: #fff;
+    background-color:#496ebc
+}
+.btn-tw{
+    color: #fff;
+    background-color:#55acee;
+}
+.btn-tw:hover{
+    color: #fff;
+    background-color:#59b5fa;
+}
+@media(max-width:768px){
+    #login-dp{
+        background-color: inherit;
+        color: #fff;
+    }
+    #login-dp .bottom{
+        background-color: inherit;
+        border-top:0 none;
+    }
+}
+
