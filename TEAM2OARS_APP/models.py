@@ -25,7 +25,7 @@ class Staff (models.Model):
     password = models.CharField(max_length=50)
 
     def __str__(self):
-        return self.first_name + " " + self.last_name + " - " + self.username
+        return str(self.staff_no)
 
 class Apartment (models.Model):
     VACANT = 'V'

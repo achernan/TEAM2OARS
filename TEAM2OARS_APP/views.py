@@ -54,8 +54,10 @@ def enter_credentials(request):
             urecords = Staff.objects.filter(username__exact=request.POST['uname'])
             precords = Staff.objects.filter(password__exact=request.POST['pwd'])
             allInvoices = Invoices.objects.all()
+            allStaff = Staff.objects.all()
             allAutomobiles = Automobiles.objects.all()
             autoCount = Automobiles.objects.values('auto_make').order_by().annotate(Count('auto_make'))
+            staffCount = Handle_Rents.objects.values('staff_no').order_by().annotate(Count('staff_no'))
             allRents = Handle_Rents.objects.all()
             rentCount = Apartment.objects.aggregate(Sum('apt_rent_amt')).values()[0]
             allTenants = Tenant.objects.all()
@@ -67,7 +69,8 @@ def enter_credentials(request):
                 'allTenants' : allTenants, 'allApartments' : allApartments,
                 'allComplaints': allComplaints, 'allInvoices': allInvoices,
                 'allRents': allRents, 'autoCount': autoCount,
-                'allAutomobiles': allAutomobiles, 'rentCount': rentCount
+                'allAutomobiles': allAutomobiles, 'rentCount': rentCount,
+                'staffCount':staffCount, 'allStaff':allStaff
             }
             if urecords.filter(position__contains='supervisor'):
               if context:
