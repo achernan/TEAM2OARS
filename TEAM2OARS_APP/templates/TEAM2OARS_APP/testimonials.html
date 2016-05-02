@@ -39,9 +39,53 @@
                 <li> <a href="{% url 'about_us'%}"> About Us </a> </li>
                 <li> <a href="{% url 'contact_us'%}"> Contact Us </a> </li>
                 <li> <a href="#"> Testimonials </a> </li>
-            </ul>
-            </div>
-
+                
+                <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="session">
+            <b>Log In  </b><span class="caret"></span>
+            </a>
+            <ul id="login-dp" class="dropdown-menu">
+				<li class="dropdown">
+					 <div class="row">
+							<div class="col-md-12">
+								Already have an account? Log in
+								<div class="social-buttons">
+									
+								</div>
+								 <form class="form" role="form" method="post" action="/enter_credentials/" accept-charset="UTF-8" id="login-nav">
+                                         {% csrf_token %}
+										<div class="form-group">
+											 <label class="sr-only" for="exampleInputEmail2">Email address</label>
+											 <input type="text" name=uname class="form-control" id="exampleInputEmail2" placeholder="Username" required>
+										</div>
+										<div class="form-group">
+											 <label class="sr-only" for="exampleInputPassword2">Password</label>
+											 <input type="password" name=pwd class="form-control" id="exampleInputPassword2" placeholder="Password" required>
+                                             <div class="help-block text-right"><a href="">Forgot password?</a></div>
+										</div>
+										<div class="form-group">
+											 <a href="/login/"><button type="submit" class="btn btn-primary btn-block">Sign In</button></a>
+										</div>
+										<div class="checkbox">
+											 <label>
+											   {% if form.non_field_errors %}
+    <ul class='form-errors'>
+        {% for error in form.non_field_errors %}
+            <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+											 <input type="checkbox"> keep me logged in
+											 </label>
+										</div>
+								 </form>
+							</div>
+							<div class="bottom text-center">
+								Don't have an account? <a href="#signUp" class="portfolio-link" data-toggle="modal"><b>Sign Up</b></a>
+							</div>
+					 </div>
+				</li>
+			</ul>
         </nav>
 
         <h1> Testimonials</h1>
@@ -205,6 +249,20 @@
             </div>
         </div>
     </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script>
+  $(function() {
+  // Setup drop down menu
+  $('.dropdown-toggle').dropdown();
+ 
+  // Fix input element click problem
+  $('.dropdown input, .dropdown label').click(function(e) {
+    e.stopPropagation();
+  });
+});
+</script>
 
 <script type="text/javascript">
 var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
