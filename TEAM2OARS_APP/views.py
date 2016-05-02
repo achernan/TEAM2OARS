@@ -18,13 +18,24 @@ from django.db.models import Count, Min, Sum, Avg
 def front_page(request):
     return render(request, 'TEAM2OARS_APP/front_page.html', {})
 
-def enter_credentials(request):
-    context = False
+def logout(request):
+    request.session.delete()
+    return render(request, 'TEAM2OARS_APP/front_page.html', {})
 
-    if Tenant.objects.filter(username__exact=request.POST['uname']):
-        if Tenant.objects.filter(password__exact=request.POST['pwd']):
-            urecords = Tenant.objects.filter(username__exact=request.POST['uname'])
-            precords = Tenant.objects.filter(password__exact=request.POST['pwd'])
+def enter_credentials(request):
+    request.session.load()
+
+    if (request.session.exists() == False):
+        request.session['uname'] = request.POST['uname']
+        request.session['pwd'] = request.POST['pwd']
+        print request.session['uname']
+
+    request.session.save()
+
+    if Tenant.objects.filter(username__exact=request.session['uname']):
+        if Tenant.objects.filter(password__exact=request.session['pwd']):
+            urecords = Tenant.objects.filter(username__exact=request.session['uname'])
+            precords = Tenant.objects.filter(password__exact=request.session['pwd'])
             allTenants = Tenant.objects.all()
             for info in urecords:
               invoices = Invoices.objects.filter(rental_no__exact=info.rental_no)
@@ -34,7 +45,7 @@ def enter_credentials(request):
               for apt in rental:
                 A_num = SafeUnicode(apt.apt_no)[9:] #removes apt number string for comparison
                 apartment = Apartment.objects.filter(apt_no__exact=A_num)
-    
+
               automobiles = Automobiles.objects.filter(tenant_ss__exact=info.tenant_ss)
               family = Tenant_Family.objects.filter(tenant_ss__exact=info.tenant_ss)
             context = {
@@ -46,13 +57,12 @@ def enter_credentials(request):
             }
         if context:
           return render(request, 'TEAM2OARS_APP/tenant_login.html', context)
-        else:
-          return render(request, 'TEAM2OARS_APP/front_page.html', {})
 
-    if Staff.objects.filter(username__exact=request.POST['uname']):
-        if Staff.objects.filter(password__exact=request.POST['pwd']):
-            urecords = Staff.objects.filter(username__exact=request.POST['uname'])
-            precords = Staff.objects.filter(password__exact=request.POST['pwd'])
+
+    elif Staff.objects.filter(username__exact=request.session['uname']):
+        if Staff.objects.filter(password__exact=request.session['pwd']):
+            urecords = Staff.objects.filter(username__exact=request.session['uname'])
+            precords = Staff.objects.filter(password__exact=request.session['pwd'])
             allInvoices = Invoices.objects.all()
             allStaff = Staff.objects.all()
             allAutomobiles = Automobiles.objects.all()
@@ -81,7 +91,8 @@ def enter_credentials(request):
             if urecords.filter(position__contains="assistant"):
               if context:
                 return render(request, 'TEAM2OARS_APP/assistant_login.html', context)
-              
+
+    else:
         return render(request, 'TEAM2OARS_APP/front_page.html', {})
 
 def about_us(request):
